@@ -61,10 +61,12 @@ int main(void)
     uint8_t RESP_test[9] = {1};
     uint8_t DDAT_test[12] = {0x47, 0x4E, 0x46, 0x44, 0x04, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00};
     uint8_t TDAT_test[12] = {0x47, 0x4E, 0x46, 0x44, 0x04, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00};
-    uint8_t RSPI_test[12] = {0x52, 0x53, 0x50, 0x49, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    uint8_t RRAI_test[12] = {0x52, 0x52, 0x41, 0x49, 0x04, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00};
+    uint8_t RSPI_test[12] = {0x52, 0x53, 0x50, 0x49, 0x04, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00};
     uint8_t RESP_DDAT[32] = {1};
     uint8_t RESP_TDAT[25] = {1};
     uint8_t RESP_test_3[9] = {1};
+    uint8_t RESP_test_4[9] = {1};
     uint8_t i;
     uint8_t init = 1;
     uint8_t approaching = 2;
@@ -103,6 +105,19 @@ int main(void)
             //reads response from the speed threshold command
             for (i = 0; i <= 8; i++){          //shifts through all our respond bytes
                 RESP_test_3[i] = UART1_Read();    //reads response byte from RX
+            }
+            
+            //sends command to set threshold speed for radar detection
+            for (i = 0; i <= 11; i++){          //shifts through all our command bytes
+                UART1_Write(RRAI_test[i]);      //writes command byte to TX
+                while (UART1_IsTxReady() == 0)   //holds here till we can transmit our next byte
+                {
+                }
+            }
+            
+            //reads response from the speed threshold command
+            for (i = 0; i <= 8; i++){          //shifts through all our respond bytes
+                RESP_test_4[i] = UART1_Read();    //reads response byte from RX
             }
             
             //initializes the LCD to normal operation
@@ -145,7 +160,7 @@ int main(void)
             approaching_char = (char)approaching_ASCII;
 //            LCD_APPROACHING_Print(approaching_char);
             if (UART4_IsTxReady() == 1){
-                UART4_Write(approaching_char);
+                UART4_Write(approaching_ASCII);
             }
         }
     }

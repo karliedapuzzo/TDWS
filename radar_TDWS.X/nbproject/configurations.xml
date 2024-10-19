@@ -59,7 +59,7 @@
         <platformTool>pkob4hybrid</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>2.10</languageToolchainVersion>
-        <platform>4</platform>
+        <platform>3</platform>
       </toolsSet>
       <packs>
         <pack name="PIC24F-GL-GU_DFP" vendor="Microchip" version="1.6.243"/>
