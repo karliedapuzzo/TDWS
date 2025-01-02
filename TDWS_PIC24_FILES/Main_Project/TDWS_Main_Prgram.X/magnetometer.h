@@ -43,7 +43,7 @@ extern "C" {
      * binary_data: pointer to binary value
      * bcd_data: pointer to bcd value
      *
-     * returns: none
+     * returns:
 */
 void binary_to_bcd(uint16_t *binary_data, uint16_t *bcd_data);
 

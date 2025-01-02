@@ -46,7 +46,7 @@
   Section: Included Files
 */
 #include "mcc_generated_files/system.h"
-#include "LoRa.h"
+#include "LoRa_transmitter.h"
 #include "radar.h"
 #include "magnetometer.h"
 
@@ -71,6 +71,11 @@ int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
+    UART2_Initialize();
+    UART4_Initialize();
+    
+    init_LoRa();
+    
     TMR2_SetInterruptHandler (magISR); //set timer 2 interrupt to magnetometer ISR
     
     init_magnetometer(); //initialize magnetometer

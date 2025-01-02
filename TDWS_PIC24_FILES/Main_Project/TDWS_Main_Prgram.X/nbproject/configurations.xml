@@ -22,7 +22,7 @@
       </logicalFolder>
       <itemPath>magnetometer.h</itemPath>
       <itemPath>radar.h</itemPath>
-      <itemPath>LoRa.h</itemPath>
+      <itemPath>LoRa_transmitter.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -57,7 +57,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>magnetometer.c</itemPath>
       <itemPath>radar.c</itemPath>
-      <itemPath>LoRa.c</itemPath>
+      <itemPath>LoRa_transmitter.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
