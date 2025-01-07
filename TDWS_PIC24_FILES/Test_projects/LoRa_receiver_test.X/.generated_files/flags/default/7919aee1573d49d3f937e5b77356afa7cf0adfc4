@@ -1,0 +1,1 @@
+ -c -mcpu=$(MP_PROCESSOR_OPTION)  -DXPRJ_default=$(CND_CONF)    -Wa,-g$(MP_EXTRA_AS_POST)  -mdfp="${DFP_DIR}/xc16"C:\Users\Owner\Documents\GitHub\TDWS\TDWS_PIC24_FILES\Test_projects\LoRa_receiver_test.X\mcc_generated_files\where_was_i.s

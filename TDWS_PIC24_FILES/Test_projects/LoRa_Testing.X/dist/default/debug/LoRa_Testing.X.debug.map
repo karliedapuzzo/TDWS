@@ -4,13 +4,13 @@ Tool Name:
   c:\program files\microchip\xc16\v2.10\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003eb0.00 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003eb0.01 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003eb0.02 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003eb0.03 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003eb0.04 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003eb0.05 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003eb0.06 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000036ec.00 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000036ec.01 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000036ec.02 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000036ec.03 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000036ec.04 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000036ec.05 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000036ec.06 \
   -p24FJ128GL306 \
   --mdfp=C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC24F-GL-GU_DFP/1.6.243/xc16 \
   -o \
@@ -396,16 +396,16 @@ __FDEVOPT1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x257d
+.debug_info       0x000000       0x25d5
  *(.debug_info)
- .debug_info      0x000000        0x4cf build/default/debug/mcc_generated_files/clock.o
- .debug_info      0x0004cf        0x34c build/default/debug/mcc_generated_files/system.o
- .debug_info      0x00081b        0x6ee build/default/debug/mcc_generated_files/uart2.o
- .debug_info      0x000f09        0x4df build/default/debug/mcc_generated_files/traps.o
- .debug_info      0x0013e8        0x982 build/default/debug/mcc_generated_files/pin_manager.o
- .debug_info      0x001d6a         0xb7 build/default/debug/mcc_generated_files/where_was_i.o
- .debug_info      0x001e21        0x180 build/default/debug/mcc_generated_files/interrupt_manager.o
- .debug_info      0x001fa1        0x5dc build/default/debug/main.o
+ .debug_info      0x000000        0x4da build/default/debug/mcc_generated_files/clock.o
+ .debug_info      0x0004da        0x357 build/default/debug/mcc_generated_files/system.o
+ .debug_info      0x000831        0x6f9 build/default/debug/mcc_generated_files/uart2.o
+ .debug_info      0x000f2a        0x4ea build/default/debug/mcc_generated_files/traps.o
+ .debug_info      0x001414        0x98d build/default/debug/mcc_generated_files/pin_manager.o
+ .debug_info      0x001da1         0xc2 build/default/debug/mcc_generated_files/where_was_i.o
+ .debug_info      0x001e63        0x18b build/default/debug/mcc_generated_files/interrupt_manager.o
+ .debug_info      0x001fee        0x5e7 build/default/debug/main.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x58d
