@@ -46,13 +46,16 @@
   Section: Included Files
 */
 #include "mcc_generated_files/system.h"
+#include "mcc_generated_files/interrupt_manager.h"
+
+#include <ctype.h>
 
 /*
                          Main application
  */
 
 uint16_t uart2_rxcount = 0;
-char recieved_msg[150];
+char received_msg[150];
 uint16_t message_available = 0;
 
 //reads one character and puts it in a global character array for other functions to parse
@@ -61,13 +64,13 @@ void uart2_ISR(void)
     if(message_available == 0)
     {
         uint16_t one_char = UART2_Read();
-        recieved_msg[uart2_rxcount] = one_char & 0x00FF;
+        received_msg[uart2_rxcount] = one_char & 0x00FF;
         uart2_rxcount++;
         if(uart2_rxcount > 149) //if over message array limit reset uart2_rx_count
         {
             uart2_rxcount = 0;
         }
-        else if(recieved_msg[uart2_rxcount - 1] == '\n')
+        else if(received_msg[uart2_rxcount - 1] == '\n')
         {
             uart2_rxcount = 0;
             message_available = 1;
@@ -108,23 +111,23 @@ uint16_t check_lora(void)
 //    }
     while(message_available == 0)
     {
-        cmd[10] = 'p';
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging
     }
     message_available = 0;
-    uint8_t check_msg = (recieved_msg[5] == 0x4f) && (recieved_msg[6] == 0x4b);
+    uint8_t check_msg = (received_msg[5] == 'O') && (received_msg[6] == 'K');
     if(check_msg)
     {
-        for(int jj = 0; jj <=32; jj++)
+        for(int jj = 0; jj <=149; jj++)
             {
-                recieved_msg[jj] = 0x0000;
+                received_msg[jj] = 0x0000;
             }
         return 1;
     }
     else
     {
-        for(int jj = 0; jj <=32; jj++)
+        for(int jj = 0; jj <=149; jj++)
             {
-                recieved_msg[jj] = 0x0000;
+                received_msg[jj] = 0x0000;
             }
         return 0;
     }
@@ -149,31 +152,36 @@ uint8_t lora_set_mode(void)
         ii += 1;
     }
     //should receive back +MODE: TEST\r\n 13 total chars
-    char resp[32];
-    ii = 0;
-    while(ii < 32)
+//    char resp[32];
+//    ii = 0;
+//    while(ii < 32)
+//    {
+//        resp[ii] = UART2_Read();
+//        ii +=1;
+//        if(resp[ii-1]==0x0a)
+//        {
+//            ii = 33;
+//        }
+//    }
+    while(message_available == 0)
     {
-        resp[ii] = UART2_Read();
-        ii +=1;
-        if(resp[ii-1]==0x0a)
-        {
-            ii = 33;
-        }
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging
     }
-    int garbage_var = (resp[7] == 0x54) && (resp[8] == 0x45) && (resp[9] == 0x53) && (resp[10] == 0x54);
-    if((resp[7] == 0x54) && (resp[8] == 0x45) && (resp[9] == 0x53) && (resp[10] == 0x54))
+    message_available = 0;
+    uint8_t check_msg = (received_msg[7] == 'T') && (received_msg[8] == 'E') && (received_msg[9] == 'S') && (received_msg[10] == 'T');
+    if(check_msg)
     {
-        for(int jj = 0; jj <=32; jj++)
+        for(int jj = 0; jj <=149; jj++)
         {
-            resp[jj] = 0x0000;
+            received_msg[jj] = 0x0000;
         }
         return 1;
     }
     else
     {
-        for(int jj = 0; jj <=32; jj++)
+        for(int jj = 0; jj <=149; jj++)
         {
-            resp[jj] = 0x0000;
+            received_msg[jj] = 0x0000;
         }
         return 0;
     }
@@ -199,31 +207,36 @@ uint8_t lora_rfconfig(void)
     }
     //should receive back +TEST: RFCFG F:915000000, SF10, BW125K, TXPR:12, RXPR:15, POW:9dBm, CRC:ON, IQ:OFF, NET:OFF
 
-    char resp[100];
-    ii = 0;
-    while(ii < 100)
+//    char resp[100];
+//    ii = 0;
+//    while(ii < 100)
+//    {
+//        resp[ii] = UART2_Read();
+//        ii +=1;
+//        if(resp[ii-1]==0x0a)
+//        {
+//            ii = 101;
+//        }
+//    }
+    while(message_available == 0)
     {
-        resp[ii] = UART2_Read();
-        ii +=1;
-        if(resp[ii-1]==0x0a)
-        {
-            ii = 101;
-        }
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging
     }
-    int garbage_var = (resp[7] == 0x52) && (resp[8] == 0x46) && (resp[9] == 0x43) && (resp[10] == 0x46);
-    if((resp[7] == 0x52) && (resp[8] == 0x46) && (resp[9] == 0x43) && (resp[10] == 0x46))
+    message_available = 0;
+    int check_msg = (received_msg[7] == 'R') && (received_msg[8] == 'F') && (received_msg[9] == 'C') && (received_msg[10] == 'F');
+    if(check_msg)
     {
-        for(int jj = 0; jj <=32; jj++)
+        for(int jj = 0; jj <=149; jj++)
         {
-            resp[jj] = 0x0000;
+            received_msg[jj] = 0x0000;
         }
         return 1;
     }
     else
     {
-        for(int jj = 0; jj <=32; jj++)
+        for(int jj = 0; jj <=149; jj++)
         {
-            resp[jj] = 0x0000;
+            received_msg[jj] = 0x0000;
         }
         return 0;
     }
@@ -249,35 +262,93 @@ uint8_t LoRa_set_rx(void)
     }
     //should receive back +TEST: RXLRSTR
 
-    char resp[100];
-    ii = 0;
-    while(ii < 91)
+//    char resp[100];
+//    ii = 0;
+//    while(ii < 91)
+//    {
+//        resp[ii] = UART2_Read();
+//        ii +=1;
+//        if(resp[ii-1]==0x0a)//order matters!!!
+//        {
+//            ii = 99;
+//        }
+//    }
+    while(message_available == 0)
     {
-        resp[ii] = UART2_Read();
-        ii +=1;
-        if(resp[ii-1]==0x0a)//order matters!!!
-        {
-            ii = 99;
-        }
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging
     }
-    
-    int check_resp = (resp[7] == 0x52) && (resp[8] == 0x58) && (resp[9] == 0x4C) && (resp[10] == 0x52);
-    if(check_resp == 1)
+    message_available = 0;
+    int check_msg = (received_msg[7] == 'R') && (received_msg[8] == 'X') && (received_msg[9] == 'L') && (received_msg[10] == 'R');
+    if(check_msg)
     {
-        for(int jj = 0; jj <=32; jj++)
+        for(int jj = 0; jj <=149; jj++)
         {
-            resp[jj] = 0x0000;
+            received_msg[jj] = 0x0000;
         }
         return 1;
     }
     else
     {
-        for(int jj = 0; jj <=32; jj++)
+        for(int jj = 0; jj <=149; jj++)
         {
-            resp[jj] = 0x0000;
+            received_msg[jj] = 0x0000;
         }
         return 0;
     }
+}
+
+char msg1[149];
+char msg2[149];
+
+void read_message(void)
+{
+    //looking for message that looks like +TEST: RX "xyxyxyxyxyxy..." where xy is one char, x and y are repped in hex
+    uint8_t check_msg = (received_msg[7] == 'R' & received_msg[8] == 'X');
+    if(check_msg)
+    {
+        int ii = 11;
+        int kk = 0;
+        while(ii < 150)
+        {
+            if(received_msg[ii] == '"')
+            {
+                ii = 150;
+                msg2[kk] = '\n';//marks the end of the message that we got
+            }
+            else
+            {
+                uint16_t x_char = (uint16_t)(isdigit(received_msg[ii]) ? received_msg[ii] - '0' : toupper(received_msg[ii]) - 'A' + 10);
+                uint16_t y_char = (uint16_t)(isdigit(received_msg[ii+1]) ? received_msg[ii+1] - '0' : toupper(received_msg[ii+1]) - 'A' + 10);
+                char final_char = (char)((x_char << 4) | y_char);
+                msg2[kk] = final_char;
+                ii+=2;
+                kk++;
+            }
+        }
+    }
+    else
+    {
+        int ii = 0;
+        while(ii < 150)
+        {
+            if(received_msg[ii] == '\n')
+            {
+                ii = 150;
+            }
+            else
+            {
+                msg1[ii] = received_msg[ii];
+                ii++;
+            }
+        }
+    }
+    
+    //clear message array
+//    for(int jj = 0; jj <=149; jj++)
+//        {
+//            received_msg[jj] = 0x0000;
+//        }
+    message_available = 0;
 }
 
 void init_LoRa(void){
@@ -288,12 +359,12 @@ void init_LoRa(void){
     int all_good = 0;
     
     is_active = check_lora();
-//    if(is_active == 1)
-//    {
-//        mode_set = lora_set_mode();
-//        rfconfig_set = lora_rfconfig();
-//        set_rx = LoRa_set_rx();
-//    }
+    if(is_active == 1)
+    {
+        mode_set = lora_set_mode();
+        rfconfig_set = lora_rfconfig();
+        set_rx = LoRa_set_rx();
+    }
     
     all_good = (rfconfig_set && mode_set && set_rx);
     int trahs = 0x0000;
@@ -306,20 +377,30 @@ int main(void)
     
     UART2_SetRxInterruptHandler(&uart2_ISR);
     
+    
+    
     int warmup_wait = 0;
     while(warmup_wait < 0xffff)
-        {
-            warmup_wait++;
-        }
+    {
+        warmup_wait++;
+    }
     
     init_LoRa();
+    
+//    INTERRUPT_GlobalDisable();
+    
     while (1)
     {
+        int new_msg = 0;
         int wait = 0;
         
         while(wait < 0xffff)
         {
             wait++;
+            if(message_available)
+            {
+                read_message();
+            }
         }
     }
 

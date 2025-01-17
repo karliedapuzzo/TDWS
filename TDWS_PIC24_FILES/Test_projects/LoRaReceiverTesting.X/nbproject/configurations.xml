@@ -221,7 +221,7 @@
         <property key="debugoptions.useswbreakpoints" value="true"/>
       </Tool>
       <pkob4hybrid>
-        <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
       </pkob4hybrid>
     </conf>
   </confs>
