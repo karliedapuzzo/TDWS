@@ -314,6 +314,7 @@ void read_message(void)
             {
                 ii = 150;
                 msg2[kk] = '\n';//marks the end of the message that we got
+                
             }
             else
             {
