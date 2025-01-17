@@ -11171,18 +11171,6 @@
          <value>120</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="System Module" registerAlias="FOSCSEL" settingAlias="PLLMODE" alias="PLL4X"/>
-         <value>96</value>
-      </entry>
-      <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="System Module" registerAlias="FOSCSEL" settingAlias="PLLMODE" alias="PLL6X"/>
-         <value>104</value>
-      </entry>
-      <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="System Module" registerAlias="FOSCSEL" settingAlias="PLLMODE" alias="PLL8X"/>
-         <value>112</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="System Module" registerAlias="FOSCSEL" settingAlias="PLLMODE" alias="PLL96DIV1"/>
          <value>0</value>
       </entry>
@@ -11676,7 +11664,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART2" name="AllInterrupts"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART2" name="BaudRate"/>
@@ -11817,10 +11805,6 @@
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART2" registerAlias="UMODE" settingAlias="UEN" alias="TX_RX_CTS_RTS"/>
          <value>2</value>
-      </entry>
-      <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART2" registerAlias="UMODE" settingAlias="UEN" alias="TX_RX_RTS"/>
-         <value>1</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART2" registerAlias="UMODE" settingAlias="URXINV" alias="disabled"/>
@@ -11984,7 +11968,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART2" registerAlias="UERI" settingAlias="enable"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART2" registerAlias="UERI" settingAlias="flag"/>
@@ -12048,7 +12032,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART2" registerAlias="URXI" settingAlias="enable"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART2" registerAlias="URXI" settingAlias="flag"/>
@@ -12116,7 +12100,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART2" registerAlias="UTXI" settingAlias="enable"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART2" registerAlias="UTXI" settingAlias="flag"/>
@@ -12166,7 +12150,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\interrupt_manager.c</file>
-         <hash>1c1561a54ca5c24ee394bf3b19adc0bbc3b22d4f2b842af2be88b5cf0258d7ff</hash>
+         <hash>98f9bf7603ce4d074af5ae915e3a6b2ea73487e4abd66acdd83138cce9afc671</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\interrupt_manager.h</file>
@@ -12182,7 +12166,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>4fd35a8e85359873d9626eba74c2091e42bde953451ed3a8c0a2b1a99ecb4f03</hash>
+         <hash>2f46404e269d7f82815926597bf1fac8825950ba7c5daca8e74dc7a6f7635dc2</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
@@ -12206,11 +12190,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files\uart2.c</file>
-         <hash>4405f9f1f903f686fa670633ebab19ade24788434d4e34d78807900a393a9437</hash>
+         <hash>5e6852526c08595ffe22d69390d1a07c4bf1cf2f07520849358b47d65136bb94</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\uart2.h</file>
-         <hash>6f7999d3821f5e54bafa8d6d2a6f467b6e8c02496fc28a9bcbf9da79ca773eeb</hash>
+         <hash>515454fdafbb3ba36d3a22ffcb2026ded60d15df85585c5f281a9fac5dcc905d</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\where_was_i.s</file>

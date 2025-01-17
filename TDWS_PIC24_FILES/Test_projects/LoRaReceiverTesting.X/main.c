@@ -51,7 +51,35 @@
                          Main application
  */
 
-uint8_t check_lora(void)
+uint16_t uart2_rxcount = 0;
+char recieved_msg[150];
+uint16_t message_available = 0;
+
+//reads one character and puts it in a global character array for other functions to parse
+void uart2_ISR(void)
+{
+    if(message_available == 0)
+    {
+        uint16_t one_char = UART2_Read();
+        recieved_msg[uart2_rxcount] = one_char & 0x00FF;
+        uart2_rxcount++;
+        if(uart2_rxcount > 149) //if over message array limit reset uart2_rx_count
+        {
+            uart2_rxcount = 0;
+        }
+        else if(recieved_msg[uart2_rxcount - 1] == '\n')
+        {
+            uart2_rxcount = 0;
+            message_available = 1;
+        }
+    }
+    else
+    {
+        uint16_t trash = UART2_Read();//throw away anything in the uart buffer
+    }
+}
+
+uint16_t check_lora(void)
 {
     char cmd[32];
     sprintf(cmd, "AT\r\n");
@@ -66,24 +94,29 @@ uint8_t check_lora(void)
         }
     }
     //should receive back +AT: OK\r\n 9 total chars
-    char resp[32];
-    ii = 0;
-    while(ii < 9)
+//    char resp[32];
+//    ii = 0;
+//    while(ii < 9)
+//    {
+//        resp[ii] = UART2_Read();
+//        ii +=1;
+//        
+//        if(resp[ii-1]==0x0a)
+//        {
+//            ii=10;
+//        }
+//    }
+    while(message_available == 0)
     {
-        resp[ii] = UART2_Read();
-        ii +=1;
-        
-        if(resp[ii-1]==0x0a)
-        {
-            ii=10;
-        }
+        cmd[10] = 'p';
     }
-    
-    if((resp[5] == 0x4f) && (resp[6] == 0x4b))
+    message_available = 0;
+    uint8_t check_msg = (recieved_msg[5] == 0x4f) && (recieved_msg[6] == 0x4b);
+    if(check_msg)
     {
         for(int jj = 0; jj <=32; jj++)
             {
-                resp[jj] = 0x0000;
+                recieved_msg[jj] = 0x0000;
             }
         return 1;
     }
@@ -91,7 +124,7 @@ uint8_t check_lora(void)
     {
         for(int jj = 0; jj <=32; jj++)
             {
-                resp[jj] = 0x0000;
+                recieved_msg[jj] = 0x0000;
             }
         return 0;
     }
@@ -255,28 +288,34 @@ void init_LoRa(void){
     int all_good = 0;
     
     is_active = check_lora();
-    if(is_active == 1)
-    {
-        mode_set = lora_set_mode();
-        rfconfig_set = lora_rfconfig();
-        set_rx = LoRa_set_rx();
-    }
+//    if(is_active == 1)
+//    {
+//        mode_set = lora_set_mode();
+//        rfconfig_set = lora_rfconfig();
+//        set_rx = LoRa_set_rx();
+//    }
     
     all_good = (rfconfig_set && mode_set && set_rx);
-    int trahs = 0xDEAD;
+    int trahs = 0x0000;
 }
 
 int main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
+    
+    UART2_SetRxInterruptHandler(&uart2_ISR);
+    
+    int warmup_wait = 0;
+    while(warmup_wait < 0xffff)
+        {
+            warmup_wait++;
+        }
+    
     init_LoRa();
-    
-    
     while (1)
     {
         int wait = 0;
-        int trash = check_lora();
         
         while(wait < 0xffff)
         {

@@ -1648,19 +1648,19 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB12"/>
-         <value/>
+         <value>IO_RB12</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB13"/>
-         <value/>
+         <value>IO_RB13</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB14"/>
-         <value/>
+         <value>IO_RB14</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB15"/>
-         <value/>
+         <value>IO_RB15</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB2"/>
@@ -1896,19 +1896,19 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RB12"/>
-         <value>disabled</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RB13"/>
-         <value>disabled</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RB14"/>
-         <value>disabled</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RB15"/>
-         <value>disabled</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RB2"/>
@@ -7816,7 +7816,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSB"/>
-         <value>65532</value>
+         <value>4092</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSC"/>
@@ -8288,19 +8288,19 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB12"/>
-         <value>analog</value>
+         <value>digital</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB13"/>
-         <value>analog</value>
+         <value>digital</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB14"/>
-         <value>analog</value>
+         <value>digital</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB15"/>
-         <value>analog</value>
+         <value>digital</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB2"/>
@@ -13047,10 +13047,6 @@
          <value>2</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART1" registerAlias="UMODE" settingAlias="UEN" alias="TX_RX_RTS"/>
-         <value>1</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART1" registerAlias="UMODE" settingAlias="URXINV" alias="disabled"/>
          <value>0</value>
       </entry>
@@ -13501,10 +13497,6 @@
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART2" registerAlias="UMODE" settingAlias="UEN" alias="TX_RX_CTS_RTS"/>
          <value>2</value>
-      </entry>
-      <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART2" registerAlias="UMODE" settingAlias="UEN" alias="TX_RX_RTS"/>
-         <value>1</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART2" registerAlias="UMODE" settingAlias="URXINV" alias="disabled"/>
@@ -13959,10 +13951,6 @@
          <value>2</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART4" registerAlias="UMODE" settingAlias="UEN" alias="TX_RX_RTS"/>
-         <value>1</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART4" registerAlias="UMODE" settingAlias="URXINV" alias="disabled"/>
          <value>0</value>
       </entry>
@@ -14318,15 +14306,15 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.h</file>
-         <hash>97d3d3436afce218bd14f981c1760cf700e691bfc378b69ce964beae9454c72e</hash>
+         <hash>0860c435e37df953245ffbe8e148b7ac4cbcf5962690a62fd33ff4e7b9dd0b79</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>8dcdeb8dd7f308ef2cc977336bfc5f1d6c8d8c76ce0806a73684802563eb0f79</hash>
+         <hash>1bec361aa589c93f0496257c85d9a2870855ff62b77b1bb6d94fe4e7d1e922cb</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
-         <hash>2ba5d174321142a3252a6d3e4ad8879372092aec7e0de4b19ec768d19292d102</hash>
+         <hash>36d8402e60e676f509ad78a4d750ee9d163753a9eb9475134d7561f9859570a6</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\spi1.c</file>
@@ -14338,7 +14326,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>26f755032479a000c41d4fb655e3dfc9ad95c1ce4d3132c8e56e91bdc76b89fe</hash>
+         <hash>b3c3a3b162757758c45e95d66b39737a39c79059014f5940a4b42118f8dd7e60</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\system.h</file>

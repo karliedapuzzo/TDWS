@@ -217,6 +217,9 @@
         <property key="relaxed-math" value="false"/>
         <property key="save-temps" value="false"/>
       </C30Global>
+      <Tool>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
+      </Tool>
       <pkob4hybrid>
         <property key="debugoptions.useswbreakpoints" value="true"/>
       </pkob4hybrid>
