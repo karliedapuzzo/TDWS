@@ -77,6 +77,43 @@ uint8_t RADAR_Facreset(void)
     return(error_code);
 }
 
+uint8_t RADAR_disconnect(void)
+{
+    uint8_t INIT_test[8] = {'I', 'N', 'I', 'T', 0x01, 0x00, 0x00, 0x00};
+    uint8_t INIT_RESP_test[9] = {1};
+    uint8_t VERS_test[27] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to initialize radar to a baud rate 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(INIT_test[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(baud_setting);      //writes baud rate setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+            
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){          //shifts through all our respond bytes
+        INIT_RESP_test[i] = UART1_Read();    //reads response byte from RX
+        if (i == 8){
+            error_code = INIT_RESP_test[i]; //save error_code from response from radar
+        }
+    }
+            
+    //reads firmware_string from the initialization command
+    for (i = 0; i <= 26; i++){          //shifts through all our version bytes
+        VERS_test[i] = UART1_Read();    //reads response byte from RX
+    }
+    
+    return(error_code);
+}
+
+
 uint8_t RADAR_Init(uint8_t baud_setting)
 {
     uint8_t INIT_test[8] = {'I', 'N', 'I', 'T', 0x01, 0x00, 0x00, 0x00};
@@ -233,6 +270,40 @@ uint8_t RADAR_Threshoffset(uint8_t thresh_offset)
     return(error_code);
 }
 
+uint16_t RADAR_nextdata(uint8_t bit_field)
+{
+    uint8_t GNFD_test[8] = {'G', 'N', 'F', 'D', 0x01, 0x00, 0x00, 0x00};
+    uint8_t GNFD_RESP_test[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to ask for next data frame 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(GNFD_test[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(bit_field);     //writes threshold from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the next frame data request command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        GNFD_RESP_test[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = GNFD_RESP_test[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
+
+
+
+
+
 uint16_t UINT8to16(uint8_t high_byte, uint8_t low_byte)
 {
     uint16_t result;
@@ -246,6 +317,8 @@ int16_t UINT8toINT16(uint8_t high_byte, uint8_t low_byte)
     result = (int16_t)((high_byte << 8) | low_byte);
     return(result);
 }
+
+
 
 int main(void)
 {
