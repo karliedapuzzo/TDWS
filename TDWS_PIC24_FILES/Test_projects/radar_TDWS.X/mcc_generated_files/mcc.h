@@ -51,9 +51,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "tmr1.h"
 #include "uart4.h"
 #include "uart1.h"
-#include "tmr1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
 

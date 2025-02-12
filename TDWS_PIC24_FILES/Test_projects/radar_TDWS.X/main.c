@@ -51,7 +51,36 @@
                          Main application
  */
 
-uint8_t RADAR_Facreset(void)
+struct RadarData {
+    uint8_t num_targets;
+    uint8_t distance_low[8];
+    uint8_t distance_high[8];
+    int8_t speed_low[8];
+    int8_t speed_high[8];
+    int8_t angle_low[8];
+    int8_t angle_high[8];
+    uint8_t magnitude_low[8];
+    uint8_t magnitude_high[8]; 
+    uint8_t identification[8];
+};
+
+struct RadarParam {
+    uint8_t version[19];
+    uint8_t freq_channel;
+    uint8_t speed_setting;
+    uint8_t range_setting;
+    uint8_t threshold_offset;
+    uint8_t tracking_filttype;
+    uint8_t minzone_detect;
+    uint8_t maxzone_detect;
+    int8_t minangl_detect;
+    int8_t maxangl_detect;
+    uint8_t minspee_detect;
+    uint8_t maxspee_detect;
+    uint8_t direction_filt;
+};
+
+uint8_t RADAR_facreset(void)
 {
     uint8_t RFSE_test[8] = {'R', 'F', 'S', 'E', 0x00, 0x00, 0x00, 0x00};
     uint8_t RFSE_RESP_test[9];
@@ -79,6 +108,32 @@ uint8_t RADAR_Facreset(void)
 
 uint8_t RADAR_disconnect(void)
 {
+    uint8_t GBYE_command[8] = {'G', 'B', 'Y', 'E', 0x00, 0x00, 0x00, 0x00};
+    uint8_t GBYE_RESP_test[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to initialize radar to a baud rate 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        UART1_Write(GBYE_command[i]);      //writes command byte to TX
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+            
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){          //shifts through all our respond bytes
+        GBYE_RESP_test[i] = UART1_Read();    //reads response byte from RX
+        if (i == 8){
+            error_code = GBYE_RESP_test[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
+
+uint8_t RADAR_init(uint8_t baud_setting)
+{
     uint8_t INIT_test[8] = {'I', 'N', 'I', 'T', 0x01, 0x00, 0x00, 0x00};
     uint8_t INIT_RESP_test[9] = {1};
     uint8_t VERS_test[27] = {1};
@@ -113,84 +168,17 @@ uint8_t RADAR_disconnect(void)
     return(error_code);
 }
 
-
-uint8_t RADAR_Init(uint8_t baud_setting)
+uint8_t RADAR_mindetzone(uint8_t minimum_range)
 {
-    uint8_t INIT_test[8] = {'I', 'N', 'I', 'T', 0x01, 0x00, 0x00, 0x00};
-    uint8_t INIT_RESP_test[9] = {1};
-    uint8_t VERS_test[27] = {1};
-    uint8_t i = 0;
-    uint8_t error_code = 0x08;
-    
-    //sends command to initialize radar to a baud rate 
-    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
-        if (i < 8){
-            UART1_Write(INIT_test[i]);      //writes command byte to TX
-        } else if (i == 8){
-            UART1_Write(baud_setting);      //writes baud rate setting from input
-        }
-        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
-        {
-        }
-    }
-            
-    //reads response from the initialization command
-    for (i = 0; i <= 8; i++){          //shifts through all our respond bytes
-        INIT_RESP_test[i] = UART1_Read();    //reads response byte from RX
-        if (i == 8){
-            error_code = INIT_RESP_test[i]; //save error_code from response from radar
-        }
-    }
-            
-    //reads firmware_string from the initialization command
-    for (i = 0; i <= 26; i++){          //shifts through all our version bytes
-        VERS_test[i] = UART1_Read();    //reads response byte from RX
-    }
-    
-    return(error_code);
-}
-
-uint8_t RADAR_Rangesetting(uint8_t range_setting)
-{
-    uint8_t RRAI_test[8] = {'R', 'R', 'A', 'I', 0x01, 0x00, 0x00, 0x00};
-    uint8_t RRAI_RESP_test[9] = {1};
-    uint8_t i = 0;
-    uint8_t error_code = 0x08;
-    
-    //sends command to set radar range setting 
-    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
-        if (i < 8){
-            UART1_Write(RRAI_test[i]);      //writes command byte to TX
-        } else if (i == 8){
-            UART1_Write(range_setting);     //writes range setting from input
-        }
-        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
-        {
-        }
-    }
-    
-    //reads response from the initialization command
-    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
-        RRAI_RESP_test[i] = UART1_Read();   //reads response byte from RX
-        if (i == 8){
-            error_code = RRAI_RESP_test[i]; //save error_code from response from radar
-        }
-    }
-    
-    return(error_code);
-}
-
-uint8_t RADAR_Mindetzone(uint8_t minimum_range)
-{
-    uint8_t MIRA_test[8] = {'M', 'I', 'R', 'A', 0x01, 0x00, 0x00, 0x00};
-    uint8_t MIRA_RESP_test[9] = {1};
+    uint8_t MIRA_command[8] = {'M', 'I', 'R', 'A', 0x01, 0x00, 0x00, 0x00};
+    uint8_t MIRA_RESP[9] = {1};
     uint8_t i = 0;
     uint8_t error_code = 0x08;
     
     //sends command to set minimum range of detection zone 
     for (i = 0; i <= 8; i++){               //shifts through all our command bytes
         if (i < 8){
-            UART1_Write(MIRA_test[i]);      //writes command byte to TX
+            UART1_Write(MIRA_command[i]);      //writes command byte to TX
         } else if (i == 8){
             UART1_Write(minimum_range);     //writes minimum range setting from input
         }
@@ -201,26 +189,26 @@ uint8_t RADAR_Mindetzone(uint8_t minimum_range)
     
     //reads response from the initialization command
     for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
-        MIRA_RESP_test[i] = UART1_Read();   //reads response byte from RX
+        MIRA_RESP[i] = UART1_Read();   //reads response byte from RX
         if (i == 8){
-            error_code = MIRA_RESP_test[i]; //save error_code from response from radar
+            error_code = MIRA_RESP[i]; //save error_code from response from radar
         }
     }
     
     return(error_code);
 }
 
-uint8_t RADAR_Maxdetzone(uint8_t maximum_range)
+uint8_t RADAR_maxdetzone(uint8_t maximum_range)
 {
-    uint8_t MARA_test[8] = {'M', 'A', 'R', 'A', 0x01, 0x00, 0x00, 0x00};
-    uint8_t MARA_RESP_test[9] = {1};
+    uint8_t MARA_command[8] = {'M', 'A', 'R', 'A', 0x01, 0x00, 0x00, 0x00};
+    uint8_t MARA_RESP[9] = {1};
     uint8_t i = 0;
     uint8_t error_code = 0x08;
     
     //sends command to set maximum range of detection zone 
     for (i = 0; i <= 8; i++){               //shifts through all our command bytes
         if (i < 8){
-            UART1_Write(MARA_test[i]);      //writes command byte to TX
+            UART1_Write(MARA_command[i]);      //writes command byte to TX
         } else if (i == 8){
             UART1_Write(maximum_range);     //writes maximum range setting from input
         }
@@ -231,26 +219,26 @@ uint8_t RADAR_Maxdetzone(uint8_t maximum_range)
     
     //reads response from the initialization command
     for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
-        MARA_RESP_test[i] = UART1_Read();   //reads response byte from RX
+        MARA_RESP[i] = UART1_Read();   //reads response byte from RX
         if (i == 8){
-            error_code = MARA_RESP_test[i]; //save error_code from response from radar
+            error_code = MARA_RESP[i]; //save error_code from response from radar
         }
     }
     
     return(error_code);
 }
 
-uint8_t RADAR_Threshoffset(uint8_t thresh_offset)
+uint8_t RADAR_threshoffset(uint8_t thresh_offset)
 {
-    uint8_t THOF_test[8] = {'T', 'H', 'O', 'F', 0x01, 0x00, 0x00, 0x00};
-    uint8_t THOF_RESP_test[9] = {1};
+    uint8_t THOF[8] = {'T', 'H', 'O', 'F', 0x01, 0x00, 0x00, 0x00};
+    uint8_t THOF_RESP[9] = {1};
     uint8_t i = 0;
     uint8_t error_code = 0x08;
     
     //sends command to set threshold offset 
     for (i = 0; i <= 8; i++){               //shifts through all our command bytes
         if (i < 8){
-            UART1_Write(THOF_test[i]);      //writes command byte to TX
+            UART1_Write(THOF[i]);      //writes command byte to TX
         } else if (i == 8){
             UART1_Write(thresh_offset);     //writes threshold from input
         }
@@ -261,29 +249,26 @@ uint8_t RADAR_Threshoffset(uint8_t thresh_offset)
     
     //reads response from the initialization command
     for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
-        THOF_RESP_test[i] = UART1_Read();   //reads response byte from RX
+        THOF_RESP[i] = UART1_Read();   //reads response byte from RX
         if (i == 8){
-            error_code = THOF_RESP_test[i]; //save error_code from response from radar
+            error_code = THOF_RESP[i]; //save error_code from response from radar
         }
     }
     
     return(error_code);
 }
 
-uint16_t RADAR_nextdata(uint8_t bit_field)
+uint8_t RADAR_nexttdat(struct RadarData *result)
 {
-    uint8_t GNFD_test[8] = {'G', 'N', 'F', 'D', 0x01, 0x00, 0x00, 0x00};
+    uint8_t GNFD_test[9] = {'G', 'N', 'F', 'D', 0x01, 0x00, 0x00, 0x00, 0x08};
     uint8_t GNFD_RESP_test[9] = {1};
+    uint8_t TDAT_headpay[8] = {1};
     uint8_t i = 0;
     uint8_t error_code = 0x08;
     
     //sends command to ask for next data frame 
     for (i = 0; i <= 8; i++){               //shifts through all our command bytes
-        if (i < 8){
-            UART1_Write(GNFD_test[i]);      //writes command byte to TX
-        } else if (i == 8){
-            UART1_Write(bit_field);     //writes threshold from input
-        }
+        UART1_Write(GNFD_test[i]);      //writes command byte to TX
         while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
         {
         }
@@ -297,12 +282,312 @@ uint16_t RADAR_nextdata(uint8_t bit_field)
         }
     }
     
+    if (error_code == 0x00){
+        for (i=0; i<=7; i++){
+            TDAT_headpay[i] = UART1_Read();
+        }
+        if (TDAT_headpay[4] != 0x00){
+            result->num_targets = TDAT_headpay[4] / 8;
+            error_code = 0x00;
+            for (i=0;i <= result->num_targets - 1; i++){
+                result->distance_low[i] = UART1_Read();
+                result->distance_high[i] = UART1_Read();
+                result->speed_low[i] = UART1_Read();
+                result->speed_high[i] = UART1_Read();
+                result->angle_low[i] = UART1_Read();
+                result->angle_high[i] = UART1_Read();
+                result->magnitude_low[i] = UART1_Read(); 
+                result->magnitude_high[i] = UART1_Read();
+                result->identification[i] = UART1_Read();
+            }
+            error_code = 0x00;
+        }
+    }
+    
     return(error_code);
 }
 
+uint8_t RADAR_readparam(struct RadarParam *result)
+{
+    uint8_t GRPS_test[8] = {'G', 'R', 'P', 'S', 0x00, 0x00, 0x00, 0x00};
+    uint8_t GRPS_RESP_test[9] = {1};
+    uint8_t RPST_test[8] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to ask for next data frame 
+    for (i = 0; i <= 7; i++){               //shifts through all our command bytes
+        UART1_Write(GRPS_test[i]);      //writes command byte to TX
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the next frame data request command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        GRPS_RESP_test[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = GRPS_RESP_test[i]; //save error_code from response from radar
+        }
+    }
+    
+    if (error_code == 0x00){
+        //read header, payload length, and version 
+        for (i=0; i<= 7; i++){
+            RPST_test[i] = UART1_Read();
+        }
+        for (i=0; i<= 18; i++){
+            result->version[i] = UART1_Read();
+        }
+        //read parameters
+        result->freq_channel = UART1_Read();
+        result->speed_setting = UART1_Read();
+        result->range_setting = UART1_Read();
+        result->threshold_offset = UART1_Read();
+        result->tracking_filttype = UART1_Read();
+        result->minzone_detect = UART1_Read(); 
+        result->maxzone_detect = UART1_Read();
+        result->minangl_detect = UART1_Read();
+        result->maxangl_detect = UART1_Read();
+        result->minspee_detect = UART1_Read();
+        result->maxspee_detect = UART1_Read();
+        result->direction_filt = UART1_Read();
+    }
+    
+    return(error_code);
+}
 
+uint8_t RADAR_speedset(uint8_t speed_setting){
+    uint8_t RSPI_command[8] = {'R', 'S', 'P', 'I', 0x01, 0x00, 0x00, 0x00};
+    uint8_t RSPI_RESP[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(RSPI_command[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(speed_setting);     //writes maximum range setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        RSPI_RESP[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = RSPI_RESP[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
 
+uint8_t RADAR_rangeset(uint8_t range_setting){
+    uint8_t RRAI_command[8] = {'R', 'R', 'A', 'I', 0x01, 0x00, 0x00, 0x00};
+    uint8_t RRAI_RESP[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(RRAI_command[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(range_setting);     //writes maximum range setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        RRAI_RESP[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = RRAI_RESP[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
 
+uint8_t RADAR_filttype(uint8_t filter_type){
+    uint8_t TRFT_command[8] = {'T', 'R', 'F', 'T', 0x01, 0x00, 0x00, 0x00};
+    uint8_t TRFT_RESP[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(TRFT_command[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(filter_type);     //writes maximum range setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        TRFT_RESP[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = TRFT_RESP[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
+
+uint8_t RADAR_minangle(int8_t min_angle){
+    uint8_t MIAN_command[8] = {'M', 'I', 'A', 'N', 0x01, 0x00, 0x00, 0x00};
+    uint8_t MIAN_RESP[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(MIAN_command[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(min_angle);     //writes maximum range setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        MIAN_RESP[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = MIAN_RESP[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
+
+uint8_t RADAR_maxangle(int8_t max_angle){
+    uint8_t MAAN_command[8] = {'M', 'A', 'A', 'N', 0x01, 0x00, 0x00, 0x00};
+    uint8_t MAAN_RESP[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(MAAN_command[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(max_angle);     //writes maximum range setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        MAAN_RESP[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = MAAN_RESP[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
+
+uint8_t RADAR_minspeed(uint8_t min_speed){
+    uint8_t MISP_command[8] = {'M', 'I', 'S', 'P', 0x01, 0x00, 0x00, 0x00};
+    uint8_t MISP_RESP[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(MISP_command[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(min_speed);     //writes maximum range setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        MISP_RESP[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = MISP_RESP[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
+
+uint8_t RADAR_maxspeed(uint8_t max_speed){
+    uint8_t MASP_command[8] = {'M', 'A', 'S', 'P', 0x01, 0x00, 0x00, 0x00};
+    uint8_t MASP_RESP[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(MASP_command[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(max_speed);     //writes maximum range setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        MASP_RESP[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = MASP_RESP[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
+
+uint8_t RADAR_directset(uint8_t direction_setting){
+    uint8_t DEDI_command[8] = {'D', 'E', 'D', 'I', 0x01, 0x00, 0x00, 0x00};
+    uint8_t DEDI_RESP[9] = {1};
+    uint8_t i = 0;
+    uint8_t error_code = 0x08;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 8; i++){               //shifts through all our command bytes
+        if (i < 8){
+            UART1_Write(DEDI_command[i]);      //writes command byte to TX
+        } else if (i == 8){
+            UART1_Write(direction_setting);     //writes maximum range setting from input
+        }
+        while (UART1_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    
+    //reads response from the initialization command
+    for (i = 0; i <= 8; i++){               //shifts through all our respond bytes
+        DEDI_RESP[i] = UART1_Read();   //reads response byte from RX
+        if (i == 8){
+            error_code = DEDI_RESP[i]; //save error_code from response from radar
+        }
+    }
+    
+    return(error_code);
+}
 
 uint16_t UINT8to16(uint8_t high_byte, uint8_t low_byte)
 {
@@ -318,7 +603,79 @@ int16_t UINT8toINT16(uint8_t high_byte, uint8_t low_byte)
     return(result);
 }
 
+void RADAR_printhead(void){
+    char header[] = "ID, Distance(cm), Speed(km/h x 100), Angle(deg x 100), Magnitude of target(dB x 100)";
+    uint8_t i;
+    
+    //sends command to set maximum range of detection zone 
+    for (i = 0; i <= 85; i++){               //shifts through all our command bytes
+        UART4_Write(header[i]);     //writes maximum range setting from input
+        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    UART4_Write(0x0A);     //writes maximum range setting from input
+    while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+    {
+    }
+    UART4_Write(0x0D);     //writes maximum range setting from input
+    while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+    {
+    }
+    
+}
 
+void RADAR_printdecimal(uint16_t number){
+    char buffer[20];
+    uint8_t i = 0;
+    sprintf(buffer, "%d", number);
+    for (i = 0; buffer[i] != '\0'; i++){
+        UART4_Write(buffer[i]);     //writes maximum range setting from input
+        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+}
+
+void RADAR_printdata(struct RadarData *results){
+    uint8_t i;
+    uint8_t test;
+    for (i=0; i <= results->num_targets - 1; i++){
+        if (results->num_targets > 1){
+            test = 0;
+        }
+        RADAR_printdecimal(results->identification[i]);
+        UART4_Write(',');     //writes maximum range setting from input
+        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+        RADAR_printdecimal(UINT8to16(results->distance_high[i], results->distance_low[i]));     //writes maximum range setting from input
+        UART4_Write(',');     //writes maximum range setting from input
+        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+        RADAR_printdecimal(UINT8toINT16(results->speed_high[i], results->speed_low[i]));     //writes maximum range setting from input
+        UART4_Write(',');     //writes maximum range setting from input
+        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+        RADAR_printdecimal(UINT8toINT16(results->angle_high[i], results->angle_low[i]));     //writes maximum range setting from input
+        UART4_Write(',');     //writes maximum range setting from input
+        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+        RADAR_printdecimal(UINT8to16(results->magnitude_high[i], results->magnitude_low[i]));     //writes maximum range setting from input
+        UART4_Write(0x0A);     //writes maximum range setting from input
+        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+        UART4_Write(0x0D);     //writes maximum range setting from input
+        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+        {
+        }
+    }
+    i = 0;
+}
 
 int main(void)
 {
@@ -326,214 +683,69 @@ int main(void)
     SYSTEM_Initialize();
     UART1_Initialize();
     TMR1_Initialize();
-        
-    uint8_t GRPS_test[8] = {'G', 'R', 'P', 'S', 0x00, 0x00, 0x00, 0x00};
-    uint8_t RSPT_RESP_test[48];
-    
-    uint8_t GNFD_test[9] = {'G', 'N', 'F', 'D', 0x01, 0x00, 0x00, 0x00, 0x28};
-    uint8_t GNFD_RESP_test[93] = {1};
-    
-    uint8_t i;
-    uint8_t approaching = 0;
-    uint8_t neg_angle = 0;
-    uint8_t reading_done = 0;
-    uint8_t done_count = 0;
-    uint8_t num_targets = 0x09;
-    uint8_t k = 0;
-    uint8_t init = 1;
     uint8_t test = 1;
-    
-    uint16_t distance;
-    uint8_t distance_string[5];
-    int16_t speed;
-    uint8_t speed_string[5];
-    int16_t angle;
-    uint8_t angle_string[4];
-    uint16_t magnitude;
-    uint8_t magnitude_string[5];
-    uint8_t identification;
+    uint8_t init = 1;
+    char header[87] = "ID, Distance(cm), Speed(km/h x 100), Angle(deg x 100), Magnitude of target(dB x 100)";  
+    struct RadarParam test_param;
+    struct RadarData test_data;
     
     while (1)
     {
         if (init == 1){
             
-            while (RADAR_Facreset() != 0x00){           //factory reset
+            while (RADAR_facreset() != 0x00){           //factory reset
             }
                         
-            while (RADAR_Init(0x00) != 0x00){           //initialize uart communication to setting 0 (115200 baud)
+            while (RADAR_init(0x00) != 0x00){           //initialize uart communication to setting 0 (115200 baud)
+            }
+                        
+            while (RADAR_speedset(0x00) != 0x00){   
+            }
+
+            while (RADAR_rangeset(0x00) != 0x00){   
+            }
+
+            while (RADAR_threshoffset(0x06) != 0x00){   
+            }
+
+            while (RADAR_filttype(0x01) != 0x00){   
+            }
+
+            while (RADAR_mindetzone(0x00) != 0x00){   
+            }
+
+            while (RADAR_maxdetzone(0x05) != 0x00){   
+            }
+
+            while (RADAR_minangle(-30) != 0x00){   
+            }
+
+            while (RADAR_maxangle(30) != 0x00){   
+            }
+
+            while (RADAR_minspeed(7) != 0x00){   
             }
             
-            while (RADAR_Rangesetting(0x00) != 0x00){   //set range setting to setting 0 (100m)
+            while (RADAR_maxspeed(90) != 0x00){   
             }
             
-            while (RADAR_Mindetzone(0x00) != 0x00){     //set minimum range setting to 0% of range setting
+            while (RADAR_directset(2) != 0x00){   
             }
             
-            while (RADAR_Maxdetzone(0x07) != 0x00){     //set maximum range setting to 7% of range setting
-            }
-            
-            while (RADAR_Threshoffset(0x0C) != 0x00){   //set threshold offset to 0dB
-            }
+            RADAR_printhead();
             
             init = 0;
             TMR1_Start();
-//            
         }
         
         if (TMR1_GetElapsedThenClear()){
             if (test == 1 || test == 0){
                 test = 0;
-
-                for (i = 0; i <= 7; i++){          //shifts through all our command bytes
-                    UART1_Write(GRPS_test[i]);      //writes command byte to TX
-                    while (UART1_IsTxReady() == 0)   //holds here till we can transmit our next byte
-                    {
-                    }
+                while (RADAR_nexttdat(&test_data) != 0x00){           //tracked 
                 }
-
-                for (i = 0; i <= 47; i++){                //shifts through all our respond bytes
-                    RSPT_RESP_test[i] = UART1_Read();    //reads response byte from RX
-                }
-                
-                test = 0;        
-                //sends command to get next data frame, specifically tracked data 
-                for (i = 0; i <= 8; i++){          //shifts through all our command bytes
-                    UART1_Write(GNFD_test[i]);      //writes command byte to TX
-                    while (UART1_IsTxReady() == 0)   //holds here till we can transmit our next byte
-                    {
-                    }
-                }
-
-                //reads response from the next data frame command
-                for (i = 0; i <= 92; i++){                //shifts through all our respond bytes
-                    GNFD_RESP_test[i] = UART1_Read();    //reads response byte from RX
-                    if (reading_done == 1){
-                        if (done_count > 1){
-                            done_count = done_count - 1;
-                        } else {
-                            done_count = 0;
-                            reading_done = 0;
-//                            UART4_Write(num_targets);      //writes command byte to TX
-//                            while (UART4_IsTxReady() == 0)   //holds here till we can transmit our next byte
-//                            {
-//                            }
-                            break;
-                        }
-                    }else if (i >= 3){
-                        if(GNFD_RESP_test[i-4] == 'T'){
-                            if(GNFD_RESP_test[i-3] == 'D'){
-                                if(GNFD_RESP_test[i-2] == 'A'){
-                                    if(GNFD_RESP_test[i-1] == 'T'){
-                                        num_targets = (GNFD_RESP_test[i] / 9);
-                                    }
-                                }
-                            } 
-                        }
-                        if(GNFD_RESP_test[i-3] == 'D'){
-                            if(GNFD_RESP_test[i-2] == 'O'){
-                                if(GNFD_RESP_test[i-1] == 'N'){
-                                    if(GNFD_RESP_test[i] == 'E'){
-                                        reading_done = 1;
-                                        done_count = 8;
-                                    }
-                                }
-                            } 
-                        }
-                    }
-                }
-                
-                if (num_targets > 0x00){
-                    for (i = 0; i < num_targets; i++){
-                        
-                        distance = UINT8to16(GNFD_RESP_test[18 + (i*9)], GNFD_RESP_test[17 + (i*9)]);
-                        speed = UINT8toINT16(GNFD_RESP_test[20 + (i*9)], GNFD_RESP_test[19 + (i*9)]);
-                        angle = UINT8toINT16(GNFD_RESP_test[22 + (i*9)], GNFD_RESP_test[21 + (i*9)]);
-                        magnitude = UINT8to16(GNFD_RESP_test[24 + (i*9)], GNFD_RESP_test[23 + (i*9)]);
-                        identification = GNFD_RESP_test[25 + (i*9)];
-                        
-                        for (k = 0; k < 5; k++){                    //splice digits of distance
-                            if (distance != 0){
-                                distance_string[k] = 0x30 + distance % 10;
-                                distance /= 10;
-                            }
-                        }
-                        
-                        if (speed < 0){
-                            approaching = 1;
-                            speed *= -1;
-                        }
-                        
-                        for (k = 0; k < 5; k++){                    //splice digits of speed
-                            if (speed != 0){
-                                speed_string[k] = 0x30 + speed % 10;
-                                speed /= 10;
-                            }
-                        }
-                        
-                        if (angle < 0){
-                            neg_angle = 1;
-                            angle *= -1;
-                        }
-                        
-                        for (k = 0; k < 3; k++){                    //splice digits of angle
-                            if (angle != 0){
-                                angle_string[k] = 0x30 + angle % 10;
-                                angle /= 10;
-                            }
-                        }
-                        
-                        for (k = 0; k < 4; k++){                    //splice digits of magnitude
-                            if (magnitude != 0){
-                                magnitude_string[k] = 0x30 + magnitude % 10;
-                                magnitude /= 10;
-                            }
-                        }
-                        
-                        UART4_Write(0x30 + identification);      //writes command byte to TX
-                        while (UART4_IsTxReady() == 0)   //holds here till we can transmit our next byte
-                        {
-                        }
-                        
-                        test = 0;
-                        
-                        UART4_Write(' ');      //writes command byte to TX
-                        while (UART4_IsTxReady() == 0)   //holds here till we can transmit our next byte
-                        {
-                        }
-                        
-                        test = 0;
-                        
-                        for (k = 0; k <= 4; k++){
-                            if (distance_string[4 - k] != 0x00){
-                                UART4_Write(distance_string[4 - k]);      //writes command byte to TX
-                                while (UART4_IsTxReady() == 0)   //holds here till we can transmit our next byte
-                                {
-                                }
-                            }
-                            test = 0;
-                        }
-                        
-                        test = 0;
-                        
-                        UART4_Write(0x0A);      //writes command byte to TX
-                        while (UART4_IsTxReady() == 0)   //holds here till we can transmit our next byte
-                        {
-                        }
-                        
-                        test = 0;
-                        
-                        UART4_Write(0x0D);      //writes command byte to TX
-                        while (UART4_IsTxReady() == 0)   //holds here till we can transmit our next byte
-                        {
-                        }
-                        
-                        test = 0;
-                    }
-                    approaching = 0;
-                    for (k = 0; k <= 4; k++){
-                        distance_string[4 - k] = 0x00;
-                    }
-                    num_targets = 0;
+                if (test_data.num_targets != 0x00){
+                    RADAR_printdata(&test_data);
+                    test_data.num_targets = 0x00;
                 }
                 test = 0;
             }

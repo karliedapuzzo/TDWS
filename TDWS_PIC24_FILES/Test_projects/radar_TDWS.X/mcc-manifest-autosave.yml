@@ -2,13 +2,13 @@
 
 manifest_file_version: 1.0.0
 project: radar_TDWS
-creation_date: 2025-01-01T13:37:35.906-07:00[America/Denver]
-operating_system: Windows 10
+creation_date: 2025-02-12T13:58:27.095-07:00[America/Denver]
+operating_system: Mac OS X
 mcc_mode: IDE
 mcc_mode_version: v6.20
 device_name: PIC24FJ128GL306
 compiler: XC16 2.10
-mcc_version: 5.5.0
+mcc_version: 5.5.1
 mcc_core_version: 5.7.0
 content_manager_version: 5.0.1
 is_mcc_offline: false
