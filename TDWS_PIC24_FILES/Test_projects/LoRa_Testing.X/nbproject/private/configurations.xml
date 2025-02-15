@@ -4,13 +4,8 @@
   <defaultConf>0</defaultConf>
   <confs>
     <conf name="default" type="2">
-<<<<<<< HEAD
-      <platformToolSN>noToolString</platformToolSN>
-      <languageToolchainDir>/Applications/microchip/xc16/v2.10/bin</languageToolchainDir>
-=======
-      <platformToolSN>:=MPLABComm-USB-Microchip:=&lt;vid>04D8:=&lt;pid>810B:=&lt;rev>0100:=&lt;man>Microchip Technology Incorporated:=&lt;prod>MPLAB PKoB 4:=&lt;sn>BUR204820193:=&lt;drv>x:=&lt;xpt>b:=end</platformToolSN>
-      <languageToolchainDir>C:\Program Files\Microchip\xc16\v2.10\bin</languageToolchainDir>
->>>>>>> 034e6c6a4372910452f9f1a557de98ac8a8075a1
+      <platformToolSN></platformToolSN>
+      <languageToolchainDir></languageToolchainDir>
       <mdbdebugger version="1">
         <placeholder1>place holder 1</placeholder1>
         <placeholder2>place holder 2</placeholder2>
