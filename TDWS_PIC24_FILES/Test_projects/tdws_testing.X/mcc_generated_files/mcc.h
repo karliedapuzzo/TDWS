@@ -51,10 +51,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "spi1.h"
 #include "tmr1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
+#include "spi1.h"
 #include "uart4.h"
 
 #warning "This file will be removed in future MCC releases. Use system.h instead."

@@ -75,7 +75,7 @@ void PIN_MANAGER_Initialize (void)
     TRISA = 0x0001;
     TRISB = 0xFFFF;
     TRISC = 0x7000;
-    TRISD = 0x07E5;
+    TRISD = 0x07D5;
     TRISE = 0x00FF;
     TRISF = 0x0077;
     TRISG = 0x03CC;
@@ -108,7 +108,7 @@ void PIN_MANAGER_Initialize (void)
     IOCPUB = 0x0000;
     IOCPUC = 0x0000;
     IOCPUD = 0x0000;
-    IOCPUE = 0x0000;
+    IOCPUE = 0x003C;
     IOCPUF = 0x0000;
     IOCPUG = 0x0000;
 
@@ -127,10 +127,10 @@ void PIN_MANAGER_Initialize (void)
      * Setting the Analog/Digital Configuration SFR(s)
      ***************************************************************************/
     ANSA = 0x0001;
-    ANSB = 0x0FFC;
+    ANSB = 0xFFFC;
     ANSC = 0x3000;
     ANSD = 0x00C0;
-    ANSE = 0x001E;
+    ANSE = 0x0002;
     ANSG = 0x03C0;
     
     /****************************************************************************
@@ -138,17 +138,17 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
 
+    RPOR10bits.RP20R = 0x0003;    //RD5->UART1:U1TX
     RPINR19bits.U2RXR = 0x0003;    //RD10->UART2:U2RX
-    RPOR5bits.RP11R = 0x0008;    //RD0->SPI1:SCK1OUT
-    RPINR20bits.SCK1R = 0x000B;    //RD0->SPI1:SCK1OUT
-    RPOR12bits.RP25R = 0x0003;    //RD4->UART1:U1TX
-    RPOR8bits.RP16R = 0x0018;    //RF3->UART4:U4TX
-    RPINR20bits.SDI1R = 0x0017;    //RD2->SPI1:SDI1
-    RPOR12bits.RP24R = 0x0007;    //RD1->SPI1:SDO1
-    RPINR18bits.U1RXR = 0x0014;    //RD5->UART1:U1RX
+    RPOR11bits.RP22R = 0x0009;    //RD3->SPI1:SS1OUT
     RPOR6bits.RP12R = 0x0005;    //RD11->UART2:U2TX
     RPINR27bits.U4RXR = 0x001E;    //RF2->UART4:U4RX
-    RPOR11bits.RP22R = 0x0009;    //RD3->SPI1:SS1OUT
+    RPINR18bits.U1RXR = 0x0019;    //RD4->UART1:U1RX
+    RPOR8bits.RP16R = 0x0018;    //RF3->UART4:U4TX
+    RPINR20bits.SCK1R = 0x000B;    //RD0->SPI1:SCK1OUT
+    RPOR5bits.RP11R = 0x0008;    //RD0->SPI1:SCK1OUT
+    RPOR12bits.RP24R = 0x0007;    //RD1->SPI1:SDO1
+    RPINR20bits.SDI1R = 0x0017;    //RD2->SPI1:SDI1
 
     __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
 }

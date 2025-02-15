@@ -51,54 +51,155 @@
 /*
                          Main application
  */
-int main(void)
+
+static uint16_t mode = 0x00;
+static uint16_t mode_set = 0;
+
+void read_switches(void)//read the switch values and indicate if they changed
+{
+//    uint16_t prev_mode = mode;
+    
+    uint16_t sw0;
+    uint16_t sw1;
+    uint16_t sw2;
+    uint16_t sw3;
+    
+    sw0 = IO_RE2_GetValue();
+    sw1 = IO_RE3_GetValue();
+    sw2 = IO_RE4_GetValue();
+    sw3 = IO_RE5_GetValue();
+    
+    sw0 = (~sw0 & 0x0001);
+    sw1 = (~sw1 & 0x0001) << 1;
+    sw2 = (~sw2 & 0x0001) << 2;
+    sw3 = (~sw3 & 0x0001) << 3;
+    
+    mode = (sw0 | sw1 | sw2 | sw3);
+}
+
+static uint16_t here;
+
+int main_mode(void)
+{
+    while(1)
+    {
+        here = 0;
+    }
+}
+
+int detect_mod1(void)
+{
+    while(1)
+    {
+        here = 1;
+    }
+}
+
+int detect_mod2(void)
+{
+    while(1)
+    {
+        here = 2;
+    }
+}
+
+int radar_test(void)
+{
+    while(1)
+    {
+        here = 3;
+    }
+}
+
+int mag_test(void)
+{
+    while(1)
+    {
+        here = 4;
+    }
+}
+
+int lora_test(void)
+{
+    while(1)
+    {
+        here = 5;
+    }
+}
+
+int light_test(void)
+{
+    while(1)
+    {
+        here = 6;
+    }
+}
+
+int data_collection(void)
+{
+    while(1)
+    {
+        here = 7;
+    }
+}
+
+int main(void) //this initializes the pic and it's "mode" then sends to the mode based on the switch input
 {
     // initialize the device
     SYSTEM_Initialize();
-    
-    IO_RE2_SetDigitalInput();
+
     uint16_t wait = 0;
     while(wait < 0x00ff)
     {
         wait ++;
     }
-
+    wait = 0;
+    
+    while(wait < 10)//read switches
+    {
+        wait++;
+        read_switches();
+    }
+    
+    if(mode == 0x0001)
+    {
+        detect_mod1();
+    }
+    else if(mode == 0x0003)
+    {
+        detect_mod2();
+    }
+    else if(mode == 0x0008)
+    {
+        radar_test();
+    }
+    else if(mode == 0x0009)
+    {
+        mag_test();
+    }
+    else if(mode == 0x000A)
+    {
+        lora_test();
+    }
+    else if(mode == 0x000B)
+    {
+        light_test();
+    }
+    else if((mode == 0x000C) | (mode == 0x000D) | (mode == 0x000E) | (mode == 0x000F))
+    {
+        data_collection();
+    }
+    else
+    {
+        main_mode();
+    }
+    
     while (1)
     {
-        uint16_t wait = 0;
-        
-        uint16_t switch0_val;
-        uint16_t switch1_val;
-        uint16_t switch2_val;
-        uint16_t switch3_val;
-        uint16_t switch_mode;
-        
+        uint16_t error = 1;
         while(wait < 0xffff)
         {
             wait++;
-        }
-        
-        //weak pull up (WPU in pin module) resistors need to be enabled for these to function properly
-        switch0_val = IO_RE2_GetValue();
-        switch1_val = IO_RE3_GetValue();
-        switch2_val = IO_RE4_GetValue();
-        switch3_val = IO_RE5_GetValue();
-        
-        switch0_val = (~switch0_val & 0x0001);
-        switch1_val = (~switch1_val & 0x0001) << 1;
-        switch2_val = (~switch2_val & 0x0001) << 2;
-        switch3_val = (~switch3_val & 0x0001) << 3;
-        
-        switch_mode = (switch0_val | switch1_val | switch2_val | switch3_val);
-        
-        
-        if(switch_mode > 0)
-        {
-            continue;
-        }
-        else
-        {
-            wait=0;
         }
         
     }

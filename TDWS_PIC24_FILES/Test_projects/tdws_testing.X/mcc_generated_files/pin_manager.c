@@ -128,7 +128,7 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     ANSA = 0x0001;
     ANSB = 0xFFFC;
-    ANSC = 0x3000;
+    ANSC = 0xB000;
     ANSD = 0x0CC0;
     ANSE = 0x001E;
     ANSG = 0x03C0;
@@ -138,13 +138,13 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
 
-    RPINR27bits.U4RXR = 0x001E;    //RF2->UART4:U4RX
-    RPOR5bits.RP11R = 0x0008;    //RD0->SPI1:SCK1OUT
-    RPINR20bits.SCK1R = 0x000B;    //RD0->SPI1:SCK1OUT
     RPINR20bits.SDI1R = 0x0017;    //RD2->SPI1:SDI1
-    RPOR8bits.RP16R = 0x0018;    //RF3->UART4:U4TX
-    RPOR12bits.RP24R = 0x0007;    //RD1->SPI1:SDO1
+    RPOR5bits.RP11R = 0x0008;    //RD0->SPI1:SCK1OUT
     RPOR11bits.RP22R = 0x0009;    //RD3->SPI1:SS1OUT
+    RPINR27bits.U4RXR = 0x001E;    //RF2->UART4:U4RX
+    RPOR8bits.RP16R = 0x0018;    //RF3->UART4:U4TX
+    RPINR20bits.SCK1R = 0x000B;    //RD0->SPI1:SCK1OUT
+    RPOR12bits.RP24R = 0x0007;    //RD1->SPI1:SDO1
 
     __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
 }

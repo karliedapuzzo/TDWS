@@ -43,12 +43,11 @@
 */
 
 #ifndef _XTAL_FREQ
-#define _XTAL_FREQ  8000000UL
+#define _XTAL_FREQ  32000000UL
 #endif
 
 #include "xc.h"
 #include "stdint.h"
-#include "mcc.h"
 
 #ifndef SYSTEM_H
 #define	SYSTEM_H

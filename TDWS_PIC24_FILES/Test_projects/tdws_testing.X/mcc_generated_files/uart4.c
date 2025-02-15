@@ -63,8 +63,8 @@ void UART4_Initialize(void)
     U4MODE = (0x8008 & ~(1<<15));  // disabling UARTEN bit
     // UTXISEL0 TX_ONE_CHAR; UTXINV disabled; OERR NO_ERROR_cleared; URXISEL RX_ONE_CHAR; UTXBRK COMPLETED; UTXEN disabled; ADDEN disabled; 
     U4STA = 0x00;
-    // BaudRate = 9600; Frequency = 4000000 Hz; U4BRG 103; 
-    U4BRG = 0x67;
+    // BaudRate = 115200; Frequency = 16000000 Hz; U4BRG 34; 
+    U4BRG = 0x22;
     
     U4MODEbits.UARTEN = 1;   // enabling UART ON bit
     U4STAbits.UTXEN = 1;
