@@ -1,7 +1,7 @@
 /TDWS_PIC24_FILES/Main_Project/TDWS_Main_Prgram.X/build/
 /TDWS_PIC24_FILES/Main_Project/TDWS_Main_Prgram.X/dist/
-/TDWS_PIC24_FILES/Main_projects/TDWS_Main.X/nbproject/
-/TDWS_PIC24_FILES/Main_projects/TDWS_Main.X/debug/
+/TDWS_PIC24_FILES/Main_projects/TDWS_Main_Prgram.X/nbproject/
+/TDWS_PIC24_FILES/Main_projects/TDWS_Main_Prgram.X/debug/
 
 
 /TDWS_PIC24_FILES/Test_projects/LoRa_receiver_test.X/build/
@@ -36,3 +36,5 @@
 
 *.py
 *.log
+
+**.generated_files
