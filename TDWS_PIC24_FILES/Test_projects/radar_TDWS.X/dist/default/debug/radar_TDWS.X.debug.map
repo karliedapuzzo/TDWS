@@ -4,13 +4,13 @@ Tool Name:
   /Applications/microchip/xc16/v2.10/bin/bin/../bin/elf-ld
 
 Command:
-  -T/tmp/tmp0000269d.00 \
-  -T/tmp/tmp0000269d.01 \
-  -T/tmp/tmp0000269d.02 \
-  -T/tmp/tmp0000269d.03 \
-  -T/tmp/tmp0000269d.04 \
-  -T/tmp/tmp0000269d.05 \
-  -T/tmp/tmp0000269d.06 \
+  -T/tmp/tmp0000480a.00 \
+  -T/tmp/tmp0000480a.01 \
+  -T/tmp/tmp0000480a.02 \
+  -T/tmp/tmp0000480a.03 \
+  -T/tmp/tmp0000480a.04 \
+  -T/tmp/tmp0000480a.05 \
+  -T/tmp/tmp0000480a.06 \
   -p24FJ128GL306 \
   --mdfp=/Applications/microchip/mplabx/v6.20/packs/Microchip/PIC24F-GL-GU_DFP/1.6.243/xc16 \
   -o \

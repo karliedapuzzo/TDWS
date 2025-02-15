@@ -699,22 +699,22 @@ int main(void)
             while (RADAR_init(0x00) != 0x00){           //initialize uart communication to setting 0 (115200 baud)
             }
                         
-            while (RADAR_speedset(0x00) != 0x00){   
+            while (RADAR_speedset(0x02) != 0x00){   
             }
 
             while (RADAR_rangeset(0x00) != 0x00){   
             }
 
-            while (RADAR_threshoffset(0x06) != 0x00){   
+            while (RADAR_threshoffset(0x0C) != 0x00){   
             }
 
-            while (RADAR_filttype(0x01) != 0x00){   
+            while (RADAR_filttype(0x02) != 0x00){   
             }
 
-            while (RADAR_mindetzone(0x00) != 0x00){   
+            while (RADAR_mindetzone(0x10) != 0x00){   
             }
 
-            while (RADAR_maxdetzone(0x05) != 0x00){   
+            while (RADAR_maxdetzone(0x50) != 0x00){   
             }
 
             while (RADAR_minangle(-30) != 0x00){   
@@ -723,13 +723,13 @@ int main(void)
             while (RADAR_maxangle(30) != 0x00){   
             }
 
-            while (RADAR_minspeed(7) != 0x00){   
+            while (RADAR_minspeed(0x14) != 0x00){   
             }
             
-            while (RADAR_maxspeed(90) != 0x00){   
+            while (RADAR_maxspeed(0x64) != 0x00){   
             }
             
-            while (RADAR_directset(2) != 0x00){   
+            while (RADAR_directset(0x02) != 0x00){   
             }
             
             RADAR_printhead();
