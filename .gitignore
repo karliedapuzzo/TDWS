@@ -9,7 +9,6 @@
 /TDWS_PIC24_FILES/Test_projects/LoRa_receiver_test.X/nbproject/
 /TDWS_PIC24_FILES/Test_projects/LoRa_receiver_test.X/debug/
 
-
 /TDWS_PIC24_FILES/Test_projects/LoRa_Testing.X/build/
 /TDWS_PIC24_FILES/Test_projects/LoRa_Testing.X/dist/
 /TDWS_PIC24_FILES/Test_projects/LoRa_Testing.X/nbproject/
@@ -34,3 +33,6 @@
 /TDWS_PIC24_FILES/Test_projects/tdws_testing.X/dist/
 /TDWS_PIC24_FILES/Test_projects/tdws_testing.X/nbproject/
 /TDWS_PIC24_FILES/Test_projects/tdws_testing.X/debug/
+
+*.py
+*.log

@@ -1,0 +1,9 @@
+*.log.inx
+*.log
+*.mc3
+Makefile
+build/
+debug/
+dist/
+nbproject/
+.generated_files/
