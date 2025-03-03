@@ -46,11 +46,6 @@
   Section: Included Files
 */
 #include "mcc_generated_files/system.h"
-#include "radar.h"
-#include "mcc_generated_files/spi1.h"
-#include "mcc_generated_files/pin_manager.h"
-#include "mcc_generated_files/uart4.h"
-#include "mcc_generated_files/interrupt_manager.h"
 
 /*
                          Main application
@@ -680,6 +675,84 @@ void RADAR_printdata(struct RadarData *results){
         }
     }
     i = 0;
+}
+
+int main(void)
+{
+    // initialize the device
+    SYSTEM_Initialize();
+    UART1_Initialize();
+    TMR1_Initialize();
+    uint8_t test = 1;
+    uint8_t init = 1;
+    char header[87] = "ID, Distance(cm), Speed(km/h x 100), Angle(deg x 100), Magnitude of target(dB x 100)";  
+    struct RadarParam test_param;
+    struct RadarData test_data;
+    
+    while (1)
+    {
+        if (init == 1){
+            
+            while (RADAR_facreset() != 0x00){           //factory reset
+            }
+                        
+            while (RADAR_init(0x00) != 0x00){           //initialize uart communication to setting 0 (115200 baud)
+            }
+                        
+            while (RADAR_speedset(0x02) != 0x00){   
+            }
+
+            while (RADAR_rangeset(0x00) != 0x00){   
+            }
+
+            while (RADAR_threshoffset(0x0C) != 0x00){   
+            }
+
+            while (RADAR_filttype(0x02) != 0x00){   
+            }
+
+            while (RADAR_mindetzone(0x10) != 0x00){   
+            }
+
+            while (RADAR_maxdetzone(0x50) != 0x00){   
+            }
+
+            while (RADAR_minangle(-30) != 0x00){   
+            }
+
+            while (RADAR_maxangle(30) != 0x00){   
+            }
+
+            while (RADAR_minspeed(0x14) != 0x00){   
+            }
+            
+            while (RADAR_maxspeed(0x64) != 0x00){   
+            }
+            
+            while (RADAR_directset(0x02) != 0x00){   
+            }
+            
+            RADAR_printhead();
+            
+            init = 0;
+            TMR1_Start();
+        }
+        
+        if (TMR1_GetElapsedThenClear()){
+            if (test == 1 || test == 0){
+                test = 0;
+                while (RADAR_nexttdat(&test_data) != 0x00){           //tracked 
+                }
+                if (test_data.num_targets != 0x00){
+                    RADAR_printdata(&test_data);
+                    test_data.num_targets = 0x00;
+                }
+                test = 0;
+            }
+        }
+    }
+    
+    return 1;
 }
 /**
  End of File
