@@ -237,7 +237,7 @@ int radar_test(void)
 int mag_test(void)
 {
     uint16_t magnitude_bcd = 0;
-//    float filtered_magnitude;
+    float filtered_magnitude;
     float mag_magnitude = 0;
     float tmp1 = 0;
     float tmp2 = 0;
@@ -248,7 +248,7 @@ int mag_test(void)
     float z_copy = 0;
     uint16_t out_mag = 0;
     calibrate_mag_data();//set calibration values for upcoming mag data
-
+    
     while(1)
     {
         
@@ -277,7 +277,7 @@ int mag_test(void)
             tmp3 = powf(tmp3, 2.0f);
             
             mag_magnitude = sqrtf(tmp1 + tmp2 + tmp3);
-            //filtered_magnitude = fir_filter(mag_magnitude);
+            filtered_magnitude = fir_filter(mag_magnitude);
             out_mag = ((uint16_t)mag_magnitude);
             binary_to_bcd(&out_mag, &magnitude_bcd);
             transmit_magnitude_to_pc(&magnitude_bcd, &new_mag_data);
