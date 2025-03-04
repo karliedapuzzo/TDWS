@@ -711,10 +711,10 @@ int main(void)
             while (RADAR_filttype(0x02) != 0x00){   
             }
 
-            while (RADAR_mindetzone(0x10) != 0x00){   
+            while (RADAR_mindetzone(10) != 0x00){   
             }
 
-            while (RADAR_maxdetzone(0x50) != 0x00){   
+            while (RADAR_maxdetzone(50) != 0x00){   
             }
 
             while (RADAR_minangle(-30) != 0x00){   
@@ -723,7 +723,7 @@ int main(void)
             while (RADAR_maxangle(30) != 0x00){   
             }
 
-            while (RADAR_minspeed(0x14) != 0x00){   
+            while (RADAR_minspeed(0x05) != 0x00){   
             }
             
             while (RADAR_maxspeed(0x64) != 0x00){   

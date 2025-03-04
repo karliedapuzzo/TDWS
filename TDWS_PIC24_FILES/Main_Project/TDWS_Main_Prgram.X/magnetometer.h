@@ -58,7 +58,7 @@ void binary_to_bcd(uint16_t *binary_data, uint16_t *bcd_data);
      *
      * returns:
 */
-void read_xaxis(uint16_t *x_data, uint16_t *x_dir);
+void read_xaxis(uint16_t *x_data, uint16_t *x_dir, int16_t *x_int);
 
 /*
      * Function: read_yaxis
@@ -70,7 +70,7 @@ void read_xaxis(uint16_t *x_data, uint16_t *x_dir);
      *
      * returns:
 */
-void read_yaxis(uint16_t *y_data, uint16_t *y_dir);
+void read_yaxis(uint16_t *y_data, uint16_t *y_dir, int16_t *y_int);
 
 /*
      * Function: read_zaxis
@@ -82,7 +82,7 @@ void read_yaxis(uint16_t *y_data, uint16_t *y_dir);
      *
      * returns:
 */
-void read_zaxis(uint16_t *z_data, uint16_t *z_dir);
+void read_zaxis(uint16_t *z_data, uint16_t *z_dir, int16_t *z_int);
 
 /*
      * Function: transmit_mag_to_pc
@@ -103,6 +103,8 @@ void transmit_mag_to_pc(uint16_t *mag_x_bcd, uint16_t *mag_x_dir,
                         uint16_t *mag_z_bcd, uint16_t *mag_z_dir,
                         uint16_t *new_mag_data);
 
+void transmit_magnitude_to_pc(uint16_t *magnitude_bcd,
+                              uint16_t *new_mag_data);
 
 void init_magnetometer(void);
 

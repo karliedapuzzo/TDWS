@@ -124,7 +124,7 @@ uint8_t set_lora_rfconfig(void)
 uint8_t LoRa_transmit_msg(char *msg[32])
 {
     char cmd[64];
-    snprintf(cmd, sizeof(cmd), "AT+TEST=TXLRSTR,\"%s\"\r\n", *msg);//this will eventually be replaced with status indicator message
+    snprintf(cmd, sizeof(cmd), "AT+TEST=TXLRSTR,\"%s\"\r\n", *msg);
     //write send message command to uart
     int ii = 0;
     while(ii < 64)
