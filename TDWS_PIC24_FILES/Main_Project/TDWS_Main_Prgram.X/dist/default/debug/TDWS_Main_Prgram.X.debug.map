@@ -4,13 +4,13 @@ Tool Name:
   c:\program files\microchip\xc16\v2.10\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000029d4.00 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000029d4.01 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000029d4.02 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000029d4.03 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000029d4.04 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000029d4.05 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000029d4.06 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003c40.00 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003c40.01 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003c40.02 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003c40.03 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003c40.04 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003c40.05 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00003c40.06 \
   -p24FJ128GL306 \
   --mdfp=C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC24F-GL-GU_DFP/1.6.243/xc16 \
   -o \
