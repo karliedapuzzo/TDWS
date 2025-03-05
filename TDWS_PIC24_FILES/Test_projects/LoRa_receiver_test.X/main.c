@@ -46,9 +46,9 @@
   Section: Included Files
 */
 #include "mcc_generated_files/system.h"
-//#include "mcc_generated_files/interrupt_manager.h"//this shouldn't be needed but compiler hates it for some reason
-//#include "mcc_generated_files/uart2.h"//this shouldn't be needed but compiler hates it for some reason
-//#include <stdio.h>
+#include "mcc_generated_files/interrupt_manager.h"//this shouldn't be needed but compiler hates it for some reason
+#include "mcc_generated_files/uart2.h"//this shouldn't be needed but compiler hates it for some reason
+#include <stdio.h>
 
 /*
                          Main application
@@ -229,7 +229,7 @@ uint8_t LoRa_set_receive(void) //sets LoRa to receive data
     }
 }
 
-void init_LoRa(void){
+void init_LoRa_rx(void){
     int is_active;
     int mode_set;
     int rfconfig_set;
@@ -273,11 +273,11 @@ int main(void)
     // initialize the device
     SYSTEM_Initialize();
     INTERRUPT_GlobalDisable();// make for sure that all interrupts are disabled
-    init_LoRa();
+    init_LoRa_rx();
 
-    //UART2_SetRxInterruptHandler(int_vec_addr);
+    UART2_SetRxInterruptHandler(LoRa_receive_ISR);
 //    UART2_SetTxInterruptHandler(do_nothing);
-    //INTERRUPT_GlobalEnable(); //turn on UART2 Interrupt so that when we receive something from lora we go and read what it gave us
+    INTERRUPT_GlobalEnable(); //turn on UART2 Interrupt so that when we receive something from lora we go and read what it gave us
     while (1)
     {
         int temp_var = 1;//runs until interrupt

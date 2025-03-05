@@ -111,7 +111,7 @@ uint16_t check_lora(void)
 //    }
     while(message_available == 0)
     {
-        cmd[10] = 'p';//this does nothing/is just a place holder for debugging
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
     }
     message_available = 0;
     uint8_t check_msg = (received_msg[5] == 'O') && (received_msg[6] == 'K');
@@ -165,7 +165,7 @@ uint8_t lora_set_mode(void)
 //    }
     while(message_available == 0)
     {
-        cmd[10] = 'p';//this does nothing/is just a place holder for debugging
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
     }
     message_available = 0;
     uint8_t check_msg = (received_msg[7] == 'T') && (received_msg[8] == 'E') && (received_msg[9] == 'S') && (received_msg[10] == 'T');
@@ -220,7 +220,7 @@ uint8_t lora_rfconfig(void)
 //    }
     while(message_available == 0)
     {
-        cmd[10] = 'p';//this does nothing/is just a place holder for debugging
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
     }
     message_available = 0;
     int check_msg = (received_msg[7] == 'R') && (received_msg[8] == 'F') && (received_msg[9] == 'C') && (received_msg[10] == 'F');
@@ -245,7 +245,7 @@ uint8_t lora_rfconfig(void)
 uint8_t LoRa_set_rx(void)
 {
     char cmd[64];
-    sprintf(cmd, "AT+TEST=RXLRPKT\r\n");//this will eventually be replaced with status indicator message
+    sprintf(cmd, "AT+TEST=RXLRPKT\r\n");
     //write AT to uart
     int ii = 0;
     while(ii < 64)
@@ -275,7 +275,7 @@ uint8_t LoRa_set_rx(void)
 //    }
     while(message_available == 0)
     {
-        cmd[10] = 'p';//this does nothing/is just a place holder for debugging
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
     }
     message_available = 0;
     int check_msg = (received_msg[7] == 'R') && (received_msg[8] == 'X') && (received_msg[9] == 'L') && (received_msg[10] == 'R');
@@ -300,7 +300,7 @@ uint8_t LoRa_set_rx(void)
 char msg1[149];
 char msg2[149];
 
-void read_message(void)
+void read_message(void)//only run if LoRa is in reciever mode
 {
     //looking for message that looks like +TEST: RX "xyxyxyxyxyxy..." where xy is one char, x and y are repped in hex
     uint8_t check_msg = (received_msg[7] == 'R' & received_msg[8] == 'X');
@@ -352,7 +352,92 @@ void read_message(void)
     message_available = 0;
 }
 
-void init_LoRa(void){
+uint8_t LoRa_transmit_msg(void)//this should transmit a message over LoRa
+{
+    char cmd[64];
+    sprintf(cmd, "AT+TEST=TXLRSTR,\"ThisIsATest\"\r\n");//this will eventually be replaced with status indicator message
+    //write AT to uart
+    int ii = 0;
+    while(ii < 64)
+    {
+        if(UART2_IsTxReady() == 1)
+        {
+            UART2_Write(cmd[ii]); 
+            if(cmd[ii]==0x0a)
+            {
+                ii = 65;
+            }
+            ii += 1;
+        }
+    }
+    //should receive back +TEST: TXLRSTR "..."\n and +TEST: DONE\n
+
+
+    
+    while(message_available == 0)
+    {
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
+    }
+    message_available = 0;//skips first message +TEST: TXLRSTR
+    while(message_available == 0)
+    {
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
+    }
+    message_available = 0;//looks at second message and checks if it did sent the packet
+    int check_msg = (received_msg[7] == 'D') && (received_msg[8] == 'O') && (received_msg[9] == 'N') && (received_msg[10] == 'E');
+    if(check_msg)
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 1;
+    }
+    else
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 0;
+    }
+//    char resp1[100];
+//    char resp2[100];
+//    ii = 0;
+//    while(ii < 91)
+//    {
+//        resp1[ii] = UART2_Read();
+//        ii +=1;
+//        if(resp1[ii-1]==0x0a)//order matters!!!
+//        {
+//            ii = 99;
+//        }
+//    }
+//    
+//    ii = 0;
+//    while(ii < 91)
+//    {
+//        resp2[ii] = UART2_Read();
+//        ii +=1;
+//        if(resp2[ii-1]==0x0a)//order matters!!!
+//        {
+//            ii = 99;
+//        }
+//    }
+    
+//    int garbage_var = (resp2[10] == 0x44) && (resp2[11] == 0x4F) && (resp2[12] == 0x4E) && (resp2[13] == 0x45);
+//    if((resp2[10] == 0x44) && (resp2[11] == 0x4F) && (resp2[12] == 0x4E) && (resp2[13] == 0x45))
+//    {
+//        return 1;
+//    }
+//    else
+//    {
+//        return 0;
+//    }
+}
+
+void init_LoRa_rx(void)//the difference between rx and tx is that rx is a specific setting, otherwise will not notify if it received something
+{
     int is_active;
     int mode_set;
     int rfconfig_set;
@@ -371,6 +456,23 @@ void init_LoRa(void){
     int trahs = 0x0000;
 }
 
+void init_LoRa_tx(void)//initializes lora but doesn't set it for receiving
+{
+    int is_active;
+    int mode_set;
+    int rfconfig_set;
+    
+    is_active = check_lora();
+    if(is_active == 1)
+    {
+        mode_set = lora_set_mode();
+        rfconfig_set = lora_rfconfig();
+    }
+    
+    int more_garbage = rfconfig_set && mode_set;
+    int temp = 0;
+}
+
 int main(void)
 {
     // initialize the device
@@ -386,7 +488,8 @@ int main(void)
         warmup_wait++;
     }
     
-    init_LoRa();
+//    init_LoRa_rx();
+    init_LoRa_tx();
     
 //    INTERRUPT_GlobalDisable();
     
@@ -398,10 +501,11 @@ int main(void)
         while(wait < 0xffff)
         {
             wait++;
-            if(message_available)
-            {
-                read_message();
-            }
+//            if(message_available)
+//            {
+//                read_message();
+//            }
+            LoRa_transmit_msg();
         }
     }
 

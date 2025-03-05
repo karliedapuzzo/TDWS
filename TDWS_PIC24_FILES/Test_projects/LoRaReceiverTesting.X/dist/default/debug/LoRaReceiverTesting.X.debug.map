@@ -4,13 +4,13 @@ Tool Name:
   c:\program files\microchip\xc16\v2.10\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000039ec.00 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000039ec.01 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000039ec.02 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000039ec.03 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000039ec.04 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000039ec.05 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000039ec.06 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00001f24.00 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00001f24.01 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00001f24.02 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00001f24.03 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00001f24.04 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00001f24.05 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00001f24.06 \
   -p24FJ128GL306 \
   --mdfp=C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC24F-GL-GU_DFP/1.6.243/xc16 \
   -o \
@@ -108,12 +108,12 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100               0x2cc           0x432  (1074)
-.const                       0x3cc                0x56            0x81  (129)
-.text                        0x422               0x8cc           0xd32  (3378)
-.dinit                       0xcee                0x2e            0x45  (69)
-.text                        0xd1c                0x5c            0x8a  (138)
+.const                       0x3cc                0x76            0xb1  (177)
+.text                        0x442               0x9ca           0xeaf  (3759)
+.dinit                       0xe0c                0x2e            0x45  (69)
+.text                        0xe3a                0x5c            0x8a  (138)
 
-                 Total "program" memory used (bytes):         0x12b4  (4788) 3%
+                 Total "program" memory used (bytes):         0x1461  (5217) 3%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -183,66 +183,69 @@ External Symbols in Program Memory (by address):
                   0x0003b0                  _memcpy
                   0x0003be                  _toupper
                   0x0003ca                  ___toupper_l
-                  0x000422                  _uart2_ISR
-                  0x000466                  _check_lora
-                  0x000504                  _lora_set_mode
-                  0x0005be                  _lora_rfconfig
-                  0x000680                  _LoRa_set_rx
-                  0x000742                  _read_message
-                  0x00084a                  _init_LoRa
-                  0x00088e                  _main
-                  0x0008c6                  _UART2_Initialize
-                  0x0008fa                  _UART2_SetTxInterruptHandler
-                  0x000918                  _UART2_SetRxInterruptHandler
-                  0x000936                  _UART2_Read
-                  0x000962                  _UART2_Write
-                  0x00098c                  _UART2_IsRxReady
-                  0x0009a2                  _UART2_IsTxReady
-                  0x0009d6                  _UART2_IsTxDone
-                  0x000a64                  _UART2_ReadBuffer
-                  0x000a9e                  _UART2_WriteBuffer
-                  0x000ad8                  _UART2_TransferStatusGet
-                  0x000b1c                  _UART2_Peek
-                  0x000b3c                  _UART2_ReceiveBufferIsEmpty
-                  0x000b4c                  _UART2_TransmitBufferIsFull
-                  0x000b5c                  _UART2_StatusGet
-                  0x000b64                  _UART2_TransmitBufferSizeGet
-                  0x000b92                  _UART2_ReceiveBufferSizeGet
-                  0x000bc0                  _UART2_Enable
-                  0x000bca                  _UART2_Disable
-                  0x000bd4                  _PIN_MANAGER_Initialize
-                  0x000c9a                  _CLOCK_Initialize
-                  0x000d1c                  _INTERRUPT_Initialize
-                  0x000d5a                  _where_was_i
-                  0x000d6a                  _SYSTEM_Initialize
+                  0x000442                  _uart2_ISR
+                  0x000486                  _check_lora
+                  0x000524                  _lora_set_mode
+                  0x0005de                  _lora_rfconfig
+                  0x0006a0                  _LoRa_set_rx
+                  0x000762                  _read_message
+                  0x00086a                  _LoRa_transmit_msg
+                  0x00093a                  _init_LoRa_rx
+                  0x00097e                  _init_LoRa_tx
+                  0x0009b2                  _main
+                  0x0009e4                  _UART2_Initialize
+                  0x000a18                  _UART2_SetTxInterruptHandler
+                  0x000a36                  _UART2_SetRxInterruptHandler
+                  0x000a54                  _UART2_Read
+                  0x000a80                  _UART2_Write
+                  0x000aaa                  _UART2_IsRxReady
+                  0x000ac0                  _UART2_IsTxReady
+                  0x000af4                  _UART2_IsTxDone
+                  0x000b82                  _UART2_ReadBuffer
+                  0x000bbc                  _UART2_WriteBuffer
+                  0x000bf6                  _UART2_TransferStatusGet
+                  0x000c3a                  _UART2_Peek
+                  0x000c5a                  _UART2_ReceiveBufferIsEmpty
+                  0x000c6a                  _UART2_TransmitBufferIsFull
+                  0x000c7a                  _UART2_StatusGet
+                  0x000c82                  _UART2_TransmitBufferSizeGet
+                  0x000cb0                  _UART2_ReceiveBufferSizeGet
+                  0x000cde                  _UART2_Enable
+                  0x000ce8                  _UART2_Disable
+                  0x000cf2                  _PIN_MANAGER_Initialize
+                  0x000db8                  _CLOCK_Initialize
+                  0x000e3a                  _INTERRUPT_Initialize
+                  0x000e78                  _where_was_i
+                  0x000e88                  _SYSTEM_Initialize
                   0x015f00                  __FSEC.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000c9a                  _CLOCK_Initialize
-                  0x000d1c                  _INTERRUPT_Initialize
-                  0x000680                  _LoRa_set_rx
-                  0x000bd4                  _PIN_MANAGER_Initialize
-                  0x000d6a                  _SYSTEM_Initialize
-                  0x000bca                  _UART2_Disable
-                  0x000bc0                  _UART2_Enable
-                  0x0008c6                  _UART2_Initialize
-                  0x00098c                  _UART2_IsRxReady
-                  0x0009d6                  _UART2_IsTxDone
-                  0x0009a2                  _UART2_IsTxReady
-                  0x000b1c                  _UART2_Peek
-                  0x000936                  _UART2_Read
-                  0x000a64                  _UART2_ReadBuffer
-                  0x000b3c                  _UART2_ReceiveBufferIsEmpty
-                  0x000b92                  _UART2_ReceiveBufferSizeGet
-                  0x000918                  _UART2_SetRxInterruptHandler
-                  0x0008fa                  _UART2_SetTxInterruptHandler
-                  0x000b5c                  _UART2_StatusGet
-                  0x000ad8                  _UART2_TransferStatusGet
-                  0x000b4c                  _UART2_TransmitBufferIsFull
-                  0x000b64                  _UART2_TransmitBufferSizeGet
-                  0x000962                  _UART2_Write
-                  0x000a9e                  _UART2_WriteBuffer
+                  0x000db8                  _CLOCK_Initialize
+                  0x000e3a                  _INTERRUPT_Initialize
+                  0x0006a0                  _LoRa_set_rx
+                  0x00086a                  _LoRa_transmit_msg
+                  0x000cf2                  _PIN_MANAGER_Initialize
+                  0x000e88                  _SYSTEM_Initialize
+                  0x000ce8                  _UART2_Disable
+                  0x000cde                  _UART2_Enable
+                  0x0009e4                  _UART2_Initialize
+                  0x000aaa                  _UART2_IsRxReady
+                  0x000af4                  _UART2_IsTxDone
+                  0x000ac0                  _UART2_IsTxReady
+                  0x000c3a                  _UART2_Peek
+                  0x000a54                  _UART2_Read
+                  0x000b82                  _UART2_ReadBuffer
+                  0x000c5a                  _UART2_ReceiveBufferIsEmpty
+                  0x000cb0                  _UART2_ReceiveBufferSizeGet
+                  0x000a36                  _UART2_SetRxInterruptHandler
+                  0x000a18                  _UART2_SetTxInterruptHandler
+                  0x000c7a                  _UART2_StatusGet
+                  0x000bf6                  _UART2_TransferStatusGet
+                  0x000c6a                  _UART2_TransmitBufferIsFull
+                  0x000c82                  _UART2_TransmitBufferSizeGet
+                  0x000a80                  _UART2_Write
+                  0x000bbc                  _UART2_WriteBuffer
                   0x0003aa                  __DefaultInterrupt
                   0x015f00                  __FSEC.sec
                   0x000394                  __U2ErrInterrupt
@@ -253,16 +256,17 @@ External Symbols in Program Memory (by name):
                   0x000152                  __data_init_da
                   0x00013c                  __psv_init
                   0x000100                  __resetPRI
-                  0x000466                  _check_lora
-                  0x00084a                  _init_LoRa
-                  0x0005be                  _lora_rfconfig
-                  0x000504                  _lora_set_mode
-                  0x00088e                  _main
+                  0x000486                  _check_lora
+                  0x00093a                  _init_LoRa_rx
+                  0x00097e                  _init_LoRa_tx
+                  0x0005de                  _lora_rfconfig
+                  0x000524                  _lora_set_mode
+                  0x0009b2                  _main
                   0x0003b0                  _memcpy
-                  0x000742                  _read_message
+                  0x000762                  _read_message
                   0x0003be                  _toupper
-                  0x000422                  _uart2_ISR
-                  0x000d5a                  _where_was_i
+                  0x000442                  _uart2_ISR
+                  0x000e78                  _where_was_i
 
 Memory Configuration
 
@@ -459,7 +463,7 @@ __FDEVOPT1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x36e2
+.debug_info       0x000000       0x382b
  *(.debug_info)
  .debug_info      0x000000        0x540 build/default/debug/mcc_generated_files/interrupt_manager.o
  .debug_info      0x000540        0x994 build/default/debug/mcc_generated_files/pin_manager.o
@@ -468,7 +472,7 @@ __FDEVOPT1
  .debug_info      0x002410        0x35e build/default/debug/mcc_generated_files/system.o
  .debug_info      0x00276e        0x4e1 build/default/debug/mcc_generated_files/clock.o
  .debug_info      0x002c4f         0xc9 build/default/debug/mcc_generated_files/where_was_i.o
- .debug_info      0x002d18        0x9ca build/default/debug/main.o
+ .debug_info      0x002d18        0xb13 build/default/debug/main.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x806
@@ -483,7 +487,7 @@ __FDEVOPT1
  .debug_abbrev    0x0005e5         0x14 build/default/debug/mcc_generated_files/where_was_i.o
  .debug_abbrev    0x0005f9        0x20d build/default/debug/main.o
 
-.debug_line       0x000000        0xa6b
+.debug_line       0x000000        0xa9c
  *(.debug_line)
  .debug_line      0x000000         0x1a build/default/debug/mcc_generated_files/mcc.o
  .debug_line      0x00001a        0x128 build/default/debug/mcc_generated_files/interrupt_manager.o
@@ -493,9 +497,9 @@ __FDEVOPT1
  .debug_line      0x0005f9        0x11f build/default/debug/mcc_generated_files/system.o
  .debug_line      0x000718        0x12a build/default/debug/mcc_generated_files/clock.o
  .debug_line      0x000842         0x55 build/default/debug/mcc_generated_files/where_was_i.o
- .debug_line      0x000897        0x1d4 build/default/debug/main.o
+ .debug_line      0x000897        0x205 build/default/debug/main.o
 
-.debug_frame      0x000000        0x662
+.debug_frame      0x000000        0x696
  *(.debug_frame)
  .debug_frame     0x000000         0x2e build/default/debug/mcc_generated_files/interrupt_manager.o
  .debug_frame     0x00002e         0x2e build/default/debug/mcc_generated_files/pin_manager.o
@@ -503,9 +507,9 @@ __FDEVOPT1
  .debug_frame     0x000218        0x30a build/default/debug/mcc_generated_files/uart2.o
  .debug_frame     0x000522         0x2e build/default/debug/mcc_generated_files/system.o
  .debug_frame     0x000550         0x2e build/default/debug/mcc_generated_files/clock.o
- .debug_frame     0x00057e         0xe4 build/default/debug/main.o
+ .debug_frame     0x00057e        0x118 build/default/debug/main.o
 
-.debug_str        0x000000        0x194
+.debug_str        0x000000        0x1b4
  *(.debug_str)
  .debug_str       0x000000         0x13 build/default/debug/mcc_generated_files/interrupt_manager.o
  .debug_str       0x000013         0x16 build/default/debug/mcc_generated_files/pin_manager.o
@@ -513,7 +517,7 @@ __FDEVOPT1
  .debug_str       0x00004d         0xac build/default/debug/mcc_generated_files/uart2.o
  .debug_str       0x0000f9          0xc build/default/debug/mcc_generated_files/system.o
  .debug_str       0x000105         0x1d build/default/debug/mcc_generated_files/clock.o
- .debug_str       0x000122         0x72 build/default/debug/main.o
+ .debug_str       0x000122         0x92 build/default/debug/main.o
 
 .debug_loc
  *(.debug_loc)
@@ -522,7 +526,7 @@ __FDEVOPT1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x490
+                  0x000000        0x4ba
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x2b build/default/debug/mcc_generated_files/interrupt_manager.o
@@ -537,7 +541,7 @@ __FDEVOPT1
  .debug_pubnames
                   0x000393         0x27 build/default/debug/mcc_generated_files/clock.o
  .debug_pubnames
-                  0x0003ba         0xd6 build/default/debug/main.o
+                  0x0003ba        0x100 build/default/debug/main.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -2484,55 +2488,57 @@ mcc_generated_files/where_was_i.s.scn1
 .config_BSLIM     0x015f10          0x2
  .config_BSLIM    0x015f10          0x2 build/default/debug/mcc_generated_files/system.o
 
-.const              0x83cc         0x56 load address 0x0003cc  
- .const             0x83cc         0x56 build/default/debug/main.o
+.const              0x83cc         0x76 load address 0x0003cc  
+ .const             0x83cc         0x76 build/default/debug/main.o
 
-.text             0x000422        0x8cc
- .text            0x000422        0x4a4 build/default/debug/main.o
-                  0x000422                  _uart2_ISR
-                  0x000466                  _check_lora
-                  0x000504                  _lora_set_mode
-                  0x0005be                  _lora_rfconfig
-                  0x000680                  _LoRa_set_rx
-                  0x000742                  _read_message
-                  0x00084a                  _init_LoRa
-                  0x00088e                  _main
- .text            0x0008c6        0x30e build/default/debug/mcc_generated_files/uart2.o
-                  0x0008c6                  _UART2_Initialize
-                  0x0008fa                  _UART2_SetTxInterruptHandler
-                  0x000912                  _UART2_Transmit_CallBack
-                  0x000918                  _UART2_SetRxInterruptHandler
-                  0x000930                  _UART2_Receive_CallBack
-                  0x000936                  _UART2_Read
-                  0x000962                  _UART2_Write
-                  0x00098c                  _UART2_IsRxReady
-                  0x0009a2                  _UART2_IsTxReady
-                  0x0009d6                  _UART2_IsTxDone
-                  0x000a64                  _UART2_ReadBuffer
-                  0x000a9e                  _UART2_WriteBuffer
-                  0x000ad8                  _UART2_TransferStatusGet
-                  0x000b1c                  _UART2_Peek
-                  0x000b3c                  _UART2_ReceiveBufferIsEmpty
-                  0x000b4c                  _UART2_TransmitBufferIsFull
-                  0x000b5c                  _UART2_StatusGet
-                  0x000b64                  _UART2_TransmitBufferSizeGet
-                  0x000b92                  _UART2_ReceiveBufferSizeGet
-                  0x000bc0                  _UART2_Enable
-                  0x000bca                  _UART2_Disable
- .text            0x000bd4         0xc6 build/default/debug/mcc_generated_files/pin_manager.o
-                  0x000bd4                  _PIN_MANAGER_Initialize
- .text            0x000c9a         0x54 build/default/debug/mcc_generated_files/clock.o
-                  0x000c9a                  _CLOCK_Initialize
+.text             0x000442        0x9ca
+ .text            0x000442        0x5a2 build/default/debug/main.o
+                  0x000442                  _uart2_ISR
+                  0x000486                  _check_lora
+                  0x000524                  _lora_set_mode
+                  0x0005de                  _lora_rfconfig
+                  0x0006a0                  _LoRa_set_rx
+                  0x000762                  _read_message
+                  0x00086a                  _LoRa_transmit_msg
+                  0x00093a                  _init_LoRa_rx
+                  0x00097e                  _init_LoRa_tx
+                  0x0009b2                  _main
+ .text            0x0009e4        0x30e build/default/debug/mcc_generated_files/uart2.o
+                  0x0009e4                  _UART2_Initialize
+                  0x000a18                  _UART2_SetTxInterruptHandler
+                  0x000a30                  _UART2_Transmit_CallBack
+                  0x000a36                  _UART2_SetRxInterruptHandler
+                  0x000a4e                  _UART2_Receive_CallBack
+                  0x000a54                  _UART2_Read
+                  0x000a80                  _UART2_Write
+                  0x000aaa                  _UART2_IsRxReady
+                  0x000ac0                  _UART2_IsTxReady
+                  0x000af4                  _UART2_IsTxDone
+                  0x000b82                  _UART2_ReadBuffer
+                  0x000bbc                  _UART2_WriteBuffer
+                  0x000bf6                  _UART2_TransferStatusGet
+                  0x000c3a                  _UART2_Peek
+                  0x000c5a                  _UART2_ReceiveBufferIsEmpty
+                  0x000c6a                  _UART2_TransmitBufferIsFull
+                  0x000c7a                  _UART2_StatusGet
+                  0x000c82                  _UART2_TransmitBufferSizeGet
+                  0x000cb0                  _UART2_ReceiveBufferSizeGet
+                  0x000cde                  _UART2_Enable
+                  0x000ce8                  _UART2_Disable
+ .text            0x000cf2         0xc6 build/default/debug/mcc_generated_files/pin_manager.o
+                  0x000cf2                  _PIN_MANAGER_Initialize
+ .text            0x000db8         0x54 build/default/debug/mcc_generated_files/clock.o
+                  0x000db8                  _CLOCK_Initialize
 
-.dinit            0x000cee         0x2e
- .dinit           0x000cee         0x2e data_init
+.dinit            0x000e0c         0x2e
+ .dinit           0x000e0c         0x2e data_init
 
-.text             0x000d1c         0x5c
- .text            0x000d1c         0x24 build/default/debug/mcc_generated_files/interrupt_manager.o
-                  0x000d1c                  _INTERRUPT_Initialize
- .text            0x000d40         0x1a build/default/debug/mcc_generated_files/traps.o
-                  0x000d40                  _TRAPS_halt_on_error
- .text            0x000d5a         0x10 build/default/debug/mcc_generated_files/where_was_i.o
-                  0x000d5a                  _where_was_i
- .text            0x000d6a          0xe build/default/debug/mcc_generated_files/system.o
-                  0x000d6a                  _SYSTEM_Initialize
+.text             0x000e3a         0x5c
+ .text            0x000e3a         0x24 build/default/debug/mcc_generated_files/interrupt_manager.o
+                  0x000e3a                  _INTERRUPT_Initialize
+ .text            0x000e5e         0x1a build/default/debug/mcc_generated_files/traps.o
+                  0x000e5e                  _TRAPS_halt_on_error
+ .text            0x000e78         0x10 build/default/debug/mcc_generated_files/where_was_i.o
+                  0x000e78                  _where_was_i
+ .text            0x000e88          0xe build/default/debug/mcc_generated_files/system.o
+                  0x000e88                  _SYSTEM_Initialize

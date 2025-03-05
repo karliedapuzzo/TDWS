@@ -60,6 +60,8 @@
                          Main application
  */
 
+#define magnet_thresh 80; //threshold for when we think a train passed by
+
 //unsigned integer values of x, y, z with corresponding direction
 static uint16_t mag_x_val = 0;
 static uint16_t mag_x_dir = 0;
@@ -80,6 +82,8 @@ static uint16_t new_mag_data = 0;
 static int32_t mag_x_cal = 0;
 static int32_t mag_y_cal = 0;
 static int32_t mag_z_cal = 0;
+
+
 
 
 uint16_t magISR(void)
@@ -187,6 +191,16 @@ int main_mode(void)
     while(1)
     {
         here = 0;
+        //this will be the master mode,
+        /*
+         * the order of ops for this mode will be
+         * any initial setup.. i.e. 
+         * -setup for lora reciever
+         * -setup magnetometer calibration data
+         * -setup radar
+         * the main loop will be be a
+         * 
+         */
     }
 }
 
@@ -216,6 +230,16 @@ uint8_t Lora_msg[32];
 int detect_mod1(void)
 {
     here = 1;
+    //this will be the secondary mode1,
+        /*
+         * the order of ops for this mode will be
+         * any initial setup.. i.e. 
+         * -setup for lora reciever
+         * -setup magnetometer calibration data
+         * -setup radar
+         * the main loop will be be a
+         * 
+         */
 }
 
 int detect_mod2(void)//basically the same as detect_mod1 but with a different lora address
@@ -223,6 +247,16 @@ int detect_mod2(void)//basically the same as detect_mod1 but with a different lo
     while(1)
     {
         here = 2;
+        //this will be the secondary mode2, this mode is the same as detect_mod1 but with a different address
+        /*
+         * the order of ops for this mode will be
+         * any initial setup.. i.e. 
+         * -setup for lora reciever
+         * -setup magnetometer calibration data
+         * -setup radar
+         * the main loop will be be where the action happens :D
+         * 
+         */
     }
 }
 
@@ -234,7 +268,7 @@ int radar_test(void)
     }
 }
 
-int mag_test(void)
+int mag_test(void) //I wasted so much time working on this, very sadge
 {
     uint16_t magnitude_bcd = 0;
     float filtered_magnitude;

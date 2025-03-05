@@ -11668,11 +11668,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART2" name="BaudRate"/>
-         <value>9600</value>
+         <value>115200</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART2" name="BaudRateError"/>
-         <value>-0.080</value>
+         <value>-0.794</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART2" name="DataBits"/>
@@ -11944,7 +11944,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="UART2" registerAlias="UBRG"/>
-         <value>416</value>
+         <value>34</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="UART2" registerAlias="UMODE"/>
@@ -11960,7 +11960,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART2" registerAlias="UBRG" settingAlias="BRG"/>
-         <value>416</value>
+         <value>34</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART2" registerAlias="UERI" settingAlias="context"/>
@@ -12166,7 +12166,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>2f46404e269d7f82815926597bf1fac8825950ba7c5daca8e74dc7a6f7635dc2</hash>
+         <hash>4fd35a8e85359873d9626eba74c2091e42bde953451ed3a8c0a2b1a99ecb4f03</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
@@ -12174,7 +12174,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>b89ff1bdfc7521f73c65353710286ff71218f394500bb61d907566923930879b</hash>
+         <hash>b6083fd8493f1697e01c987bf316db7ad0295ca417581c9c276333a392b5fe13</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\system.h</file>
@@ -12190,7 +12190,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\uart2.c</file>
-         <hash>5e6852526c08595ffe22d69390d1a07c4bf1cf2f07520849358b47d65136bb94</hash>
+         <hash>262eb296a2f11a94de8896a69227beb11dd74e8c5772679b39bc6ed1d5e94fd1</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\uart2.h</file>
