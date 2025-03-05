@@ -46,7 +46,6 @@
   Section: Included Files
 */
 #include "mcc_generated_files/system.h"
-#include "LoRa_transmitter.h"
 #include "radar.h"
 #include "magnetometer.h"
 #include "mcc_generated_files/pin_manager.h"
@@ -55,12 +54,343 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdio.h>
-
+#include <ctype.h>
 /*
                          Main application
  */
 
 #define magnet_thresh 80; //threshold for when we think a train passed by
+
+//LORA FUNCTIONS BELOW HERE
+uint16_t uart2_rxcount = 0;
+char received_msg[150];
+uint16_t message_available = 0;
+
+//reads one character and puts it in a global character array for other functions to parse
+void uart2_ISR(void)
+{
+    if(message_available == 0)
+    {
+        uint16_t one_char = UART2_Read();
+        received_msg[uart2_rxcount] = one_char & 0x00FF;
+        uart2_rxcount++;
+        if(uart2_rxcount > 149) //if over message array limit reset uart2_rx_count
+        {
+            uart2_rxcount = 0;
+        }
+        else if(received_msg[uart2_rxcount - 1] == '\n')
+        {
+            uart2_rxcount = 0;
+            message_available = 1;
+        }
+    }
+    else
+    {
+        uint16_t trash = UART2_Read();//throw away anything in the uart buffer
+    }
+}
+
+uint16_t check_lora(void)
+{
+    char cmd[32];
+    sprintf(cmd, "AT\r\n");
+    //write AT to uart
+    int ii = 0;
+    while(ii < 4)
+    {
+        if(UART2_IsTxReady() == 1)
+        {
+            UART2_Write(cmd[ii]); 
+            ii += 1;
+        }
+    }
+    while(message_available == 0)
+    {
+        cmd[10] = 'p';//this does nothing/is to keep here while waiting for the response
+    }
+    message_available = 0;
+    uint8_t check_msg = (received_msg[5] == 'O') && (received_msg[6] == 'K');
+    if(check_msg)
+    {
+        for(int jj = 0; jj <=149; jj++)
+            {
+                received_msg[jj] = 0x0000;
+            }
+        return 1;
+    }
+    else
+    {
+        for(int jj = 0; jj <=149; jj++)
+            {
+                received_msg[jj] = 0x0000;
+            }
+        return 0;
+    }
+}
+
+uint8_t lora_set_mode(void)
+{
+    char cmd[32];
+    sprintf(cmd, "AT+MODE=TEST\r\n");
+    //write AT to uart
+    int ii = 0;
+    while(ii < 32)
+    {
+        UART2_Write(cmd[ii]); 
+        if(cmd[ii] == 0x0a)
+        {
+            ii=32;
+        }
+        ii += 1;
+    }
+    while(message_available == 0)
+    {
+        cmd[10] = 'p';//this does nothing/is to keep here while waiting for the response
+    }
+    message_available = 0;
+    uint8_t check_msg = (received_msg[7] == 'T') && (received_msg[8] == 'E') && (received_msg[9] == 'S') && (received_msg[10] == 'T');
+    if(check_msg)
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 1;
+    }
+    else
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 0;
+    }
+}
+
+uint8_t lora_rfconfig(void)
+{
+    char cmd[64];
+    sprintf(cmd, "AT+TEST=RFCFG,915,SF10,125,12,15,9,ON,OFF,OFF\r\n");
+    //write AT to uart
+    int ii = 0;
+    while(ii < 64)
+    {
+        if(UART2_IsTxReady() == 1)
+        {
+            UART2_Write(cmd[ii]); 
+            if(cmd[ii]==0x0a)
+            {
+                ii = 64;
+            }
+            ii += 1;
+        }
+    }
+    //should receive back +TEST: RFCFG F:915000000, SF10, BW125K, TXPR:12, RXPR:15, POW:9dBm, CRC:ON, IQ:OFF, NET:OFF
+    while(message_available == 0)
+    {
+        cmd[10] = 'p';//this does nothing/is to keep here while waiting for the response
+    }
+    message_available = 0;
+    int check_msg = (received_msg[7] == 'R') && (received_msg[8] == 'F') && (received_msg[9] == 'C') && (received_msg[10] == 'F');
+    if(check_msg)
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 1;
+    }
+    else
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 0;
+    }
+}
+
+uint8_t LoRa_set_rx(void)
+{
+    char cmd[64];
+    sprintf(cmd, "AT+TEST=RXLRPKT\r\n");
+    //write AT to uart
+    int ii = 0;
+    while(ii < 64)
+    {
+        if(UART2_IsTxReady() == 1)
+        {
+            UART2_Write(cmd[ii]); 
+            if(cmd[ii]==0x0a)
+            {
+                ii = 65;
+            }
+            ii += 1;
+        }
+    }
+    //should receive back +TEST: RXLRSTR
+    while(message_available == 0)
+    {
+        cmd[10] = 'p';//this does nothing/is to keep here while waiting for the response
+    }
+    message_available = 0;
+    int check_msg = (received_msg[7] == 'R') && (received_msg[8] == 'X') && (received_msg[9] == 'L') && (received_msg[10] == 'R');
+    if(check_msg)
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 1;
+    }
+    else
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 0;
+    }
+}
+
+char msg1[149];
+char msg2[149];
+
+void read_message(void)//only run if LoRa is in reciever mode
+{
+    //looking for message that looks like +TEST: RX "xyxyxyxyxyxy..." where xy is one char, x and y are repped in hex
+    uint8_t check_msg = (received_msg[7] == 'R' & received_msg[8] == 'X');
+    if(check_msg)
+    {
+        int ii = 11;
+        int kk = 0;
+        while(ii < 150)
+        {
+            if(received_msg[ii] == '"')
+            {
+                ii = 150;
+                msg2[kk] = '\n';//marks the end of the message that we got
+                
+            }
+            else
+            {
+                uint16_t x_char = (uint16_t)(isdigit(received_msg[ii]) ? received_msg[ii] - '0' : toupper(received_msg[ii]) - 'A' + 10);
+                uint16_t y_char = (uint16_t)(isdigit(received_msg[ii+1]) ? received_msg[ii+1] - '0' : toupper(received_msg[ii+1]) - 'A' + 10);
+                char final_char = (char)((x_char << 4) | y_char);
+                msg2[kk] = final_char;
+                ii+=2;
+                kk++;
+            }
+        }
+    }
+    else
+    {
+        int ii = 0;
+        while(ii < 150)
+        {
+            if(received_msg[ii] == '\n')
+            {
+                ii = 150;
+            }
+            else
+            {
+                msg1[ii] = received_msg[ii];
+                ii++;
+            }
+        }
+    }
+    message_available = 0;
+}
+
+uint8_t LoRa_transmit_msg(char *msg)//this should transmit a message over LoRa
+{
+    char cmd[64];
+    sprintf(cmd, "AT+TEST=TXLRSTR,\"%s\"\r\n", msg);
+    //write AT to uart
+    int ii = 0;
+    while(ii < 64)
+    {
+        if(UART2_IsTxReady() == 1)
+        {
+            UART2_Write(cmd[ii]); 
+            if(cmd[ii]==0x0a)
+            {
+                ii = 65;
+            }
+            ii += 1;
+        }
+    }
+    //should receive back +TEST: TXLRSTR "..."\n and +TEST: DONE\n
+
+
+    
+    while(message_available == 0)
+    {
+        cmd[10] = 'p';//this does nothing/is to keep here while waiting for the response
+    }
+    message_available = 0;//skips first message +TEST: TXLRSTR
+    while(message_available == 0)
+    {
+        cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
+    }
+    message_available = 0;//looks at second message and checks if it did sent the packet
+    int check_msg = (received_msg[7] == 'D') && (received_msg[8] == 'O') && (received_msg[9] == 'N') && (received_msg[10] == 'E');
+    if(check_msg)
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 1;
+    }
+    else
+    {
+        for(int jj = 0; jj <=149; jj++)
+        {
+            received_msg[jj] = 0x0000;
+        }
+        return 0;
+    }
+}
+
+void init_LoRa_rx(void)//the difference between rx and tx is that rx is a specific setting, otherwise will not notify if it received something
+{
+    int is_active;
+    int mode_set;
+    int rfconfig_set;
+    int set_rx;
+    int all_good = 0;
+    
+    is_active = check_lora();
+    if(is_active == 1)
+    {
+        mode_set = lora_set_mode();
+        rfconfig_set = lora_rfconfig();
+        set_rx = LoRa_set_rx();
+    }
+    
+    all_good = (rfconfig_set && mode_set && set_rx);
+    int trahs = 0x0000;
+}
+
+void init_LoRa_tx(void)//initializes lora but doesn't set it for receiving
+{
+    int is_active;
+    int mode_set;
+    int rfconfig_set;
+    
+    is_active = check_lora();
+    if(is_active == 1)
+    {
+        mode_set = lora_set_mode();
+        rfconfig_set = lora_rfconfig();
+    }
+    
+    int more_garbage = rfconfig_set && mode_set;
+    int temp = 0;
+}
+//LORA FUNCTIONS ABOVE HERE
+
 
 //unsigned integer values of x, y, z with corresponding direction
 static uint16_t mag_x_val = 0;
@@ -83,9 +413,6 @@ static int32_t mag_x_cal = 0;
 static int32_t mag_y_cal = 0;
 static int32_t mag_z_cal = 0;
 
-
-
-
 uint16_t magISR(void)
 {
     //read x direction
@@ -98,7 +425,6 @@ uint16_t magISR(void)
     new_mag_data = 1;
     return 1; //new data was collected so return 1
 }
-
 
 #define FILTER_ORDER 101  // Number of filter coefficients (order + 1)
 #define SAMPLING_RATE 5000  // Sampling rate in Hz
@@ -186,24 +512,6 @@ void read_switches(void)//read the switch values and indicate if they changed
 
 static uint16_t here;
 
-int main_mode(void)
-{
-    while(1)
-    {
-        here = 0;
-        //this will be the master mode,
-        /*
-         * the order of ops for this mode will be
-         * any initial setup.. i.e. 
-         * -setup for lora reciever
-         * -setup magnetometer calibration data
-         * -setup radar
-         * the main loop will be be a
-         * 
-         */
-    }
-}
-
 void calibrate_mag_data(void)//makes calibration values
 {
     uint16_t num_samples = 0;
@@ -222,6 +530,24 @@ void calibrate_mag_data(void)//makes calibration values
     mag_x_cal = mag_x_cal / (int32_t)num_samples;
     mag_y_cal = mag_y_cal / (int32_t)num_samples;
     mag_z_cal = mag_z_cal / (int32_t)num_samples;
+}
+
+int main_mode(void)
+{
+    while(1)
+    {
+        here = 0;
+        //this will be the master mode,
+        /*
+         * the order of ops for this mode will be
+         * any initial setup.. i.e. 
+         * -setup for lora reciever
+         * -setup magnetometer calibration data
+         * -setup radar
+         * the main loop will be be a
+         * 
+         */
+    }
 }
 
 //vars for detection modes
@@ -285,7 +611,6 @@ int mag_test(void) //I wasted so much time working on this, very sadge
     
     while(1)
     {
-        
         mag_magnitude = 0;
         //read mag and radar,
         //if train transmit
@@ -324,6 +649,9 @@ int mag_test(void) //I wasted so much time working on this, very sadge
 
 int lora_receive_test(void)
 {
+    //init lora as receiver
+    //wait and then read the message
+    init_LoRa_rx();
     while(1)
     {
         here = 5;
@@ -332,9 +660,18 @@ int lora_receive_test(void)
 
 int lora_transmit_test(void)
 {
-    INTERRUPT_GlobalDisable();
+    //init lora as transmitter
+    //wait and send a test message
+    init_LoRa_tx();
+    char *message = "TestMessage";
     while(1)
     {
+        int wait = 0;
+        while(wait < 0xffff)
+        {
+            wait++;
+            LoRa_transmit_msg(message);
+        }
         here = 6;
     }
 }
@@ -366,9 +703,8 @@ int main(void)
         wait ++;
     }
     
-    init_LoRa();
-    
     TMR2_SetInterruptHandler(magISR); //set timer 2 interrupt to magnetometer ISR
+    UART2_SetRxInterruptHandler(&uart2_ISR);//set uart2 receiever ISR
     
     init_magnetometer(); //initialize magnetometer
     //init radar

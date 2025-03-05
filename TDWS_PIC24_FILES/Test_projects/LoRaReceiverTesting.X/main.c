@@ -96,19 +96,6 @@ uint16_t check_lora(void)
             ii += 1;
         }
     }
-    //should receive back +AT: OK\r\n 9 total chars
-//    char resp[32];
-//    ii = 0;
-//    while(ii < 9)
-//    {
-//        resp[ii] = UART2_Read();
-//        ii +=1;
-//        
-//        if(resp[ii-1]==0x0a)
-//        {
-//            ii=10;
-//        }
-//    }
     while(message_available == 0)
     {
         cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
@@ -131,9 +118,6 @@ uint16_t check_lora(void)
             }
         return 0;
     }
-    
-    //clear resp memory
-    
 }
 
 uint8_t lora_set_mode(void)
@@ -151,18 +135,6 @@ uint8_t lora_set_mode(void)
         }
         ii += 1;
     }
-    //should receive back +MODE: TEST\r\n 13 total chars
-//    char resp[32];
-//    ii = 0;
-//    while(ii < 32)
-//    {
-//        resp[ii] = UART2_Read();
-//        ii +=1;
-//        if(resp[ii-1]==0x0a)
-//        {
-//            ii = 33;
-//        }
-//    }
     while(message_available == 0)
     {
         cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
@@ -206,18 +178,6 @@ uint8_t lora_rfconfig(void)
         }
     }
     //should receive back +TEST: RFCFG F:915000000, SF10, BW125K, TXPR:12, RXPR:15, POW:9dBm, CRC:ON, IQ:OFF, NET:OFF
-
-//    char resp[100];
-//    ii = 0;
-//    while(ii < 100)
-//    {
-//        resp[ii] = UART2_Read();
-//        ii +=1;
-//        if(resp[ii-1]==0x0a)
-//        {
-//            ii = 101;
-//        }
-//    }
     while(message_available == 0)
     {
         cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
@@ -261,18 +221,6 @@ uint8_t LoRa_set_rx(void)
         }
     }
     //should receive back +TEST: RXLRSTR
-
-//    char resp[100];
-//    ii = 0;
-//    while(ii < 91)
-//    {
-//        resp[ii] = UART2_Read();
-//        ii +=1;
-//        if(resp[ii-1]==0x0a)//order matters!!!
-//        {
-//            ii = 99;
-//        }
-//    }
     while(message_available == 0)
     {
         cmd[10] = 'p';//this does nothing/is just a place holder for debugging/ to keep here while waiting for the response
@@ -343,12 +291,6 @@ void read_message(void)//only run if LoRa is in reciever mode
             }
         }
     }
-    
-    //clear message array
-//    for(int jj = 0; jj <=149; jj++)
-//        {
-//            received_msg[jj] = 0x0000;
-//        }
     message_available = 0;
 }
 
@@ -401,39 +343,6 @@ uint8_t LoRa_transmit_msg(void)//this should transmit a message over LoRa
         }
         return 0;
     }
-//    char resp1[100];
-//    char resp2[100];
-//    ii = 0;
-//    while(ii < 91)
-//    {
-//        resp1[ii] = UART2_Read();
-//        ii +=1;
-//        if(resp1[ii-1]==0x0a)//order matters!!!
-//        {
-//            ii = 99;
-//        }
-//    }
-//    
-//    ii = 0;
-//    while(ii < 91)
-//    {
-//        resp2[ii] = UART2_Read();
-//        ii +=1;
-//        if(resp2[ii-1]==0x0a)//order matters!!!
-//        {
-//            ii = 99;
-//        }
-//    }
-    
-//    int garbage_var = (resp2[10] == 0x44) && (resp2[11] == 0x4F) && (resp2[12] == 0x4E) && (resp2[13] == 0x45);
-//    if((resp2[10] == 0x44) && (resp2[11] == 0x4F) && (resp2[12] == 0x4E) && (resp2[13] == 0x45))
-//    {
-//        return 1;
-//    }
-//    else
-//    {
-//        return 0;
-//    }
 }
 
 void init_LoRa_rx(void)//the difference between rx and tx is that rx is a specific setting, otherwise will not notify if it received something
