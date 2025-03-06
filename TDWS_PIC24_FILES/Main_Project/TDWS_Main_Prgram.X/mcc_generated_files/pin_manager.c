@@ -138,17 +138,17 @@ void PIN_MANAGER_Initialize (void)
      ***************************************************************************/
     __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
 
-    RPINR19bits.U2RXR = 0x0003;    //RD10->UART2:U2RX
-    RPOR12bits.RP24R = 0x0007;    //RD1->SPI1:SDO1
-    RPINR18bits.U1RXR = 0x0014;    //RD5->UART1:U1RX
-    RPOR12bits.RP25R = 0x0003;    //RD4->UART1:U1TX
-    RPINR20bits.SDI1R = 0x0017;    //RD2->SPI1:SDI1
-    RPINR20bits.SCK1R = 0x000B;    //RD0->SPI1:SCK1OUT
-    RPOR8bits.RP16R = 0x0018;    //RF3->UART4:U4TX
     RPOR11bits.RP22R = 0x0009;    //RD3->SPI1:SS1OUT
+    RPINR27bits.U4RXR = 0x001E;    //RF2->UART4:U4RX
+    RPINR20bits.SCK1R = 0x000B;    //RD0->SPI1:SCK1OUT
+    RPINR19bits.U2RXR = 0x0003;    //RD10->UART2:U2RX
     RPOR5bits.RP11R = 0x0008;    //RD0->SPI1:SCK1OUT
     RPOR6bits.RP12R = 0x0005;    //RD11->UART2:U2TX
-    RPINR27bits.U4RXR = 0x001E;    //RF2->UART4:U4RX
+    RPOR12bits.RP24R = 0x0007;    //RD1->SPI1:SDO1
+    RPOR12bits.RP25R = 0x0003;    //RD4->UART1:U1TX
+    RPOR8bits.RP16R = 0x0018;    //RF3->UART4:U4TX
+    RPINR18bits.U1RXR = 0x0014;    //RD5->UART1:U1RX
+    RPINR20bits.SDI1R = 0x0017;    //RD2->SPI1:SDI1
 
     __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
 }

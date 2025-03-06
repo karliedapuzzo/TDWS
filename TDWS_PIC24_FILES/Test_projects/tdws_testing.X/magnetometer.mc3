@@ -8044,7 +8044,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="LATF"/>
-         <value>8</value>
+         <value>12</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="LATG"/>
@@ -10088,7 +10088,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="LATF" settingAlias="LATF2"/>
-         <value>clear</value>
+         <value>set</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="LATF" settingAlias="LATF3"/>
@@ -13126,11 +13126,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files\clock.c</file>
-         <hash>83c1ae5de28ed0897380f0c2beb3d510ec3c9143be947d7c3bef122ef0896a3b</hash>
+         <hash>876a93bb78559140730711664c3c465c1fb155d4aa428056355d928e218596d8</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\clock.h</file>
-         <hash>02ce23ef5e5cf4f2e379b370dcadf9b9a86d2043d606f985b0655b1bd426fec0</hash>
+         <hash>47e702fbc550e3b448e70e39d91c19442b3cb3192616a3bfa7645af1db83bb4d</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\interrupt_manager.c</file>
@@ -13150,7 +13150,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>a1aff1ece68dff87f68433e734c22f5ea4f6d93fc6381cd91cd73559d4d8ab9f</hash>
+         <hash>bfb0b19d5edfecef3ed47322e5812be4ea7817c2ecd5b87cb4eed5e56f5706ad</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
@@ -13166,15 +13166,15 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>9ce3f9e69372f279fa7adb046e504b5449e629d22f0ae8baa6a2ae9210dcc0c6</hash>
+         <hash>b1dbe15d26b43640167295fdfd3b5877ceb1c8ea4dd3c7ffe64ea45bba18d20c</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\system.h</file>
-         <hash>58b79e28002c904928de68f78fc6b550adbc48afd61f4cf42cbbacd296242c30</hash>
+         <hash>4d84d965ac46a2b503409eed826a4a6bf552087ae6c65f8009c7abfbf7bd7b9e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr1.c</file>
-         <hash>2167a66957d9a91181d25f29e6ed268be3078c1c91040a1bc3c6f81a5f6fca59</hash>
+         <hash>cc76afa97146852b55f8c1e4582853e59cef9ca2a17cea13a28ac444bc61d2b0</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr1.h</file>
@@ -13190,7 +13190,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\uart4.c</file>
-         <hash>d041309e9a5940e2ca1d4a9017110676b402565a95077a629bf311a8d0f15b87</hash>
+         <hash>9f6aa153cd30446dd95d024f68bdf93bc1007232630182e9724f7122c701be35</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\uart4.h</file>

@@ -413,7 +413,7 @@ static int32_t mag_x_cal = 0;
 static int32_t mag_y_cal = 0;
 static int32_t mag_z_cal = 0;
 
-uint16_t magISR(void)
+uint16_t magISR(void)//maybe takes to long :/
 {
     //read x direction
     read_xaxis(&mag_x_val, &mag_x_dir, &mag_x);//returns magnitude and direction

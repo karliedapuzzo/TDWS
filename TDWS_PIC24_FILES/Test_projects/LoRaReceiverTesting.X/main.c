@@ -397,8 +397,8 @@ int main(void)
         warmup_wait++;
     }
     
-//    init_LoRa_rx();
-    init_LoRa_tx();
+    init_LoRa_rx();
+//    init_LoRa_tx();
     
 //    INTERRUPT_GlobalDisable();
     
@@ -410,11 +410,16 @@ int main(void)
         while(wait < 0xffff)
         {
             wait++;
-//            if(message_available)
-//            {
-//                read_message();
-//            }
-            LoRa_transmit_msg();
+            if(message_available)
+            {
+                read_message();
+                new_msg++;
+            }
+            if(new_msg >= 2)
+            {
+                new_msg = 0;
+            }
+//            LoRa_transmit_msg();
         }
     }
 

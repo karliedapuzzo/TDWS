@@ -4,13 +4,13 @@ Tool Name:
   c:\program files\microchip\xc16\v2.10\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005970.00 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005970.01 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005970.02 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005970.03 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005970.04 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005970.05 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005970.06 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000054b0.00 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000054b0.01 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000054b0.02 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000054b0.03 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000054b0.04 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000054b0.05 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000054b0.06 \
   -p24FJ128GL306 \
   --mdfp=C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC24F-GL-GU_DFP/1.6.243/xc16 \
   -o \
@@ -208,11 +208,11 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100              0x1a12          0x271b  (10011)
 .const                      0x1b12               0x154           0x1fe  (510)
-.text                       0x1c66              0x1c44          0x2a66  (10854)
-.dinit                      0x38aa               0x17a           0x237  (567)
-.text                       0x3a24               0x608           0x90c  (2316)
+.text                       0x1c66              0x1c48          0x2a6c  (10860)
+.dinit                      0x38ae               0x17a           0x237  (567)
+.text                       0x3a28               0x608           0x90c  (2316)
 
-                 Total "program" memory used (bytes):         0x5ec2  (24258) 18%
+                 Total "program" memory used (bytes):         0x5ec8  (24264) 18%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -233,11 +233,11 @@ mcc_generated_files/where_was_i.s.scn1     0x88a                   0            
 .nbss                        0x890                   0             0x2  (2)
 .bss                         0x892                   0           0x374  (884)
 .data                        0xc06                   0           0x194  (404)
-.bss                         0xd9a                   0            0x20  (32)
-.data                        0xdba                   0            0x1e  (30)
-.bss                         0xdd8                   0            0x18  (24)
+.bss                         0xd9a                   0            0x4a  (74)
+.data                        0xde4                   0            0x1e  (30)
+.bss                         0xe02                   0             0x6  (6)
 
-                 Total "data" memory used (bytes):          0x5f0  (1520) 18%
+                 Total "data" memory used (bytes):          0x608  (1544) 18%
 
 
 Dynamic Memory Usage
@@ -245,9 +245,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xdf0                              0x1a10  (6672)
+stack                        0xe08                              0x19f8  (6648)
 
-                 Maximum dynamic memory (bytes):         0x1a10  (6672)
+                 Maximum dynamic memory (bytes):         0x19f8  (6648)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -265,7 +265,7 @@ External Symbols in Data Memory (by address):
                     0x09bd                  _msg2
                     0x0be6                  _Lora_msg
                     0x0c06                  _fir_coefficients
-                    0x0dee                  ___errno_val
+                    0x0e06                  ___errno_val
 
 External Symbols in Data Memory (by name):
 
@@ -273,7 +273,7 @@ External Symbols in Data Memory (by name):
                     0x0828                  _TMR2_InterruptHandler
                     0x0888                  _UART2_RxDefaultInterruptHandler
                     0x0886                  _UART2_TxDefaultInterruptHandler
-                    0x0dee                  ___errno_val
+                    0x0e06                  ___errno_val
                     0x0c06                  _fir_coefficients
                     0x0852                  _message_available
                     0x0928                  _msg1
@@ -419,74 +419,74 @@ External Symbols in Program Memory (by address):
                   0x00373a                  _UART2_ReadBuffer
                   0x003774                  _UART2_WriteBuffer
                   0x0037ae                  _UART2_TransferStatusGet
-                  0x0037f2                  _UART2_Peek
-                  0x003812                  _UART2_ReceiveBufferIsEmpty
-                  0x003822                  _UART2_TransmitBufferIsFull
-                  0x003832                  _UART2_StatusGet
-                  0x00383a                  _UART2_TransmitBufferSizeGet
-                  0x003868                  _UART2_ReceiveBufferSizeGet
-                  0x003896                  _UART2_Enable
-                  0x0038a0                  _UART2_Disable
-                  0x003a24                  _SPI1_Initialize
-                  0x003a40                  _SPI1_Exchange
-                  0x003a6c                  _SPI1_ExchangeBuffer
-                  0x003b36                  _SPI1_Exchange16bit
-                  0x003b46                  _SPI1_Exchange16bitBuffer
-                  0x003b5c                  _SPI1_StatusGet
-                  0x003b64                  _PIN_MANAGER_Initialize
-                  0x003c90                  _TMR2_Initialize
-                  0x003cb4                  _TMR2_Period16BitSet
-                  0x003cc6                  _TMR2_Period16BitGet
-                  0x003cce                  _TMR2_Counter16BitSet
-                  0x003ce0                  _TMR2_Counter16BitGet
-                  0x003cee                  _TMR2_SetInterruptHandler
-                  0x003cfe                  _TMR2_Start
-                  0x003d0e                  _TMR2_Stop
-                  0x003d18                  _TMR2_GetElapsedThenClear
-                  0x003d30                  _TMR2_SoftwareCounterGet
-                  0x003d3c                  _TMR2_SoftwareCounterClear
-                  0x003d48                  _UART4_Initialize
-                  0x003d5c                  _UART4_Read
-                  0x003d7a                  _UART4_Write
-                  0x003d92                  _UART4_IsRxReady
-                  0x003daa                  _UART4_IsTxReady
-                  0x003dcc                  _UART4_IsTxDone
-                  0x003de4                  _UART4_StatusGet
-                  0x003dec                  _UART4_Enable
-                  0x003df6                  _UART4_Disable
-                  0x003e00                  _UART1_Initialize
-                  0x003e14                  _UART1_Read
-                  0x003e32                  _UART1_Write
-                  0x003e4a                  _UART1_IsRxReady
-                  0x003e62                  _UART1_IsTxReady
-                  0x003e84                  _UART1_IsTxDone
-                  0x003e9c                  _UART1_StatusGet
-                  0x003ea4                  _UART1_Enable
-                  0x003eae                  _UART1_Disable
-                  0x003eb8                  _TMR1_Initialize
-                  0x003ece                  _TMR1_Tasks_16BitOperation
-                  0x003eee                  _TMR1_Period16BitSet
-                  0x003f00                  _TMR1_Period16BitGet
-                  0x003f08                  _TMR1_Counter16BitSet
-                  0x003f1a                  _TMR1_Counter16BitGet
-                  0x003f22                  _TMR1_Start
-                  0x003f30                  _TMR1_Stop
-                  0x003f38                  _TMR1_GetElapsedThenClear
-                  0x003f50                  _TMR1_SoftwareCounterGet
-                  0x003f5c                  _TMR1_SoftwareCounterClear
-                  0x003f68                  _CLOCK_Initialize
-                  0x003fbc                  _INTERRUPT_Initialize
-                  0x004004                  _SYSTEM_Initialize
-                  0x00401c                  _where_was_i
+                  0x0037f6                  _UART2_Peek
+                  0x003816                  _UART2_ReceiveBufferIsEmpty
+                  0x003826                  _UART2_TransmitBufferIsFull
+                  0x003836                  _UART2_StatusGet
+                  0x00383e                  _UART2_TransmitBufferSizeGet
+                  0x00386c                  _UART2_ReceiveBufferSizeGet
+                  0x00389a                  _UART2_Enable
+                  0x0038a4                  _UART2_Disable
+                  0x003a28                  _SPI1_Initialize
+                  0x003a44                  _SPI1_Exchange
+                  0x003a70                  _SPI1_ExchangeBuffer
+                  0x003b3a                  _SPI1_Exchange16bit
+                  0x003b4a                  _SPI1_Exchange16bitBuffer
+                  0x003b60                  _SPI1_StatusGet
+                  0x003b68                  _PIN_MANAGER_Initialize
+                  0x003c94                  _TMR2_Initialize
+                  0x003cb8                  _TMR2_Period16BitSet
+                  0x003cca                  _TMR2_Period16BitGet
+                  0x003cd2                  _TMR2_Counter16BitSet
+                  0x003ce4                  _TMR2_Counter16BitGet
+                  0x003cf2                  _TMR2_SetInterruptHandler
+                  0x003d02                  _TMR2_Start
+                  0x003d12                  _TMR2_Stop
+                  0x003d1c                  _TMR2_GetElapsedThenClear
+                  0x003d34                  _TMR2_SoftwareCounterGet
+                  0x003d40                  _TMR2_SoftwareCounterClear
+                  0x003d4c                  _UART4_Initialize
+                  0x003d60                  _UART4_Read
+                  0x003d7e                  _UART4_Write
+                  0x003d96                  _UART4_IsRxReady
+                  0x003dae                  _UART4_IsTxReady
+                  0x003dd0                  _UART4_IsTxDone
+                  0x003de8                  _UART4_StatusGet
+                  0x003df0                  _UART4_Enable
+                  0x003dfa                  _UART4_Disable
+                  0x003e04                  _UART1_Initialize
+                  0x003e18                  _UART1_Read
+                  0x003e36                  _UART1_Write
+                  0x003e4e                  _UART1_IsRxReady
+                  0x003e66                  _UART1_IsTxReady
+                  0x003e88                  _UART1_IsTxDone
+                  0x003ea0                  _UART1_StatusGet
+                  0x003ea8                  _UART1_Enable
+                  0x003eb2                  _UART1_Disable
+                  0x003ebc                  _TMR1_Initialize
+                  0x003ed2                  _TMR1_Tasks_16BitOperation
+                  0x003ef2                  _TMR1_Period16BitSet
+                  0x003f04                  _TMR1_Period16BitGet
+                  0x003f0c                  _TMR1_Counter16BitSet
+                  0x003f1e                  _TMR1_Counter16BitGet
+                  0x003f26                  _TMR1_Start
+                  0x003f34                  _TMR1_Stop
+                  0x003f3c                  _TMR1_GetElapsedThenClear
+                  0x003f54                  _TMR1_SoftwareCounterGet
+                  0x003f60                  _TMR1_SoftwareCounterClear
+                  0x003f6c                  _CLOCK_Initialize
+                  0x003fc0                  _INTERRUPT_Initialize
+                  0x004008                  _SYSTEM_Initialize
+                  0x004020                  _where_was_i
                   0x015f00                  __FSEC.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x003f68                  _CLOCK_Initialize
-                  0x003fbc                  _INTERRUPT_Initialize
+                  0x003f6c                  _CLOCK_Initialize
+                  0x003fc0                  _INTERRUPT_Initialize
                   0x002a14                  _LoRa_set_rx
                   0x002bde                  _LoRa_transmit_msg
-                  0x003b64                  _PIN_MANAGER_Initialize
+                  0x003b68                  _PIN_MANAGER_Initialize
                   0x00256a                  _RADAR_directset
                   0x001cd6                  _RADAR_disconnect
                   0x001c66                  _RADAR_facreset
@@ -506,72 +506,72 @@ External Symbols in Program Memory (by name):
                   0x0020b0                  _RADAR_readparam
                   0x0021c0                  _RADAR_speedset
                   0x001ef8                  _RADAR_threshoffset
-                  0x003a40                  _SPI1_Exchange
-                  0x003b36                  _SPI1_Exchange16bit
-                  0x003b46                  _SPI1_Exchange16bitBuffer
-                  0x003a6c                  _SPI1_ExchangeBuffer
-                  0x003a24                  _SPI1_Initialize
-                  0x003b5c                  _SPI1_StatusGet
-                  0x004004                  _SYSTEM_Initialize
-                  0x003f1a                  _TMR1_Counter16BitGet
-                  0x003f08                  _TMR1_Counter16BitSet
-                  0x003f38                  _TMR1_GetElapsedThenClear
-                  0x003eb8                  _TMR1_Initialize
-                  0x003f00                  _TMR1_Period16BitGet
-                  0x003eee                  _TMR1_Period16BitSet
-                  0x003f5c                  _TMR1_SoftwareCounterClear
-                  0x003f50                  _TMR1_SoftwareCounterGet
-                  0x003f22                  _TMR1_Start
-                  0x003f30                  _TMR1_Stop
-                  0x003ece                  _TMR1_Tasks_16BitOperation
-                  0x003ce0                  _TMR2_Counter16BitGet
-                  0x003cce                  _TMR2_Counter16BitSet
-                  0x003d18                  _TMR2_GetElapsedThenClear
-                  0x003c90                  _TMR2_Initialize
-                  0x003cc6                  _TMR2_Period16BitGet
-                  0x003cb4                  _TMR2_Period16BitSet
-                  0x003cee                  _TMR2_SetInterruptHandler
-                  0x003d3c                  _TMR2_SoftwareCounterClear
-                  0x003d30                  _TMR2_SoftwareCounterGet
-                  0x003cfe                  _TMR2_Start
-                  0x003d0e                  _TMR2_Stop
-                  0x003eae                  _UART1_Disable
-                  0x003ea4                  _UART1_Enable
-                  0x003e00                  _UART1_Initialize
-                  0x003e4a                  _UART1_IsRxReady
-                  0x003e84                  _UART1_IsTxDone
-                  0x003e62                  _UART1_IsTxReady
-                  0x003e14                  _UART1_Read
-                  0x003e9c                  _UART1_StatusGet
-                  0x003e32                  _UART1_Write
-                  0x0038a0                  _UART2_Disable
-                  0x003896                  _UART2_Enable
+                  0x003a44                  _SPI1_Exchange
+                  0x003b3a                  _SPI1_Exchange16bit
+                  0x003b4a                  _SPI1_Exchange16bitBuffer
+                  0x003a70                  _SPI1_ExchangeBuffer
+                  0x003a28                  _SPI1_Initialize
+                  0x003b60                  _SPI1_StatusGet
+                  0x004008                  _SYSTEM_Initialize
+                  0x003f1e                  _TMR1_Counter16BitGet
+                  0x003f0c                  _TMR1_Counter16BitSet
+                  0x003f3c                  _TMR1_GetElapsedThenClear
+                  0x003ebc                  _TMR1_Initialize
+                  0x003f04                  _TMR1_Period16BitGet
+                  0x003ef2                  _TMR1_Period16BitSet
+                  0x003f60                  _TMR1_SoftwareCounterClear
+                  0x003f54                  _TMR1_SoftwareCounterGet
+                  0x003f26                  _TMR1_Start
+                  0x003f34                  _TMR1_Stop
+                  0x003ed2                  _TMR1_Tasks_16BitOperation
+                  0x003ce4                  _TMR2_Counter16BitGet
+                  0x003cd2                  _TMR2_Counter16BitSet
+                  0x003d1c                  _TMR2_GetElapsedThenClear
+                  0x003c94                  _TMR2_Initialize
+                  0x003cca                  _TMR2_Period16BitGet
+                  0x003cb8                  _TMR2_Period16BitSet
+                  0x003cf2                  _TMR2_SetInterruptHandler
+                  0x003d40                  _TMR2_SoftwareCounterClear
+                  0x003d34                  _TMR2_SoftwareCounterGet
+                  0x003d02                  _TMR2_Start
+                  0x003d12                  _TMR2_Stop
+                  0x003eb2                  _UART1_Disable
+                  0x003ea8                  _UART1_Enable
+                  0x003e04                  _UART1_Initialize
+                  0x003e4e                  _UART1_IsRxReady
+                  0x003e88                  _UART1_IsTxDone
+                  0x003e66                  _UART1_IsTxReady
+                  0x003e18                  _UART1_Read
+                  0x003ea0                  _UART1_StatusGet
+                  0x003e36                  _UART1_Write
+                  0x0038a4                  _UART2_Disable
+                  0x00389a                  _UART2_Enable
                   0x00359c                  _UART2_Initialize
                   0x003662                  _UART2_IsRxReady
                   0x0036ac                  _UART2_IsTxDone
                   0x003678                  _UART2_IsTxReady
-                  0x0037f2                  _UART2_Peek
+                  0x0037f6                  _UART2_Peek
                   0x00360c                  _UART2_Read
                   0x00373a                  _UART2_ReadBuffer
-                  0x003812                  _UART2_ReceiveBufferIsEmpty
-                  0x003868                  _UART2_ReceiveBufferSizeGet
+                  0x003816                  _UART2_ReceiveBufferIsEmpty
+                  0x00386c                  _UART2_ReceiveBufferSizeGet
                   0x0035ee                  _UART2_SetRxInterruptHandler
                   0x0035d0                  _UART2_SetTxInterruptHandler
-                  0x003832                  _UART2_StatusGet
+                  0x003836                  _UART2_StatusGet
                   0x0037ae                  _UART2_TransferStatusGet
-                  0x003822                  _UART2_TransmitBufferIsFull
-                  0x00383a                  _UART2_TransmitBufferSizeGet
+                  0x003826                  _UART2_TransmitBufferIsFull
+                  0x00383e                  _UART2_TransmitBufferSizeGet
                   0x003638                  _UART2_Write
                   0x003774                  _UART2_WriteBuffer
-                  0x003df6                  _UART4_Disable
-                  0x003dec                  _UART4_Enable
-                  0x003d48                  _UART4_Initialize
-                  0x003d92                  _UART4_IsRxReady
-                  0x003dcc                  _UART4_IsTxDone
-                  0x003daa                  _UART4_IsTxReady
-                  0x003d5c                  _UART4_Read
-                  0x003de4                  _UART4_StatusGet
-                  0x003d7a                  _UART4_Write
+                  0x003dfa                  _UART4_Disable
+                  0x003df0                  _UART4_Enable
+                  0x003d4c                  _UART4_Initialize
+                  0x003d96                  _UART4_IsRxReady
+                  0x003dd0                  _UART4_IsTxDone
+                  0x003dae                  _UART4_IsTxReady
+                  0x003d60                  _UART4_Read
+                  0x003de8                  _UART4_StatusGet
+                  0x003d7e                  _UART4_Write
                   0x0025f0                  _UINT8to16
                   0x00260a                  _UINT8toINT16
                   0x0003e8                  __DefaultInterrupt
@@ -676,7 +676,7 @@ External Symbols in Program Memory (by name):
                   0x00340c                  _transmit_mag_to_pc
                   0x003516                  _transmit_magnitude_to_pc
                   0x0027b6                  _uart2_ISR
-                  0x00401c                  _where_was_i
+                  0x004020                  _where_was_i
 
 Memory Configuration
 
@@ -1060,7 +1060,7 @@ __FDEVOPT1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x983b
+.debug_info       0x000000       0x984b
  *(.debug_info)
  .debug_info      0x000000        0x8b0 build/default/debug/mcc_generated_files/spi1.o
  .debug_info      0x0008b0        0x7a3 build/default/debug/mcc_generated_files/tmr1.o
@@ -1073,33 +1073,33 @@ __FDEVOPT1
  .debug_info      0x002df8        0xcc0 build/default/debug/mcc_generated_files/pin_manager.o
  .debug_info      0x003ab8        0x6fc build/default/debug/mcc_generated_files/uart4.o
  .debug_info      0x0041b4        0x6fc build/default/debug/mcc_generated_files/uart1.o
- .debug_info      0x0048b0       0x1047 build/default/debug/mcc_generated_files/uart2.o
- .debug_info      0x0058f7       0x1172 build/default/debug/main.o
- .debug_info      0x006a69        0x905 build/default/debug/magnetometer.o
- .debug_info      0x00736e       0x177e build/default/debug/radar.o
- .debug_info      0x008aec         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.DA_o)
- .debug_info      0x008b78         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.DA_o)
- .debug_info      0x008c05         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
- .debug_info      0x008c95         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
- .debug_info      0x008d24         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
- .debug_info      0x008db1         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
- .debug_info      0x008e3e         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
- .debug_info      0x008edb         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
- .debug_info      0x008f78         0xa0 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
- .debug_info      0x009018         0xa2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
- .debug_info      0x0090ba         0x9c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
- .debug_info      0x009156         0x9f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
- .debug_info      0x0091f5         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
- .debug_info      0x009284         0x91 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
- .debug_info      0x009315         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
- .debug_info      0x0093a0         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
- .debug_info      0x009430         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
- .debug_info      0x0094bb         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
- .debug_info      0x009547         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
- .debug_info      0x0095e4         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
- .debug_info      0x009681         0x9e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
- .debug_info      0x00971f         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
- .debug_info      0x0097ad         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
+ .debug_info      0x0048b0       0x1057 build/default/debug/mcc_generated_files/uart2.o
+ .debug_info      0x005907       0x1172 build/default/debug/main.o
+ .debug_info      0x006a79        0x905 build/default/debug/magnetometer.o
+ .debug_info      0x00737e       0x177e build/default/debug/radar.o
+ .debug_info      0x008afc         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsi3.DA_o)
+ .debug_info      0x008b88         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.DA_o)
+ .debug_info      0x008c15         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
+ .debug_info      0x008ca5         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
+ .debug_info      0x008d34         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
+ .debug_info      0x008dc1         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
+ .debug_info      0x008e4e         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
+ .debug_info      0x008eeb         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
+ .debug_info      0x008f88         0xa0 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
+ .debug_info      0x009028         0xa2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
+ .debug_info      0x0090ca         0x9c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
+ .debug_info      0x009166         0x9f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
+ .debug_info      0x009205         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
+ .debug_info      0x009294         0x91 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
+ .debug_info      0x009325         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
+ .debug_info      0x0093b0         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
+ .debug_info      0x009440         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
+ .debug_info      0x0094cb         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
+ .debug_info      0x009557         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
+ .debug_info      0x0095f4         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
+ .debug_info      0x009691         0x9e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
+ .debug_info      0x00972f         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
+ .debug_info      0x0097bd         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000       0x13b6
@@ -3282,18 +3282,18 @@ mcc_generated_files/where_was_i.s.scn1
  .data              0x0c06        0x194 build/default/debug/main.o
                     0x0c06                  _fir_coefficients
 
-.bss                0x0d9a         0x20
- .bss               0x0d9a         0x20 build/default/debug/mcc_generated_files/traps.o
+.bss                0x0d9a         0x4a
+ .bss               0x0d9a         0x2a build/default/debug/mcc_generated_files/uart2.o
+ .bss               0x0dc4         0x20 build/default/debug/mcc_generated_files/traps.o
 
-.data               0x0dba         0x1e
- .data              0x0dba         0x1e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__printf_core.DA_o)
+.data               0x0de4         0x1e
+ .data              0x0de4         0x1e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__printf_core.DA_o)
 
-.bss                0x0dd8         0x18
- .bss               0x0dd8         0x12 build/default/debug/mcc_generated_files/uart2.o
- .bss               0x0dea          0x2 build/default/debug/mcc_generated_files/tmr1.o
- .bss               0x0dec          0x2 build/default/debug/mcc_generated_files/tmr2.o
- .bss               0x0dee          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__errno_location.DA_o)
-                    0x0dee                  ___errno_val
+.bss                0x0e02          0x6
+ .bss               0x0e02          0x2 build/default/debug/mcc_generated_files/tmr1.o
+ .bss               0x0e04          0x2 build/default/debug/mcc_generated_files/tmr2.o
+ .bss               0x0e06          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__errno_location.DA_o)
+                    0x0e06                  ___errno_val
 
 .ivt._T2Interrupt
                   0x000022          0x2
@@ -3397,7 +3397,7 @@ mcc_generated_files/where_was_i.s.scn1
  .const             0x9b12         0xda build/default/debug/radar.o
  .const             0x9bec         0x7a build/default/debug/main.o
 
-.text             0x001c66       0x1c44
+.text             0x001c66       0x1c48
  .text            0x001c66        0xb38 build/default/debug/radar.o
                   0x001c66                  _RADAR_facreset
                   0x001cd6                  _RADAR_disconnect
@@ -3452,7 +3452,7 @@ mcc_generated_files/where_was_i.s.scn1
                   0x00340c                  _transmit_mag_to_pc
                   0x003516                  _transmit_magnitude_to_pc
                   0x00358a                  _init_magnetometer
- .text            0x00359c        0x30e build/default/debug/mcc_generated_files/uart2.o
+ .text            0x00359c        0x312 build/default/debug/mcc_generated_files/uart2.o
                   0x00359c                  _UART2_Initialize
                   0x0035d0                  _UART2_SetTxInterruptHandler
                   0x0035e8                  _UART2_Transmit_CallBack
@@ -3466,80 +3466,80 @@ mcc_generated_files/where_was_i.s.scn1
                   0x00373a                  _UART2_ReadBuffer
                   0x003774                  _UART2_WriteBuffer
                   0x0037ae                  _UART2_TransferStatusGet
-                  0x0037f2                  _UART2_Peek
-                  0x003812                  _UART2_ReceiveBufferIsEmpty
-                  0x003822                  _UART2_TransmitBufferIsFull
-                  0x003832                  _UART2_StatusGet
-                  0x00383a                  _UART2_TransmitBufferSizeGet
-                  0x003868                  _UART2_ReceiveBufferSizeGet
-                  0x003896                  _UART2_Enable
-                  0x0038a0                  _UART2_Disable
+                  0x0037f6                  _UART2_Peek
+                  0x003816                  _UART2_ReceiveBufferIsEmpty
+                  0x003826                  _UART2_TransmitBufferIsFull
+                  0x003836                  _UART2_StatusGet
+                  0x00383e                  _UART2_TransmitBufferSizeGet
+                  0x00386c                  _UART2_ReceiveBufferSizeGet
+                  0x00389a                  _UART2_Enable
+                  0x0038a4                  _UART2_Disable
 
-.dinit            0x0038aa        0x17a
- .dinit           0x0038aa        0x17a data_init
+.dinit            0x0038ae        0x17a
+ .dinit           0x0038ae        0x17a data_init
 
-.text             0x003a24        0x608
- .text            0x003a24        0x140 build/default/debug/mcc_generated_files/spi1.o
-                  0x003a24                  _SPI1_Initialize
-                  0x003a40                  _SPI1_Exchange
-                  0x003a6c                  _SPI1_ExchangeBuffer
-                  0x003b36                  _SPI1_Exchange16bit
-                  0x003b46                  _SPI1_Exchange16bitBuffer
-                  0x003b5c                  _SPI1_StatusGet
- .text            0x003b64        0x12c build/default/debug/mcc_generated_files/pin_manager.o
-                  0x003b64                  _PIN_MANAGER_Initialize
- .text            0x003c90         0xb8 build/default/debug/mcc_generated_files/tmr2.o
-                  0x003c90                  _TMR2_Initialize
-                  0x003cb4                  _TMR2_Period16BitSet
-                  0x003cc6                  _TMR2_Period16BitGet
-                  0x003cce                  _TMR2_Counter16BitSet
-                  0x003ce0                  _TMR2_Counter16BitGet
-                  0x003ce8                  _TMR2_CallBack
-                  0x003cee                  _TMR2_SetInterruptHandler
-                  0x003cfe                  _TMR2_Start
-                  0x003d0e                  _TMR2_Stop
-                  0x003d18                  _TMR2_GetElapsedThenClear
-                  0x003d30                  _TMR2_SoftwareCounterGet
-                  0x003d3c                  _TMR2_SoftwareCounterClear
- .text            0x003d48         0xb8 build/default/debug/mcc_generated_files/uart4.o
-                  0x003d48                  _UART4_Initialize
-                  0x003d5c                  _UART4_Read
-                  0x003d7a                  _UART4_Write
-                  0x003d92                  _UART4_IsRxReady
-                  0x003daa                  _UART4_IsTxReady
-                  0x003dcc                  _UART4_IsTxDone
-                  0x003de4                  _UART4_StatusGet
-                  0x003dec                  _UART4_Enable
-                  0x003df6                  _UART4_Disable
- .text            0x003e00         0xb8 build/default/debug/mcc_generated_files/uart1.o
-                  0x003e00                  _UART1_Initialize
-                  0x003e14                  _UART1_Read
-                  0x003e32                  _UART1_Write
-                  0x003e4a                  _UART1_IsRxReady
-                  0x003e62                  _UART1_IsTxReady
-                  0x003e84                  _UART1_IsTxDone
-                  0x003e9c                  _UART1_StatusGet
-                  0x003ea4                  _UART1_Enable
-                  0x003eae                  _UART1_Disable
- .text            0x003eb8         0xb0 build/default/debug/mcc_generated_files/tmr1.o
-                  0x003eb8                  _TMR1_Initialize
-                  0x003ece                  _TMR1_Tasks_16BitOperation
-                  0x003eee                  _TMR1_Period16BitSet
-                  0x003f00                  _TMR1_Period16BitGet
-                  0x003f08                  _TMR1_Counter16BitSet
-                  0x003f1a                  _TMR1_Counter16BitGet
-                  0x003f22                  _TMR1_Start
-                  0x003f30                  _TMR1_Stop
-                  0x003f38                  _TMR1_GetElapsedThenClear
-                  0x003f50                  _TMR1_SoftwareCounterGet
-                  0x003f5c                  _TMR1_SoftwareCounterClear
- .text            0x003f68         0x54 build/default/debug/mcc_generated_files/clock.o
-                  0x003f68                  _CLOCK_Initialize
- .text            0x003fbc         0x2e build/default/debug/mcc_generated_files/interrupt_manager.o
-                  0x003fbc                  _INTERRUPT_Initialize
- .text            0x003fea         0x1a build/default/debug/mcc_generated_files/traps.o
-                  0x003fea                  _TRAPS_halt_on_error
- .text            0x004004         0x18 build/default/debug/mcc_generated_files/system.o
-                  0x004004                  _SYSTEM_Initialize
- .text            0x00401c         0x10 build/default/debug/mcc_generated_files/where_was_i.o
-                  0x00401c                  _where_was_i
+.text             0x003a28        0x608
+ .text            0x003a28        0x140 build/default/debug/mcc_generated_files/spi1.o
+                  0x003a28                  _SPI1_Initialize
+                  0x003a44                  _SPI1_Exchange
+                  0x003a70                  _SPI1_ExchangeBuffer
+                  0x003b3a                  _SPI1_Exchange16bit
+                  0x003b4a                  _SPI1_Exchange16bitBuffer
+                  0x003b60                  _SPI1_StatusGet
+ .text            0x003b68        0x12c build/default/debug/mcc_generated_files/pin_manager.o
+                  0x003b68                  _PIN_MANAGER_Initialize
+ .text            0x003c94         0xb8 build/default/debug/mcc_generated_files/tmr2.o
+                  0x003c94                  _TMR2_Initialize
+                  0x003cb8                  _TMR2_Period16BitSet
+                  0x003cca                  _TMR2_Period16BitGet
+                  0x003cd2                  _TMR2_Counter16BitSet
+                  0x003ce4                  _TMR2_Counter16BitGet
+                  0x003cec                  _TMR2_CallBack
+                  0x003cf2                  _TMR2_SetInterruptHandler
+                  0x003d02                  _TMR2_Start
+                  0x003d12                  _TMR2_Stop
+                  0x003d1c                  _TMR2_GetElapsedThenClear
+                  0x003d34                  _TMR2_SoftwareCounterGet
+                  0x003d40                  _TMR2_SoftwareCounterClear
+ .text            0x003d4c         0xb8 build/default/debug/mcc_generated_files/uart4.o
+                  0x003d4c                  _UART4_Initialize
+                  0x003d60                  _UART4_Read
+                  0x003d7e                  _UART4_Write
+                  0x003d96                  _UART4_IsRxReady
+                  0x003dae                  _UART4_IsTxReady
+                  0x003dd0                  _UART4_IsTxDone
+                  0x003de8                  _UART4_StatusGet
+                  0x003df0                  _UART4_Enable
+                  0x003dfa                  _UART4_Disable
+ .text            0x003e04         0xb8 build/default/debug/mcc_generated_files/uart1.o
+                  0x003e04                  _UART1_Initialize
+                  0x003e18                  _UART1_Read
+                  0x003e36                  _UART1_Write
+                  0x003e4e                  _UART1_IsRxReady
+                  0x003e66                  _UART1_IsTxReady
+                  0x003e88                  _UART1_IsTxDone
+                  0x003ea0                  _UART1_StatusGet
+                  0x003ea8                  _UART1_Enable
+                  0x003eb2                  _UART1_Disable
+ .text            0x003ebc         0xb0 build/default/debug/mcc_generated_files/tmr1.o
+                  0x003ebc                  _TMR1_Initialize
+                  0x003ed2                  _TMR1_Tasks_16BitOperation
+                  0x003ef2                  _TMR1_Period16BitSet
+                  0x003f04                  _TMR1_Period16BitGet
+                  0x003f0c                  _TMR1_Counter16BitSet
+                  0x003f1e                  _TMR1_Counter16BitGet
+                  0x003f26                  _TMR1_Start
+                  0x003f34                  _TMR1_Stop
+                  0x003f3c                  _TMR1_GetElapsedThenClear
+                  0x003f54                  _TMR1_SoftwareCounterGet
+                  0x003f60                  _TMR1_SoftwareCounterClear
+ .text            0x003f6c         0x54 build/default/debug/mcc_generated_files/clock.o
+                  0x003f6c                  _CLOCK_Initialize
+ .text            0x003fc0         0x2e build/default/debug/mcc_generated_files/interrupt_manager.o
+                  0x003fc0                  _INTERRUPT_Initialize
+ .text            0x003fee         0x1a build/default/debug/mcc_generated_files/traps.o
+                  0x003fee                  _TRAPS_halt_on_error
+ .text            0x004008         0x18 build/default/debug/mcc_generated_files/system.o
+                  0x004008                  _SYSTEM_Initialize
+ .text            0x004020         0x10 build/default/debug/mcc_generated_files/where_was_i.o
+                  0x004020                  _where_was_i

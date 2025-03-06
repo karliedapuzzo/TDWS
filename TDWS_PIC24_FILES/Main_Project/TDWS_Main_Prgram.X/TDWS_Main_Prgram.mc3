@@ -12880,7 +12880,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR2" registerAlias="TI" settingAlias="priority"/>
-         <value>2</value>
+         <value>1</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR2" registerAlias="TMR" settingAlias="TMR"/>
@@ -13392,7 +13392,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART2" name="SWRXBufferSize"/>
-         <value>8</value>
+         <value>32</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART2" name="SWTXBufferSize"/>
@@ -14298,7 +14298,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\interrupt_manager.c</file>
-         <hash>0a27207338045975b7952dac00ce6cf58ba75f0a61e728e02fd9dee0d0e105e0</hash>
+         <hash>1e1ab669b5983240ebd79bccd61507edb7aa0c10719e628fca8f4ea496c49782</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\interrupt_manager.h</file>
@@ -14310,11 +14310,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.h</file>
-         <hash>ebd1910dba181ee57559b18ea1de78cae5d2e9c8498b270d315e7b23d8df8c5d</hash>
+         <hash>a5331ca96744b484d484e0a57c0cc185f0c8552cbd8adf9778764b51133cc2a1</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>8ee5f8712844e8201e271f81654c2a23e2953f2c45fbe66d82d566751fc7da26</hash>
+         <hash>5286ee7ef8e7ee726988eec01b43cef230466aeb4bc1b46e9d7ac711a1c5bb0f</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
@@ -14330,7 +14330,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>4ef55eb0b75c2bdd3b5f380620f96b048dff6ca9fee57625c570b6f2aac38191</hash>
+         <hash>9b8dcb90bc6d3627c692e6d62b478e2e01b45de945acd7d0ff3218cdf0fafa7f</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\system.h</file>
@@ -14370,7 +14370,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\uart2.c</file>
-         <hash>262eb296a2f11a94de8896a69227beb11dd74e8c5772679b39bc6ed1d5e94fd1</hash>
+         <hash>0992391b30346b4c68e16ee0a8305f53ab282c89d8eb7efdee40af25ace67213</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\uart2.h</file>
