@@ -50,6 +50,7 @@
 #include "magnetometer.h"
 #include "mcc_generated_files/pin_manager.h"
 #include "mcc_generated_files/interrupt_manager.h"
+#include "mcc_generated_files/uart2.h"
 
 #include <math.h>
 #include <stdint.h>
@@ -59,7 +60,7 @@
                          Main application
  */
 
-#define magnet_thresh 80; //threshold for when we think a train passed by
+#define magnet_thresh 80 //threshold for when we think a train passed by
 
 //LORA FUNCTIONS BELOW HERE
 uint16_t uart2_rxcount = 0;
@@ -67,10 +68,14 @@ char received_msg[150];
 uint16_t message_available = 0;
 
 //reads one character and puts it in a global character array for other functions to parse
-void uart2_ISR(void)
+void uart2_ISR(void)//uart takes a really long time so we will need to disable all other processes while uart is happening I think
 {
     if(message_available == 0)
     {
+        //disable timer2 so that nothing else can get in between uart2 interrupts
+        T2CONbits.TON = 0;
+        TMR2 = 0;//sets timer2 to 0 count
+        IFS0bits.T2IF = 0;//clear the flag so that it doesn't go to the ISR and also sets it to be ready when it get re-enabled
         uint16_t one_char = UART2_Read();
         received_msg[uart2_rxcount] = one_char & 0x00FF;
         uart2_rxcount++;
@@ -84,8 +89,8 @@ void uart2_ISR(void)
             message_available = 1;
         }
     }
-    else
-    {
+    else//onces a finished message is sent ignore anything afterwards/throw into the void: also re-enable timer2 interrupt
+    {//this should never evaluate, I think
         uint16_t trash = UART2_Read();//throw away anything in the uart buffer
     }
 }
@@ -254,7 +259,7 @@ uint8_t LoRa_set_rx(void)
 }
 
 char msg1[149];
-char msg2[149];
+char msg2[149];//contains ABCD\n
 
 void read_message(void)//only run if LoRa is in reciever mode
 {
@@ -290,6 +295,7 @@ void read_message(void)//only run if LoRa is in reciever mode
         {
             if(received_msg[ii] == '\n')
             {
+                msg1[ii] = received_msg[ii];
                 ii = 150;
             }
             else
@@ -423,7 +429,8 @@ uint16_t magISR(void)//maybe takes to long :/
     read_zaxis(&mag_z_val, &mag_z_dir, &mag_z);
     //new data flag
     new_mag_data = 1;
-    return 1; //new data was collected so return 1
+    return 1; 
+    //new data was collected so return 1
 }
 
 #define FILTER_ORDER 101  // Number of filter coefficients (order + 1)
@@ -532,21 +539,215 @@ void calibrate_mag_data(void)//makes calibration values
     mag_z_cal = mag_z_cal / (int32_t)num_samples;
 }
 
+uint16_t light_status = 0;
+uint16_t tmr4_first = 1;
+
+void tmr3_ISR(void)
+{
+    T4CONbits.TON = 0;//turns off t4
+    TMR4 = 0;//clears tmr4 counter so that it starts from 0 when re-enabled
+    IFS1bits.T4IF = 0;//clears tmr4 flag
+    IO_RE0_SetLow();//turns off light1
+    IO_RE1_SetLow();//turns off light2
+    light_status = 2;//set light status to recently turned off status
+    T3CONbits.TON = 0;//turn off timer 3 - turns itself off for funsies
+    TMR3 = 0;//clears timer3 register so that it starts from zero the next time we run it.
+    tmr4_first = 1;
+}
+
+
+
+void tmr4_ISR(void)
+{
+    //this is the timer4 isr which controls the alternation of the lights
+    if(tmr4_first)
+    {
+        IO_RE0_SetHigh();//set one of the lights on initially
+        tmr4_first = 0;
+        light_status = 1;//changed light status to running
+    }
+    else
+    {
+        IO_RE0_Toggle();
+        IO_RE1_Toggle();
+    }
+}
+
+uint16_t detect_train(void)//reads mag data and outputs 1 or 0
+{
+    uint16_t magnitude_bcd = 0;
+    float filtered_magnitude;
+    float mag_magnitude = 0;
+    float tmp1 = 0;
+    float tmp2 = 0;
+    float tmp3 = 0;
+    
+    float x_copy = 0;
+    float y_copy = 0;
+    float z_copy = 0;
+    uint16_t out_mag = 0;
+    //calibrate_mag_data();//set calibration values for upcoming mag data
+    
+    mag_magnitude = 0;
+    //read mag and radar,
+    //if train transmit
+    //else transmit heartbeat if time to do so
+    if(new_mag_data == 1)
+    {
+        INTERRUPT_GlobalDisable();//disable all interrupts so that all calcs can be finished before something else changes them....
+
+        x_copy = mag_x;
+        y_copy = mag_y;
+        z_copy = mag_z;
+
+        x_copy = x_copy - mag_x_cal;
+        y_copy = y_copy - mag_y_cal;
+        z_copy = z_copy - mag_z_cal;
+
+        tmp1 = (float)(x_copy);
+        tmp2 = (float)(y_copy);
+        tmp3 = (float)(z_copy);
+
+        tmp1 = powf(tmp1, 2.0f);
+        tmp2 = powf(tmp2, 2.0f);
+        tmp3 = powf(tmp3, 2.0f);
+
+        mag_magnitude = sqrtf(tmp1 + tmp2 + tmp3);
+        filtered_magnitude = fir_filter(mag_magnitude);
+        out_mag = ((uint16_t)mag_magnitude);//put to unsigned integer values, unsigned is fine since it will come out of the filter unsigned anyway
+        //binary_to_bcd(&out_mag, &magnitude_bcd);
+        //transmit_magnitude_to_pc(&magnitude_bcd, &new_mag_data);
+        new_mag_data = 0;
+        
+        if(out_mag >= magnet_thresh)
+        {
+            INTERRUPT_GlobalEnable();
+            return 1;
+        }
+        else
+        {
+            INTERRUPT_GlobalEnable();
+            return 0;
+        }
+       
+        INTERRUPT_GlobalEnable();
+    }
+}
+
+//error flags
+
+int16_t det1_mod_error = 0;
+int16_t det2_mod_error = 0;
+
+//MODES BELOW
 int main_mode(void)
 {
+    init_LoRa_rx();//initialize LoRa as reciever
+    
+    //turn on t2 to get calibration values for magenetometer
+    //once calibration is finished disable the timer again so that the reciever works properly
+    TMR2 = 0;//clears tmr2 counter so that it starts from 0 when re-enabled
+    T2CONbits.TON = 1;//turns on t2
+    uint16_t t2_warmup = 0;
+    while(t2_warmup < 0x00FF)
+    {
+        t2_warmup++;//let mag chill for a sec before taking calibration
+    }
+    calibrate_mag_data();
+    T2CONbits.TON = 0;//turns off t2
+    TMR2 = 0;//resets timer2
+    t2_warmup = 0;
+    
+    uint16_t new_msg = 0;
+    uint16_t train_detected = 0;
+    uint16_t wait_for_train = 0;
     while(1)
     {
         here = 0;
-        //this will be the master mode,
+        //this is the master mode,
         /*
          * the order of ops for this mode will be
          * any initial setup.. i.e. 
          * -setup for lora reciever
          * -setup magnetometer calibration data
-         * -setup radar
+         * -setup radar via some init_radar() func
          * the main loop will be be a
-         * 
+         * in this mode we only care about reading mag data when we receive something from either detection module
          */
+        //if we recieve a message it will be two messages each is stored in a buffer called msg1 and msg2
+        if(message_available)
+        {
+            read_message();
+            new_msg++;
+        }
+        if(new_msg >= 2)//do stuff in here based on the message
+        {
+            //read msg2 to see check detection module status and if it saw something
+                //message will be a string of chars where like ABCD, A is the status char, B and C are the ID chars, D is the train detected char
+            //if module saw something yipee!! also set status flag or reset heartbeat timer
+            if(msg2[0] == '0')//check status of module: 0 is okay
+            {
+                if(msg2[3] == '1')//check last char of msg, if it's a 1 it means it saw a train
+                {
+                    //disable uart2 because if it goes off it turns off t2 :P
+                    U2MODEbits.UARTEN = 0;
+                    T4CONbits.TON = 1;//turns on timer4 which alternates the lights
+                    wait_for_train = 1;//wait for mag to detect train
+                    T2CONbits.TON = 1;
+                    while(t2_warmup < 0x00FF)
+                    {
+                        t2_warmup++;//let mag chill for a sec before taking calibration
+                        train_detected = detect_train();
+                    }
+                    t2_warmup = 0;
+                    train_detected = 0;
+                    while(wait_for_train)
+                    {
+                        if(train_detected)
+                        {
+                            T2CONbits.TON = 0;//turn off timer2 because we are done looking for the train, we found it :)
+                            T3CONbits.TON = 1;//turns on 2 min light disabling timer
+                            wait_for_train = 0;//leave mag data reading loop
+                        }
+                        else
+                        {
+                            //lmao make sure that tmr2 is still enabled :)
+                            T2CONbits.TON = 1;
+                            train_detected = detect_train();//see if there is a train
+                        }
+                    }
+                    while(light_status < 2)
+                    {
+                        //wait here while the timers count down to disable the light
+                    }
+                    //once lights are disabled reset the light status flag and train seen status
+                    light_status = 0;
+                    train_detected = 0;
+                    U2MODEbits.UARTEN = 1;//re-enable uart
+                }
+                else
+                {
+                    //train not detected
+                }
+            }
+            else if(msg2[0] == '1')//if not okay raise error flags
+            {
+                if(msg2[2] == '0')//if ID = 0 then module 1 has error
+                {
+                    det1_mod_error = 1;
+                }
+                else if(msg2[2] == '1')//if ID = 1 then module 2 has error
+                {
+                    det2_mod_error = 1;
+                }
+            }
+            new_msg = 0;
+        }
+        else
+        {
+            //do nothing :)
+            new_msg = new_msg;
+        }
     }
 }
 
@@ -560,7 +761,7 @@ int detect_mod1(void)
         /*
          * the order of ops for this mode will be
          * any initial setup.. i.e. 
-         * -setup for lora reciever
+         * -setup for lora transmitter
          * -setup magnetometer calibration data
          * -setup radar
          * the main loop will be be a
@@ -577,7 +778,7 @@ int detect_mod2(void)//basically the same as detect_mod1 but with a different lo
         /*
          * the order of ops for this mode will be
          * any initial setup.. i.e. 
-         * -setup for lora reciever
+         * -setup for lora transmitter
          * -setup magnetometer calibration data
          * -setup radar
          * the main loop will be be where the action happens :D
@@ -652,9 +853,22 @@ int lora_receive_test(void)
     //init lora as receiver
     //wait and then read the message
     init_LoRa_rx();
+    int16_t new_msg = 0;
     while(1)
     {
         here = 5;
+        if(message_available)
+        {
+            read_message();
+            new_msg++;
+        }
+        if(new_msg >= 2)//do stuff in here based on the message
+        {
+            //read msg2 to see check detection module status and if it saw something
+                //message will be a string of chars where like ABCD, A is the status char, B and C are the ID chars, D is the train detected char
+            //if module saw something yipee!! also set status flag or reset heartbeat timer
+            new_msg = 0;
+        }
     }
 }
 
@@ -676,11 +890,31 @@ int lora_transmit_test(void)
     }
 }
 
-int light_test(void)
-{
+uint16_t test_light_cnt = 0;
+int light_test(void)//works yipee!!!
+{   
+    T3CONbits.TON = 1;
+    T4CONbits.TON = 1;//turns on t4 which alternates the lights
+    //below is for testing purposes only
+    T2CONbits.TON = 0;
+    IFS0bits.T2IF = 0;//clear the flag so that it doesn't go to the ISR and also sets it to be ready when it get re-enabled
     while(1)
     {
         here = 7;
+//        if(light_status = 0)
+//        {
+//            //run lights for 2 min 15 sec
+//            T4CONbits.TON = 1;//turns on t4 which alternates the lights
+//            light_status = 1;
+//        }
+//        else if(light_status = 2)//lights were recently disabled so wait some time before rerunning them/ this is for test purposes only
+//        {
+//            uint16_t wait = 0;
+//            while(wait <= 0xFFFF)
+//            {
+//                wait++;
+//            }
+//        }
     }
 }
 
@@ -703,8 +937,20 @@ int main(void)
         wait ++;
     }
     
+    TMR4_SetInterruptHandler(tmr4_ISR);
+    TMR3_SetInterruptHandler(tmr3_ISR);
     TMR2_SetInterruptHandler(magISR); //set timer 2 interrupt to magnetometer ISR
     UART2_SetRxInterruptHandler(&uart2_ISR);//set uart2 receiever ISR
+    
+    //turn off tmr3 and tmr4, clear the timer registers
+    T3CONbits.TON = 0;//turns off t3
+    TMR3 = 0;//clears tmr3 counter so that it starts from 0 when re-enabled
+    T4CONbits.TON = 0;//turns off t4
+    TMR4 = 0;//clears tmr4 counter so that it starts from 0 when re-enabled
+    
+    T2CONbits.TON = 0;//turns off t2
+    TMR2 = 0;//clears tmr2 counter so that it starts from 0 when re-enabled
+    
     
     init_magnetometer(); //initialize magnetometer
     //init radar

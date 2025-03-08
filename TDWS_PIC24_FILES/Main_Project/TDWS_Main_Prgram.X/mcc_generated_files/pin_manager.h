@@ -640,6 +640,298 @@
 #define SS1_SetDigitalOutput() (_TRISD3 = 0)
 /**
   @Summary
+    Sets the GPIO pin, RE0, high using LATE0.
+
+  @Description
+    Sets the GPIO pin, RE0, high using LATE0.
+
+  @Preconditions
+    The RE0 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE0 high (1)
+    IO_RE0_SetHigh();
+    </code>
+
+*/
+#define IO_RE0_SetHigh()          (_LATE0 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RE0, low using LATE0.
+
+  @Description
+    Sets the GPIO pin, RE0, low using LATE0.
+
+  @Preconditions
+    The RE0 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE0 low (0)
+    IO_RE0_SetLow();
+    </code>
+
+*/
+#define IO_RE0_SetLow()           (_LATE0 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RE0, using LATE0.
+
+  @Description
+    Toggles the GPIO pin, RE0, using LATE0.
+
+  @Preconditions
+    The RE0 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RE0
+    IO_RE0_Toggle();
+    </code>
+
+*/
+#define IO_RE0_Toggle()           (_LATE0 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RE0.
+
+  @Description
+    Reads the value of the GPIO pin, RE0.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RE0
+    postValue = IO_RE0_GetValue();
+    </code>
+
+*/
+#define IO_RE0_GetValue()         _RE0
+/**
+  @Summary
+    Configures the GPIO pin, RE0, as an input.
+
+  @Description
+    Configures the GPIO pin, RE0, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE0 as an input
+    IO_RE0_SetDigitalInput();
+    </code>
+
+*/
+#define IO_RE0_SetDigitalInput()  (_TRISE0 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RE0, as an output.
+
+  @Description
+    Configures the GPIO pin, RE0, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE0 as an output
+    IO_RE0_SetDigitalOutput();
+    </code>
+
+*/
+#define IO_RE0_SetDigitalOutput() (_TRISE0 = 0)
+/**
+  @Summary
+    Sets the GPIO pin, RE1, high using LATE1.
+
+  @Description
+    Sets the GPIO pin, RE1, high using LATE1.
+
+  @Preconditions
+    The RE1 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE1 high (1)
+    IO_RE1_SetHigh();
+    </code>
+
+*/
+#define IO_RE1_SetHigh()          (_LATE1 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RE1, low using LATE1.
+
+  @Description
+    Sets the GPIO pin, RE1, low using LATE1.
+
+  @Preconditions
+    The RE1 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE1 low (0)
+    IO_RE1_SetLow();
+    </code>
+
+*/
+#define IO_RE1_SetLow()           (_LATE1 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RE1, using LATE1.
+
+  @Description
+    Toggles the GPIO pin, RE1, using LATE1.
+
+  @Preconditions
+    The RE1 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RE1
+    IO_RE1_Toggle();
+    </code>
+
+*/
+#define IO_RE1_Toggle()           (_LATE1 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RE1.
+
+  @Description
+    Reads the value of the GPIO pin, RE1.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RE1
+    postValue = IO_RE1_GetValue();
+    </code>
+
+*/
+#define IO_RE1_GetValue()         _RE1
+/**
+  @Summary
+    Configures the GPIO pin, RE1, as an input.
+
+  @Description
+    Configures the GPIO pin, RE1, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE1 as an input
+    IO_RE1_SetDigitalInput();
+    </code>
+
+*/
+#define IO_RE1_SetDigitalInput()  (_TRISE1 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RE1, as an output.
+
+  @Description
+    Configures the GPIO pin, RE1, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE1 as an output
+    IO_RE1_SetDigitalOutput();
+    </code>
+
+*/
+#define IO_RE1_SetDigitalOutput() (_TRISE1 = 0)
+/**
+  @Summary
     Sets the GPIO pin, RE2, high using LATE2.
 
   @Description
