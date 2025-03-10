@@ -751,22 +751,22 @@ int main_mode(void)
     }
 }
 
-//vars for detection modes
-uint8_t Lora_msg[32];
 
 int detect_mod1(void)
 {
-    here = 1;
-    //this will be the secondary mode1,
-        /*
-         * the order of ops for this mode will be
-         * any initial setup.. i.e. 
-         * -setup for lora transmitter
-         * -setup magnetometer calibration data
-         * -setup radar
-         * the main loop will be be a
-         * 
-         */
+    //this will be the detection mode1,
+    /*
+     * the order of ops for this mode will be
+     * any initial setup.. i.e. 
+     * -setup radar
+     * main loop
+     * 
+     */
+    while(1)
+    {
+        here = 1;
+        
+    }
 }
 
 int detect_mod2(void)//basically the same as detect_mod1 but with a different lora address
@@ -774,7 +774,7 @@ int detect_mod2(void)//basically the same as detect_mod1 but with a different lo
     while(1)
     {
         here = 2;
-        //this will be the secondary mode2, this mode is the same as detect_mod1 but with a different address
+        //this will be the detection mode2, this mode is the same as detect_mod1 but with a different address
         /*
          * the order of ops for this mode will be
          * any initial setup.. i.e. 
@@ -797,6 +797,7 @@ int radar_test(void)
 
 int mag_test(void) //I wasted so much time working on this, very sadge
 {
+    U2MODEbits.UARTEN = 0;
     uint16_t magnitude_bcd = 0;
     float filtered_magnitude;
     float mag_magnitude = 0;
@@ -808,6 +809,14 @@ int mag_test(void) //I wasted so much time working on this, very sadge
     float y_copy = 0;
     float z_copy = 0;
     uint16_t out_mag = 0;
+    
+    T2CONbits.TON = 1;
+    uint16_t t2_warmup = 0;
+    while(t2_warmup < 0x00FF)
+    {
+        t2_warmup++;
+    }
+    
     calibrate_mag_data();//set calibration values for upcoming mag data
     
     while(1)
