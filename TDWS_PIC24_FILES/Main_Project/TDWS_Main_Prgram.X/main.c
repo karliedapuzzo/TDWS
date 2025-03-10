@@ -62,6 +62,20 @@
 
 #define magnet_thresh 80 //threshold for when we think a train passed by
 
+// Radar struct for detection modules
+struct RadarData {
+    uint8_t num_targets;
+    uint8_t distance_low[8];
+    uint8_t distance_high[8];
+    int8_t speed_low[8];
+    int8_t speed_high[8];
+    int8_t angle_low[8];
+    int8_t angle_high[8];
+    uint8_t magnitude_low[8];
+    uint8_t magnitude_high[8]; 
+    uint8_t identification[8];
+};
+
 //LORA FUNCTIONS BELOW HERE
 uint16_t uart2_rxcount = 0;
 char received_msg[150];
@@ -789,9 +803,49 @@ int detect_mod2(void)//basically the same as detect_mod1 but with a different lo
 
 int radar_test(void)
 {
+    struct RadarData result;
+    
+    if (RADAR_facreset() != 0){
+        here = 3;
+    }
+    if (RADAR_init(0) != 0){
+        here = 3;
+    }
+    if (RADAR_speedset(2) !=0){
+        here = 3;
+    }
+    if (RADAR_rangeset(0) !=0){
+        here = 3;
+    }
+    if (RADAR_rangeset(0) !=0){
+        here = 3;
+    }
+    if (RADAR_mindetzone(1) !=0){
+        here = 3;
+    }
+    if (RADAR_maxdetzone(3) !=0){
+        here = 3;
+    }
+    if (RADAR_minangle(-10) !=0){
+        here = 3;
+    }
+    if (RADAR_maxangle(10) !=0){
+        here = 3;
+    }
+    if (RADAR_minspeed(1) !=0){
+        here = 3;
+    }
+    if (RADAR_maxspeed(3) !=0){
+        here = 3;
+    }
+    RADAR_printhead();
+    
     while(1)
     {
-        here = 3;
+        if (RADAR_nexttdat(&result) !=0){
+            here = 3;
+        }
+        RADAR_printdata(&result);
     }
 }
 
