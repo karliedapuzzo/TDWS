@@ -805,37 +805,36 @@ int radar_test(void)
 {
     struct RadarData result;
     
+    U2MODEbits.UARTEN = 0;//disable uart2 for radar testing
+    
     if (RADAR_facreset() != 0){
         here = 3;
     }
     if (RADAR_init(0) != 0){
         here = 3;
     }
-    if (RADAR_speedset(2) !=0){
+    if (RADAR_speedset(1) !=0){
         here = 3;
     }
     if (RADAR_rangeset(0) !=0){
         here = 3;
     }
-    if (RADAR_rangeset(0) !=0){
+    if (RADAR_mindetzone(0) !=0){
         here = 3;
     }
-    if (RADAR_mindetzone(1) !=0){
+    if (RADAR_maxdetzone(2) !=0){
         here = 3;
     }
-    if (RADAR_maxdetzone(3) !=0){
+    if (RADAR_minangle(-30) !=0){
         here = 3;
     }
-    if (RADAR_minangle(-10) !=0){
+    if (RADAR_maxangle(30) !=0){
         here = 3;
     }
-    if (RADAR_maxangle(10) !=0){
+    if (RADAR_minspeed(2) !=0){
         here = 3;
     }
-    if (RADAR_minspeed(1) !=0){
-        here = 3;
-    }
-    if (RADAR_maxspeed(3) !=0){
+    if (RADAR_maxspeed(8) !=0){
         here = 3;
     }
     RADAR_printhead();
@@ -845,7 +844,12 @@ int radar_test(void)
         if (RADAR_nexttdat(&result) !=0){
             here = 3;
         }
-        RADAR_printdata(&result);
+        
+        if(result.num_targets != 0){
+            RADAR_printdata(&result);
+            here = 3;
+        }
+        
     }
 }
 
