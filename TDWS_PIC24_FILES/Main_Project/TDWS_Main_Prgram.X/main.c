@@ -646,6 +646,7 @@ uint16_t detect_train(void)//reads mag data and outputs 1 or 0
        
         INTERRUPT_GlobalEnable();
     }
+    return 0;
 }
 
 //error flags
@@ -681,11 +682,7 @@ int main_mode(void)
         //this is the master mode,
         /*
          * the order of ops for this mode will be
-         * any initial setup.. i.e. 
-         * -setup for lora reciever
          * -setup magnetometer calibration data
-         * -setup radar via some init_radar() func
-         * the main loop will be be a
          * in this mode we only care about reading mag data when we receive something from either detection module
          */
         //if we recieve a message it will be two messages each is stored in a buffer called msg1 and msg2
@@ -766,6 +763,48 @@ int main_mode(void)
 }
 
 
+//ID of mod1 = "00"
+//ID of mod2 = "01";
+
+uint16_t init_det_radar(void)//change this to set for detecting trains :)
+{
+    //U2MODEbits.UARTEN = 0;//disable uart2, i.e. LoRa uart (for testing purposes)
+    uint16_t error = 0;
+    
+    if (RADAR_facreset() != 0){//resets radar
+        error++;
+    }
+    if (RADAR_init(0) != 0){//set baud rate I think
+        error++;
+    }
+    if (RADAR_speedset(1) !=0){//set speed range
+        error++;
+    }
+    if (RADAR_rangeset(0) !=0){//set detection range
+        error++;
+    }
+    if (RADAR_mindetzone(0) !=0){//set closest detection zone
+        error++;
+    }
+    if (RADAR_maxdetzone(2) !=0){//set furthest detection zone
+        error++;
+    }
+    if (RADAR_minangle(-30) !=0){//set minimum detection angle, from straight on which = 0
+        error++;
+    }
+    if (RADAR_maxangle(30) !=0){//set maximum detection angle, from straight on which = 0
+        error++;
+    }
+    if (RADAR_minspeed(4) !=0){//set the slowest speed it can see
+        error++;
+    }
+    if (RADAR_maxspeed(8) !=0){//set the fastest speed it can see
+        error++;
+    }
+    return error;
+    //U2MODEbits.UARTEN = 1;//re-enable lora uart
+}
+
 int detect_mod1(void)
 {
     //this will be the detection mode1,
@@ -776,9 +815,43 @@ int detect_mod1(void)
      * main loop
      * 
      */
+    static struct RadarData det_result;
+    uint16_t all_good = 0;
+    
+    all_good = init_det_radar();//initialize all the radar settings
+    
+    uint16_t wait = 0;
+    while(wait < 0xFFFF){
+        wait++;
+    }
+    
+    init_LoRa_tx();//initalize LoRa to transimit messages
+    
+    int16_t speed_out = 0;
+    uint16_t transmitting = 0;
+    
+    char *positive_det_msg = "0001";// module status, module id1, module id 0, detection status
+    //char positive_det_msg[] = {};
+    
     while(1)
     {
-        here = 1;
+        if (RADAR_nexttdat(&det_result) !=0){//reads radar data and puts into results
+        }//kindof error checking :)
+        if(det_result.num_targets != 0){//if the number of targets is not zero then check to see if the direction on the speed is coming towards us.
+            //RADAR_printdata(&det_result);
+            speed_out = UINT8toINT16(det_result.speed_high[0], det_result.speed_low[0]);
+            if(speed_out < 0){
+                while(transmitting == 0){
+                    LoRa_transmit_msg(positive_det_msg);
+                    transmitting = 1;
+                }
+                
+            }
+            RADAR_printdata(&det_result);
+            transmitting = 0;
+            speed_out = 0;//reset speed out
+        }
+        
         
     }
 }
@@ -805,7 +878,7 @@ int radar_test(void)
 {
     struct RadarData result;
     
-    U2MODEbits.UARTEN = 0;//disable uart2 for radar testing
+    U2MODEbits.UARTEN = 0;//disable uart2, i.e. LoRa uart (for testing purposes)
     
     if (RADAR_facreset() != 0){
         here = 3;
@@ -831,7 +904,7 @@ int radar_test(void)
     if (RADAR_maxangle(30) !=0){
         here = 3;
     }
-    if (RADAR_minspeed(2) !=0){
+    if (RADAR_minspeed(4) !=0){
         here = 3;
     }
     if (RADAR_maxspeed(8) !=0){
