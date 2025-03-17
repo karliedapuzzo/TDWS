@@ -1514,6 +1514,152 @@
 
 */
 #define IO_RE5_SetDigitalOutput() (_TRISE5 = 0)
+/**
+  @Summary
+    Sets the GPIO pin, RE7, high using LATE7.
+
+  @Description
+    Sets the GPIO pin, RE7, high using LATE7.
+
+  @Preconditions
+    The RE7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE7 high (1)
+    IO_RE7_SetHigh();
+    </code>
+
+*/
+#define IO_RE7_SetHigh()          (_LATE7 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RE7, low using LATE7.
+
+  @Description
+    Sets the GPIO pin, RE7, low using LATE7.
+
+  @Preconditions
+    The RE7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE7 low (0)
+    IO_RE7_SetLow();
+    </code>
+
+*/
+#define IO_RE7_SetLow()           (_LATE7 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RE7, using LATE7.
+
+  @Description
+    Toggles the GPIO pin, RE7, using LATE7.
+
+  @Preconditions
+    The RE7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RE7
+    IO_RE7_Toggle();
+    </code>
+
+*/
+#define IO_RE7_Toggle()           (_LATE7 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RE7.
+
+  @Description
+    Reads the value of the GPIO pin, RE7.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RE7
+    postValue = IO_RE7_GetValue();
+    </code>
+
+*/
+#define IO_RE7_GetValue()         _RE7
+/**
+  @Summary
+    Configures the GPIO pin, RE7, as an input.
+
+  @Description
+    Configures the GPIO pin, RE7, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE7 as an input
+    IO_RE7_SetDigitalInput();
+    </code>
+
+*/
+#define IO_RE7_SetDigitalInput()  (_TRISE7 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RE7, as an output.
+
+  @Description
+    Configures the GPIO pin, RE7, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE7 as an output
+    IO_RE7_SetDigitalOutput();
+    </code>
+
+*/
+#define IO_RE7_SetDigitalOutput() (_TRISE7 = 0)
 
 /**
     Section: Function Prototypes

@@ -60,7 +60,7 @@
                          Main application
  */
 
-#define magnet_thresh 80 //threshold for when we think a train passed by
+#define magnet_thresh 60 //threshold for when we think a train passed by
 
 // Radar struct for detection modules
 struct RadarData {
@@ -777,28 +777,28 @@ uint16_t init_det_radar(void)//change this to set for detecting trains :)
     if (RADAR_init(0) != 0){//set baud rate I think
         error++;
     }
-    if (RADAR_speedset(1) !=0){//set speed range
+    if (RADAR_speedset(2) !=0){//set speed range
         error++;
     }
     if (RADAR_rangeset(0) !=0){//set detection range
         error++;
     }
-    if (RADAR_mindetzone(0) !=0){//set closest detection zone
+    if (RADAR_mindetzone(10) !=0){//set closest detection zone
         error++;
     }
-    if (RADAR_maxdetzone(2) !=0){//set furthest detection zone
+    if (RADAR_maxdetzone(50) !=0){//set furthest detection zone
         error++;
     }
-    if (RADAR_minangle(-30) !=0){//set minimum detection angle, from straight on which = 0
+    if (RADAR_minangle(-15) !=0){//set minimum detection angle, from straight on which = 0
         error++;
     }
-    if (RADAR_maxangle(30) !=0){//set maximum detection angle, from straight on which = 0
+    if (RADAR_maxangle(15) !=0){//set maximum detection angle, from straight on which = 0
         error++;
     }
-    if (RADAR_minspeed(4) !=0){//set the slowest speed it can see
+    if (RADAR_minspeed(30) !=0){//set the slowest speed it can see
         error++;
     }
-    if (RADAR_maxspeed(8) !=0){//set the fastest speed it can see
+    if (RADAR_maxspeed(60) !=0){//set the fastest speed it can see
         error++;
     }
     return error;
@@ -858,19 +858,44 @@ int detect_mod1(void)
 
 int detect_mod2(void)//basically the same as detect_mod1 but with a different lora address
 {
+    static struct RadarData det_result;
+    uint16_t all_good = 0;
+    
+    all_good = init_det_radar();//initialize all the radar settings
+    
+    uint16_t wait = 0;
+    while(wait < 0xFFFF){
+        wait++;
+    }
+    
+    init_LoRa_tx();//initalize LoRa to transimit messages
+    
+    int16_t speed_out = 0;
+    uint16_t transmitting = 0;
+    
+    char *positive_det_msg = "0011";// module status, module id1, module id 0, detection status
+    //char positive_det_msg[] = {};
+    
     while(1)
     {
-        here = 2;
-        //this will be the detection mode2, this mode is the same as detect_mod1 but with a different address
-        /*
-         * the order of ops for this mode will be
-         * any initial setup.. i.e. 
-         * -setup for lora transmitter
-         * -setup magnetometer calibration data
-         * -setup radar
-         * the main loop will be be where the action happens :D
-         * 
-         */
+        if (RADAR_nexttdat(&det_result) !=0){//reads radar data and puts into results
+        }//kindof error checking :)
+        if(det_result.num_targets != 0){//if the number of targets is not zero then check to see if the direction on the speed is coming towards us.
+            //RADAR_printdata(&det_result);
+            speed_out = UINT8toINT16(det_result.speed_high[0], det_result.speed_low[0]);
+            if(speed_out < 0){
+                while(transmitting == 0){
+                    LoRa_transmit_msg(positive_det_msg);
+                    transmitting = 1;
+                }
+                
+            }
+            RADAR_printdata(&det_result);
+            transmitting = 0;
+            speed_out = 0;//reset speed out
+        }
+        
+        
     }
 }
 
@@ -1033,28 +1058,68 @@ int lora_transmit_test(void)
 uint16_t test_light_cnt = 0;
 int light_test(void)//works yipee!!!
 {   
-    T3CONbits.TON = 1;
-    T4CONbits.TON = 1;//turns on t4 which alternates the lights
     //below is for testing purposes only
     T2CONbits.TON = 0;
     IFS0bits.T2IF = 0;//clear the flag so that it doesn't go to the ISR and also sets it to be ready when it get re-enabled
     while(1)
     {
         here = 7;
-//        if(light_status = 0)
-//        {
-//            //run lights for 2 min 15 sec
-//            T4CONbits.TON = 1;//turns on t4 which alternates the lights
-//            light_status = 1;
-//        }
-//        else if(light_status = 2)//lights were recently disabled so wait some time before rerunning them/ this is for test purposes only
-//        {
-//            uint16_t wait = 0;
-//            while(wait <= 0xFFFF)
-//            {
-//                wait++;
-//            }
-//        }
+        if(light_status == 0)
+        {
+            //run lights for 2 min 15 sec
+            T4CONbits.TON = 1;//turns on t4 which alternates the lights
+            T3CONbits.TON = 1;
+            light_status = 1;
+        }
+        else if(light_status == 2)//lights were recently disabled so wait some time before rerunning them/ this is for test purposes only
+        {
+            light_status = 0;
+            T3CONbits.TON = 0;//turns off timer3
+            TMR3 = 0;//resets turn off timer
+            uint16_t wait = 0;
+            while(wait < 0xFFFF)
+            {
+                wait++;
+            }
+            
+        }
+    }
+}
+
+void mag_detection_test(void)
+{
+    TMR2 = 0;//clears tmr2 counter so that it starts from 0 when re-enabled
+    T2CONbits.TON = 1;//turns on t2
+    uint16_t t2_warmup = 0;
+    IO_RE7_SetLow();
+    while(t2_warmup < 0x00FF)
+    {
+        t2_warmup++;//let mag chill for a sec before taking calibration
+    }
+    calibrate_mag_data();
+    
+    uint16_t train_detected = 0;
+    while(t2_warmup < 0x00FF)
+    {
+        t2_warmup++;//let mag chill for a sec before taking calibration
+        train_detected = detect_train();
+    }
+    t2_warmup = 0;
+    train_detected = 0;
+    
+    while(1)
+    {
+        train_detected = detect_train();
+        if(train_detected)
+        {
+            //turn test light on
+            IO_RE7_SetHigh();
+        }
+        else
+        {
+            //turn test light off
+            IO_RE7_SetLow();
+        }
     }
 }
 
@@ -1134,7 +1199,11 @@ int main(void)
     {
         light_test();
     }
-    else if((mode == 0x000C) | (mode == 0x000D) | (mode == 0x000E) | (mode == 0x000F))
+    else if((mode == 0x000C))
+    {
+        mag_detection_test();
+    }
+    else if((mode == 0x000D) | (mode == 0x000E) | (mode == 0x000F))
     {
         data_collection();
     }

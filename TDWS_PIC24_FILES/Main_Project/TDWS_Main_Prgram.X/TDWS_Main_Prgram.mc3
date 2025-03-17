@@ -1800,7 +1800,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RE7"/>
-         <value/>
+         <value>IO_RE7</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RF0"/>
@@ -2048,7 +2048,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RE7"/>
-         <value>disabled</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="RF0"/>
@@ -8268,7 +8268,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="TRISE"/>
-         <value>252</value>
+         <value>124</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="TRISF"/>
@@ -10812,7 +10812,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISE" settingAlias="TRISE7"/>
-         <value>input</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISF" settingAlias="TRISF0"/>
@@ -14766,15 +14766,15 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.h</file>
-         <hash>2896ef39d83e68bfc9c432371f1ad6923e564780662b35f4669d83c63943d7ba</hash>
+         <hash>317ebf6b4d6d3e26791f6df53ac9cde16df72fe89e375d3bed060bbdef5f3106</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>bca4a2efb35d79f06ff4ac1c8137ab6f95c793c1782a7a946749d280a03098e2</hash>
+         <hash>6c4d35ba912f2ea38125b46f3fbeb0e02d9be76974c06b5417a962229d4ce6fe</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
-         <hash>fcd8187ebb28b7da7b0e0de6e8fcbbb07fc2c469a3d349051a06b396daad5bcb</hash>
+         <hash>f1dbdecee97223fcb039c509957c7aaeeb9a0c2ab497c09dcd586428c7e44e14</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\spi1.c</file>
@@ -14786,7 +14786,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>cf4e60b9ca7cb53475247ad2d2c75b44f496704362c24f0533209e11d0f52e6f</hash>
+         <hash>d1a5db4d3a128323073256bfa9f053ff1201b19ff6251ff126f95fa94483f0b6</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\system.h</file>
