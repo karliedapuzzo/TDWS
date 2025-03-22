@@ -85,6 +85,7 @@ struct RadarParam {
     uint8_t direction_filt;
 };
 
+
 uint8_t RADAR_facreset(void)
 {
     uint8_t RFSE_test[8] = {'R', 'F', 'S', 'E', 0x00, 0x00, 0x00, 0x00};
@@ -291,9 +292,8 @@ uint8_t RADAR_nexttdat(struct RadarData *result)
         for (i=0; i<=7; i++){
             TDAT_headpay[i] = UART1_Read();
         }
-        if (TDAT_headpay[4] != 0x00){
-            result->num_targets = TDAT_headpay[4] / 8;
-            error_code = 0x00;
+        result->num_targets = TDAT_headpay[4]/9;
+        if (result->num_targets != 0){
             for (i=0;i <= result->num_targets - 1; i++){
                 result->distance_low[i] = UART1_Read();
                 result->distance_high[i] = UART1_Read();
@@ -305,7 +305,6 @@ uint8_t RADAR_nexttdat(struct RadarData *result)
                 result->magnitude_high[i] = UART1_Read();
                 result->identification[i] = UART1_Read();
             }
-            error_code = 0x00;
         }
     }
     
@@ -643,43 +642,41 @@ void RADAR_printdecimal(uint16_t number){
 }
 
 void RADAR_printdata(struct RadarData *results){
-    uint8_t i;
-    uint8_t test;
-    for (i=0; i <= results->num_targets - 1; i++){
-        if (results->num_targets > 1){
-            test = 0;
-        }
-        RADAR_printdecimal(results->identification[i]);
-        UART4_Write(',');     //writes maximum range setting from input
-        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
-        {
-        }
-        RADAR_printdecimal(UINT8to16(results->distance_high[i], results->distance_low[i]));     //writes maximum range setting from input
-        UART4_Write(',');     //writes maximum range setting from input
-        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
-        {
-        }
-        RADAR_printdecimal(UINT8toINT16(results->speed_high[i], results->speed_low[i]));     //writes maximum range setting from input
-        UART4_Write(',');     //writes maximum range setting from input
-        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
-        {
-        }
-        RADAR_printdecimal(UINT8toINT16(results->angle_high[i], results->angle_low[i]));     //writes maximum range setting from input
-        UART4_Write(',');     //writes maximum range setting from input
-        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
-        {
-        }
-        RADAR_printdecimal(UINT8to16(results->magnitude_high[i], results->magnitude_low[i]));     //writes maximum range setting from input
-        UART4_Write(0x0A);     //writes maximum range setting from input
-        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
-        {
-        }
-        UART4_Write(0x0D);     //writes maximum range setting from input
-        while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
-        {
+    uint8_t i = 0;
+    if (results->num_targets > 0){
+        for (i=0; i <= results->num_targets - 1; i++){
+        
+            RADAR_printdecimal(results->identification[i]);
+            UART4_Write(',');     //writes maximum range setting from input
+            while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+            {
+            }
+            RADAR_printdecimal(UINT8to16(results->distance_high[i], results->distance_low[i]));     //writes maximum range setting from input
+            UART4_Write(',');     //writes maximum range setting from input
+            while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+            {
+            }
+            RADAR_printdecimal(UINT8toINT16(results->speed_high[i], results->speed_low[i]));     //writes maximum range setting from input
+            UART4_Write(',');     //writes maximum range setting from input
+            while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+            {
+            }
+            RADAR_printdecimal(UINT8toINT16(results->angle_high[i], results->angle_low[i]));     //writes maximum range setting from input
+            UART4_Write(',');     //writes maximum range setting from input
+            while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+            {
+            }
+            RADAR_printdecimal(UINT8to16(results->magnitude_high[i], results->magnitude_low[i]));     //writes maximum range setting from input
+            UART4_Write(0x0A);     //writes maximum range setting from input
+            while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+            {
+            }
+            UART4_Write(0x0D);     //writes maximum range setting from input
+            while (UART4_IsTxReady() == 0)      //holds here till we can transmit our next byte
+            {
+            }
         }
     }
-    i = 0;
 }
 /**
  End of File
