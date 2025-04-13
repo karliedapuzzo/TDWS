@@ -449,9 +449,10 @@ uint16_t magISR(void)//maybe takes to long :/
 
 #define FILTER_ORDER 101  // Number of filter coefficients (order + 1)
 #define SAMPLING_RATE 5000  // Sampling rate in Hz
-#define CUTOFF_FREQUENCY 10  // Cutoff frequency in Hz
+#define CUTOFF_FREQUENCY 8  // Cutoff frequency in Hz
 
 // Define the FIR filter coefficients (hardcoded for the low-pass filter)
+//could possibly get a better filter by using a 6th order butterworth ? idk
 float fir_coefficients[FILTER_ORDER] = {
     0.00142746, 0.00144611, 0.0014972, 0.0015807, 0.00169644, 0.00184411,
     0.00202327, 0.00223336, 0.00247365, 0.00274333, 0.00304144, 0.00336689,
@@ -765,6 +766,15 @@ int main_mode(void)
 
 //ID of mod1 = "00"
 //ID of mod2 = "01";
+//detection speeds variables, change based on desired object tracking
+uint8_t rad_speed = 0;
+uint8_t rad_range = 0;
+uint8_t rad_mindet = 0;
+uint8_t rad_maxdet = 0;
+int8_t rad_minangle = 0;
+int8_t rad_maxangle = 0;
+uint8_t rad_minspeed = 0;
+uint8_t rad_maxspeed = 0;
 
 uint16_t init_det_radar(void)//change this to set for detecting trains :)
 {
@@ -777,30 +787,31 @@ uint16_t init_det_radar(void)//change this to set for detecting trains :)
     if (RADAR_init(0) != 0){//set baud rate I think
         error++;
     }
-    if (RADAR_speedset(2) !=0){//set speed range
+    if (RADAR_speedset(rad_speed) !=0){//set speed range
         error++;
     }
-    if (RADAR_rangeset(0) !=0){//set detection range
+    if (RADAR_rangeset(rad_range) !=0){//set detection range
         error++;
     }
-    if (RADAR_mindetzone(10) !=0){//set closest detection zone
+    if (RADAR_mindetzone(rad_mindet) !=0){//set closest detection zone
         error++;
     }
-    if (RADAR_maxdetzone(50) !=0){//set furthest detection zone
+    if (RADAR_maxdetzone(rad_maxdet) !=0){//set furthest detection zone
         error++;
     }
-    if (RADAR_minangle(-15) !=0){//set minimum detection angle, from straight on which = 0
+    if (RADAR_minangle(rad_minangle) !=0){//set minimum detection angle, from straight on which = 0
         error++;
     }
-    if (RADAR_maxangle(15) !=0){//set maximum detection angle, from straight on which = 0
+    if (RADAR_maxangle(rad_maxangle) !=0){//set maximum detection angle, from straight on which = 0
         error++;
     }
-    if (RADAR_minspeed(30) !=0){//set the slowest speed it can see
+    if (RADAR_minspeed(rad_minspeed) !=0){//set the slowest speed it can see
         error++;
     }
-    if (RADAR_maxspeed(60) !=0){//set the fastest speed it can see
+    if (RADAR_maxspeed(rad_maxspeed) !=0){//set the fastest speed it can see
         error++;
     }
+    RADAR_printhead();
     return error;
     //U2MODEbits.UARTEN = 1;//re-enable lora uart
 }
@@ -817,6 +828,8 @@ int detect_mod1(void)
      */
     static struct RadarData det_result;
     uint16_t all_good = 0;
+    
+    
     
     all_good = init_det_radar();//initialize all the radar settings
     
@@ -836,7 +849,7 @@ int detect_mod1(void)
     while(1)
     {
         if (RADAR_nexttdat(&det_result) !=0){//reads radar data and puts into results
-        }//kindof error checking :)
+        }//kindof error checking :) , idk i didn't make this part
         if(det_result.num_targets != 0){//if the number of targets is not zero then check to see if the direction on the speed is coming towards us.
             //RADAR_printdata(&det_result);
             speed_out = UINT8toINT16(det_result.speed_high[0], det_result.speed_low[0]);
@@ -917,28 +930,30 @@ int radar_test(void)
     if (RADAR_rangeset(0) !=0){
         here = 3;
     }
-    if (RADAR_mindetzone(0) !=0){
+    if (RADAR_mindetzone(10) !=0){
         here = 3;
     }
-    if (RADAR_maxdetzone(2) !=0){
+    if (RADAR_maxdetzone(20) !=0){
         here = 3;
     }
     if (RADAR_minangle(-30) !=0){
         here = 3;
     }
-    if (RADAR_maxangle(30) !=0){
+    if (RADAR_maxangle(-24) !=0){
         here = 3;
     }
-    if (RADAR_minspeed(4) !=0){
+    if (RADAR_minspeed(16) !=0){
         here = 3;
     }
-    if (RADAR_maxspeed(8) !=0){
+    if (RADAR_maxspeed(40) !=0){
         here = 3;
     }
     RADAR_printhead();
     
+    int16_t speed_out = 0;
+    
     while(1)
-    {
+    {//can re-use test light connected to mag detection test :D
         if (RADAR_nexttdat(&result) !=0){
             here = 3;
         }
@@ -946,6 +961,34 @@ int radar_test(void)
         if(result.num_targets != 0){
             RADAR_printdata(&result);
             here = 3;
+            speed_out = UINT8toINT16(result.speed_high[0], result.speed_low[0]);
+            if(speed_out < 0){
+                //turn light on
+                IO_RE7_SetHigh();
+            }
+            else
+            {
+                IO_RE7_SetLow();
+            }
+//            uint16_t wait = 0;
+//            while(wait < 0xFFFF)
+//            {
+//                wait++;
+//            }
+//            wait = 0;
+//            while(wait < 0xFFFF)
+//            {
+//                wait++;
+//            }
+//            IO_RE7_SetLow();
+            RADAR_printdata(&result);
+
+            speed_out = 0;//reset speed out
+            
+        }
+        else
+        {
+            IO_RE7_SetLow();
         }
         
     }
@@ -1009,7 +1052,6 @@ int mag_test(void) //I wasted so much time working on this, very sadge
             new_mag_data = 0;
             INTERRUPT_GlobalEnable();
         }
-        
     }
 }
 
@@ -1092,6 +1134,7 @@ void mag_detection_test(void)
     T2CONbits.TON = 1;//turns on t2
     uint16_t t2_warmup = 0;
     IO_RE7_SetLow();
+    U2MODEbits.UARTEN = 0;//??? idky but this fixed an issue that was having with the lora :/
     while(t2_warmup < 0x00FF)
     {
         t2_warmup++;//let mag chill for a sec before taking calibration
@@ -1173,10 +1216,81 @@ int main(void)
     
     if(mode == 0x0001)
     {
+        //set radar for people tracking
+        rad_speed = 1;
+        rad_range = 0;
+        rad_mindet = 2;
+        rad_maxdet = 15;
+        rad_minangle = -15;
+        rad_maxangle = 15;
+        rad_minspeed = 14;
+        rad_maxspeed = 30;
         detect_mod1();
+    }
+    else if(mode == 0x0002)
+    {
+        //set radar for people tracking
+        rad_speed = 1;
+        rad_range = 0;
+        rad_mindet = 2;
+        rad_maxdet = 15;
+        rad_minangle = -15;
+        rad_maxangle = 15;
+        rad_minspeed = 14;
+        rad_maxspeed = 30;
+        detect_mod2();
     }
     else if(mode == 0x0003)
     {
+        //set radar for car tracking
+        rad_speed = 1;
+        rad_range = 0;
+        rad_mindet = 10;
+        rad_maxdet = 20;
+        rad_minangle = -15;
+        rad_maxangle = 15;
+        rad_minspeed = 16;
+        rad_maxspeed = 40;
+        detect_mod1();
+    }
+    else if(mode == 0x0004)
+    {
+        //set radar for car tracking
+        rad_speed = 1;
+        rad_range = 0;
+        rad_mindet = 10;
+        rad_maxdet = 20;
+        rad_minangle = -15;
+        rad_maxangle = 15;
+        rad_minspeed = 16;
+        rad_maxspeed = 40;
+        detect_mod2();
+    }
+    else if(mode == 0x0005)
+    {
+        //set for train tracking
+        rad_speed = 2;
+        rad_range = 0;
+        rad_mindet = 10;
+        rad_maxdet = 25;
+        rad_minangle = -15;
+        rad_maxangle = 15;
+        rad_minspeed = 32;
+        rad_maxspeed = 73;
+        detect_mod1();
+        
+    }
+    else if(mode == 0x0006)
+    {
+        //set for train tracking
+        rad_speed = 2;
+        rad_range = 0;
+        rad_mindet = 10;
+        rad_maxdet = 25;
+        rad_minangle = -15;
+        rad_maxangle = 15;
+        rad_minspeed = 32;
+        rad_maxspeed = 73;
         detect_mod2();
     }
     else if(mode == 0x0007)
@@ -1203,12 +1317,12 @@ int main(void)
     {
         mag_detection_test();
     }
-    else if((mode == 0x000D) | (mode == 0x000E) | (mode == 0x000F))
-    {
-        data_collection();
-    }
+//    else if((mode == 0x000D) | (mode == 0x000E) | (mode == 0x000F))
+//    {
+//        data_collection();
+//    }
     else
-    {
+    {//0x0000, 0x000D, 0x000E, 0x000F all go to main mode
         main_mode();
     }
     

@@ -12932,7 +12932,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR3" name="callBackRate"/>
-         <value>21</value>
+         <value>3</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR3" name="clockSourceSelect"/>
@@ -12976,7 +12976,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR3" name="tickerFactor"/>
-         <value>21</value>
+         <value>3</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR3" name="timerBitMode"/>
@@ -14766,11 +14766,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.h</file>
-         <hash>317ebf6b4d6d3e26791f6df53ac9cde16df72fe89e375d3bed060bbdef5f3106</hash>
+         <hash>22cd9d03e375594b3c070f08526a56e954102e090517bf1c8206b67959f1b6c6</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>6c4d35ba912f2ea38125b46f3fbeb0e02d9be76974c06b5417a962229d4ce6fe</hash>
+         <hash>ca78c48386446d269878422a0dd6ea182699a8ed1b356f0633cae4327e2e7615</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
@@ -14786,7 +14786,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\system.c</file>
-         <hash>d1a5db4d3a128323073256bfa9f053ff1201b19ff6251ff126f95fa94483f0b6</hash>
+         <hash>109f32189b50e30681d3a5622fb41cf6587e786de381feb3056245f8653beb0f</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\system.h</file>
@@ -14810,11 +14810,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files\tmr3.c</file>
-         <hash>428bd23fd3d7dcbdcb89d1093a8eb39ce05116cae7472f62aac861aefaab95db</hash>
+         <hash>d7d226e1490a0e135655313ee571711afa64baf3eaef431f15dfbd2a5bde2a12</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr3.h</file>
-         <hash>a1bed9a0b5b95413aafb05100a7b27b97814fc411fe4e47c0c21cf4bfce93b4c</hash>
+         <hash>955884334c00e4945471329e74ba7f47d8a0061969082ca32be57a2ae4084719</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\tmr4.c</file>
