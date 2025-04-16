@@ -4,13 +4,13 @@ Tool Name:
   c:\program files\microchip\xc16\v2.10\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000080ec.00 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000080ec.01 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000080ec.02 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000080ec.03 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000080ec.04 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000080ec.05 \
-  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp000080ec.06 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005cf4.00 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005cf4.01 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005cf4.02 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005cf4.03 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005cf4.04 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005cf4.05 \
+  -TC:\\Users\\Owner\\AppData\\Local\\Temp\\tmp00005cf4.06 \
   -p24FJ128GL306 \
   --mdfp=C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC24F-GL-GU_DFP/1.6.243/xc16 \
   -o \
@@ -210,11 +210,11 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100              0x1a9c          0x27ea  (10218)
 .const                      0x1b9c               0x15e           0x20d  (525)
-.text                       0x1cfa              0x21f2          0x32eb  (13035)
-.dinit                      0x3eec               0x19a           0x267  (615)
-.text                       0x4086               0x78c           0xb52  (2898)
+.text                       0x1cfa              0x21f6          0x32f1  (13041)
+.dinit                      0x3ef0               0x19a           0x267  (615)
+.text                       0x408a               0x78c           0xb52  (2898)
 
-                 Total "program" memory used (bytes):         0x6a9b  (27291) 20%
+                 Total "program" memory used (bytes):         0x6aa1  (27297) 20%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -420,244 +420,244 @@ External Symbols in Program Memory (by address):
                   0x002a50                  _mag_detection_test
                   0x002a9a                  _data_collection
                   0x002aa2                  _main
-                  0x002c20                  _RADAR_facreset
-                  0x002c90                  _RADAR_disconnect
-                  0x002cfe                  _RADAR_init
-                  0x002da6                  _RADAR_mindetzone
-                  0x002e2c                  _RADAR_maxdetzone
-                  0x002eb2                  _RADAR_threshoffset
-                  0x002f38                  _RADAR_nexttdat
-                  0x003068                  _RADAR_readparam
-                  0x003178                  _RADAR_speedset
-                  0x0031fe                  _RADAR_rangeset
-                  0x003284                  _RADAR_filttype
-                  0x00330a                  _RADAR_minangle
-                  0x003390                  _RADAR_maxangle
-                  0x003416                  _RADAR_minspeed
-                  0x00349c                  _RADAR_maxspeed
-                  0x003522                  _RADAR_directset
-                  0x0035a8                  _UINT8to16
-                  0x0035c2                  _UINT8toINT16
-                  0x0035da                  _RADAR_printhead
-                  0x003626                  _RADAR_printdecimal
-                  0x003664                  _RADAR_printdata
-                  0x00376a                  _binary_to_bcd
-                  0x003876                  _read_xaxis
-                  0x003912                  _read_yaxis
-                  0x0039ae                  _read_zaxis
-                  0x003a4a                  _transmit_mag_to_pc
-                  0x003b54                  _transmit_magnitude_to_pc
-                  0x003bc8                  _init_magnetometer
-                  0x003bda                  _UART2_Initialize
-                  0x003c0e                  _UART2_SetTxInterruptHandler
-                  0x003c2c                  _UART2_SetRxInterruptHandler
-                  0x003c4a                  _UART2_Read
-                  0x003c76                  _UART2_Write
-                  0x003ca0                  _UART2_IsRxReady
-                  0x003cb6                  _UART2_IsTxReady
-                  0x003cea                  _UART2_IsTxDone
-                  0x003d78                  _UART2_ReadBuffer
-                  0x003db2                  _UART2_WriteBuffer
-                  0x003dec                  _UART2_TransferStatusGet
-                  0x003e34                  _UART2_Peek
-                  0x003e54                  _UART2_ReceiveBufferIsEmpty
-                  0x003e64                  _UART2_TransmitBufferIsFull
-                  0x003e74                  _UART2_StatusGet
-                  0x003e7c                  _UART2_TransmitBufferSizeGet
-                  0x003eaa                  _UART2_ReceiveBufferSizeGet
-                  0x003ed8                  _UART2_Enable
-                  0x003ee2                  _UART2_Disable
-                  0x004086                  _SPI1_Initialize
-                  0x0040a2                  _SPI1_Exchange
-                  0x0040ce                  _SPI1_ExchangeBuffer
-                  0x004198                  _SPI1_Exchange16bit
-                  0x0041a8                  _SPI1_Exchange16bitBuffer
-                  0x0041be                  _SPI1_StatusGet
-                  0x0041c6                  _PIN_MANAGER_Initialize
-                  0x0042ee                  _TMR2_Initialize
-                  0x004312                  _TMR2_Period16BitSet
-                  0x004324                  _TMR2_Period16BitGet
-                  0x00432c                  _TMR2_Counter16BitSet
-                  0x00433e                  _TMR2_Counter16BitGet
-                  0x00434c                  _TMR2_SetInterruptHandler
-                  0x00435c                  _TMR2_Start
-                  0x00436c                  _TMR2_Stop
-                  0x004376                  _TMR2_GetElapsedThenClear
-                  0x00438e                  _TMR2_SoftwareCounterGet
-                  0x00439a                  _TMR2_SoftwareCounterClear
-                  0x0043a6                  _UART4_Initialize
-                  0x0043ba                  _UART4_Read
-                  0x0043d8                  _UART4_Write
-                  0x0043f0                  _UART4_IsRxReady
-                  0x004408                  _UART4_IsTxReady
-                  0x00442a                  _UART4_IsTxDone
-                  0x004442                  _UART4_StatusGet
-                  0x00444a                  _UART4_Enable
-                  0x004454                  _UART4_Disable
-                  0x00445e                  _UART1_Initialize
-                  0x004472                  _UART1_Read
-                  0x004490                  _UART1_Write
-                  0x0044a8                  _UART1_IsRxReady
-                  0x0044c0                  _UART1_IsTxReady
-                  0x0044e2                  _UART1_IsTxDone
-                  0x0044fa                  _UART1_StatusGet
-                  0x004502                  _UART1_Enable
-                  0x00450c                  _UART1_Disable
-                  0x004516                  _TMR3_Initialize
-                  0x00453a                  _TMR3_Period16BitSet
-                  0x00454c                  _TMR3_Period16BitGet
-                  0x004554                  _TMR3_Counter16BitSet
-                  0x004566                  _TMR3_Counter16BitGet
-                  0x004574                  _TMR3_SetInterruptHandler
-                  0x004584                  _TMR3_Start
-                  0x004594                  _TMR3_Stop
-                  0x00459e                  _TMR3_GetElapsedThenClear
-                  0x0045b6                  _TMR3_SoftwareCounterGet
-                  0x0045c2                  _TMR3_SoftwareCounterClear
-                  0x0045ce                  _TMR4_Initialize
-                  0x0045f2                  _TMR4_Period16BitSet
-                  0x004604                  _TMR4_Period16BitGet
-                  0x00460c                  _TMR4_Counter16BitSet
-                  0x00461e                  _TMR4_Counter16BitGet
-                  0x00462c                  _TMR4_SetInterruptHandler
-                  0x00463c                  _TMR4_Start
-                  0x00464c                  _TMR4_Stop
-                  0x004656                  _TMR4_GetElapsedThenClear
-                  0x00466e                  _TMR4_SoftwareCounterGet
-                  0x00467a                  _TMR4_SoftwareCounterClear
-                  0x004686                  _TMR1_Initialize
-                  0x00469c                  _TMR1_Tasks_16BitOperation
-                  0x0046bc                  _TMR1_Period16BitSet
-                  0x0046ce                  _TMR1_Period16BitGet
-                  0x0046d6                  _TMR1_Counter16BitSet
-                  0x0046e8                  _TMR1_Counter16BitGet
-                  0x0046f0                  _TMR1_Start
-                  0x0046fe                  _TMR1_Stop
-                  0x004706                  _TMR1_GetElapsedThenClear
-                  0x00471e                  _TMR1_SoftwareCounterGet
-                  0x00472a                  _TMR1_SoftwareCounterClear
-                  0x004736                  _CLOCK_Initialize
-                  0x00478a                  _INTERRUPT_Initialize
-                  0x0047cc                  _SYSTEM_Initialize
-                  0x004802                  _where_was_i
+                  0x002c24                  _RADAR_facreset
+                  0x002c94                  _RADAR_disconnect
+                  0x002d02                  _RADAR_init
+                  0x002daa                  _RADAR_mindetzone
+                  0x002e30                  _RADAR_maxdetzone
+                  0x002eb6                  _RADAR_threshoffset
+                  0x002f3c                  _RADAR_nexttdat
+                  0x00306c                  _RADAR_readparam
+                  0x00317c                  _RADAR_speedset
+                  0x003202                  _RADAR_rangeset
+                  0x003288                  _RADAR_filttype
+                  0x00330e                  _RADAR_minangle
+                  0x003394                  _RADAR_maxangle
+                  0x00341a                  _RADAR_minspeed
+                  0x0034a0                  _RADAR_maxspeed
+                  0x003526                  _RADAR_directset
+                  0x0035ac                  _UINT8to16
+                  0x0035c6                  _UINT8toINT16
+                  0x0035de                  _RADAR_printhead
+                  0x00362a                  _RADAR_printdecimal
+                  0x003668                  _RADAR_printdata
+                  0x00376e                  _binary_to_bcd
+                  0x00387a                  _read_xaxis
+                  0x003916                  _read_yaxis
+                  0x0039b2                  _read_zaxis
+                  0x003a4e                  _transmit_mag_to_pc
+                  0x003b58                  _transmit_magnitude_to_pc
+                  0x003bcc                  _init_magnetometer
+                  0x003bde                  _UART2_Initialize
+                  0x003c12                  _UART2_SetTxInterruptHandler
+                  0x003c30                  _UART2_SetRxInterruptHandler
+                  0x003c4e                  _UART2_Read
+                  0x003c7a                  _UART2_Write
+                  0x003ca4                  _UART2_IsRxReady
+                  0x003cba                  _UART2_IsTxReady
+                  0x003cee                  _UART2_IsTxDone
+                  0x003d7c                  _UART2_ReadBuffer
+                  0x003db6                  _UART2_WriteBuffer
+                  0x003df0                  _UART2_TransferStatusGet
+                  0x003e38                  _UART2_Peek
+                  0x003e58                  _UART2_ReceiveBufferIsEmpty
+                  0x003e68                  _UART2_TransmitBufferIsFull
+                  0x003e78                  _UART2_StatusGet
+                  0x003e80                  _UART2_TransmitBufferSizeGet
+                  0x003eae                  _UART2_ReceiveBufferSizeGet
+                  0x003edc                  _UART2_Enable
+                  0x003ee6                  _UART2_Disable
+                  0x00408a                  _SPI1_Initialize
+                  0x0040a6                  _SPI1_Exchange
+                  0x0040d2                  _SPI1_ExchangeBuffer
+                  0x00419c                  _SPI1_Exchange16bit
+                  0x0041ac                  _SPI1_Exchange16bitBuffer
+                  0x0041c2                  _SPI1_StatusGet
+                  0x0041ca                  _PIN_MANAGER_Initialize
+                  0x0042f2                  _TMR2_Initialize
+                  0x004316                  _TMR2_Period16BitSet
+                  0x004328                  _TMR2_Period16BitGet
+                  0x004330                  _TMR2_Counter16BitSet
+                  0x004342                  _TMR2_Counter16BitGet
+                  0x004350                  _TMR2_SetInterruptHandler
+                  0x004360                  _TMR2_Start
+                  0x004370                  _TMR2_Stop
+                  0x00437a                  _TMR2_GetElapsedThenClear
+                  0x004392                  _TMR2_SoftwareCounterGet
+                  0x00439e                  _TMR2_SoftwareCounterClear
+                  0x0043aa                  _UART4_Initialize
+                  0x0043be                  _UART4_Read
+                  0x0043dc                  _UART4_Write
+                  0x0043f4                  _UART4_IsRxReady
+                  0x00440c                  _UART4_IsTxReady
+                  0x00442e                  _UART4_IsTxDone
+                  0x004446                  _UART4_StatusGet
+                  0x00444e                  _UART4_Enable
+                  0x004458                  _UART4_Disable
+                  0x004462                  _UART1_Initialize
+                  0x004476                  _UART1_Read
+                  0x004494                  _UART1_Write
+                  0x0044ac                  _UART1_IsRxReady
+                  0x0044c4                  _UART1_IsTxReady
+                  0x0044e6                  _UART1_IsTxDone
+                  0x0044fe                  _UART1_StatusGet
+                  0x004506                  _UART1_Enable
+                  0x004510                  _UART1_Disable
+                  0x00451a                  _TMR3_Initialize
+                  0x00453e                  _TMR3_Period16BitSet
+                  0x004550                  _TMR3_Period16BitGet
+                  0x004558                  _TMR3_Counter16BitSet
+                  0x00456a                  _TMR3_Counter16BitGet
+                  0x004578                  _TMR3_SetInterruptHandler
+                  0x004588                  _TMR3_Start
+                  0x004598                  _TMR3_Stop
+                  0x0045a2                  _TMR3_GetElapsedThenClear
+                  0x0045ba                  _TMR3_SoftwareCounterGet
+                  0x0045c6                  _TMR3_SoftwareCounterClear
+                  0x0045d2                  _TMR4_Initialize
+                  0x0045f6                  _TMR4_Period16BitSet
+                  0x004608                  _TMR4_Period16BitGet
+                  0x004610                  _TMR4_Counter16BitSet
+                  0x004622                  _TMR4_Counter16BitGet
+                  0x004630                  _TMR4_SetInterruptHandler
+                  0x004640                  _TMR4_Start
+                  0x004650                  _TMR4_Stop
+                  0x00465a                  _TMR4_GetElapsedThenClear
+                  0x004672                  _TMR4_SoftwareCounterGet
+                  0x00467e                  _TMR4_SoftwareCounterClear
+                  0x00468a                  _TMR1_Initialize
+                  0x0046a0                  _TMR1_Tasks_16BitOperation
+                  0x0046c0                  _TMR1_Period16BitSet
+                  0x0046d2                  _TMR1_Period16BitGet
+                  0x0046da                  _TMR1_Counter16BitSet
+                  0x0046ec                  _TMR1_Counter16BitGet
+                  0x0046f4                  _TMR1_Start
+                  0x004702                  _TMR1_Stop
+                  0x00470a                  _TMR1_GetElapsedThenClear
+                  0x004722                  _TMR1_SoftwareCounterGet
+                  0x00472e                  _TMR1_SoftwareCounterClear
+                  0x00473a                  _CLOCK_Initialize
+                  0x00478e                  _INTERRUPT_Initialize
+                  0x0047d0                  _SYSTEM_Initialize
+                  0x004806                  _where_was_i
                   0x015f00                  __FSEC.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x004736                  _CLOCK_Initialize
-                  0x00478a                  _INTERRUPT_Initialize
+                  0x00473a                  _CLOCK_Initialize
+                  0x00478e                  _INTERRUPT_Initialize
                   0x001f74                  _LoRa_set_rx
                   0x00214c                  _LoRa_transmit_msg
-                  0x0041c6                  _PIN_MANAGER_Initialize
-                  0x003522                  _RADAR_directset
-                  0x002c90                  _RADAR_disconnect
-                  0x002c20                  _RADAR_facreset
-                  0x003284                  _RADAR_filttype
-                  0x002cfe                  _RADAR_init
-                  0x003390                  _RADAR_maxangle
-                  0x002e2c                  _RADAR_maxdetzone
-                  0x00349c                  _RADAR_maxspeed
-                  0x00330a                  _RADAR_minangle
-                  0x002da6                  _RADAR_mindetzone
-                  0x003416                  _RADAR_minspeed
-                  0x002f38                  _RADAR_nexttdat
-                  0x003664                  _RADAR_printdata
-                  0x003626                  _RADAR_printdecimal
-                  0x0035da                  _RADAR_printhead
-                  0x0031fe                  _RADAR_rangeset
-                  0x003068                  _RADAR_readparam
-                  0x003178                  _RADAR_speedset
-                  0x002eb2                  _RADAR_threshoffset
-                  0x0040a2                  _SPI1_Exchange
-                  0x004198                  _SPI1_Exchange16bit
-                  0x0041a8                  _SPI1_Exchange16bitBuffer
-                  0x0040ce                  _SPI1_ExchangeBuffer
-                  0x004086                  _SPI1_Initialize
-                  0x0041be                  _SPI1_StatusGet
-                  0x0047cc                  _SYSTEM_Initialize
-                  0x0046e8                  _TMR1_Counter16BitGet
-                  0x0046d6                  _TMR1_Counter16BitSet
-                  0x004706                  _TMR1_GetElapsedThenClear
-                  0x004686                  _TMR1_Initialize
-                  0x0046ce                  _TMR1_Period16BitGet
-                  0x0046bc                  _TMR1_Period16BitSet
-                  0x00472a                  _TMR1_SoftwareCounterClear
-                  0x00471e                  _TMR1_SoftwareCounterGet
-                  0x0046f0                  _TMR1_Start
-                  0x0046fe                  _TMR1_Stop
-                  0x00469c                  _TMR1_Tasks_16BitOperation
-                  0x00433e                  _TMR2_Counter16BitGet
-                  0x00432c                  _TMR2_Counter16BitSet
-                  0x004376                  _TMR2_GetElapsedThenClear
-                  0x0042ee                  _TMR2_Initialize
-                  0x004324                  _TMR2_Period16BitGet
-                  0x004312                  _TMR2_Period16BitSet
-                  0x00434c                  _TMR2_SetInterruptHandler
-                  0x00439a                  _TMR2_SoftwareCounterClear
-                  0x00438e                  _TMR2_SoftwareCounterGet
-                  0x00435c                  _TMR2_Start
-                  0x00436c                  _TMR2_Stop
-                  0x004566                  _TMR3_Counter16BitGet
-                  0x004554                  _TMR3_Counter16BitSet
-                  0x00459e                  _TMR3_GetElapsedThenClear
-                  0x004516                  _TMR3_Initialize
-                  0x00454c                  _TMR3_Period16BitGet
-                  0x00453a                  _TMR3_Period16BitSet
-                  0x004574                  _TMR3_SetInterruptHandler
-                  0x0045c2                  _TMR3_SoftwareCounterClear
-                  0x0045b6                  _TMR3_SoftwareCounterGet
-                  0x004584                  _TMR3_Start
-                  0x004594                  _TMR3_Stop
-                  0x00461e                  _TMR4_Counter16BitGet
-                  0x00460c                  _TMR4_Counter16BitSet
-                  0x004656                  _TMR4_GetElapsedThenClear
-                  0x0045ce                  _TMR4_Initialize
-                  0x004604                  _TMR4_Period16BitGet
-                  0x0045f2                  _TMR4_Period16BitSet
-                  0x00462c                  _TMR4_SetInterruptHandler
-                  0x00467a                  _TMR4_SoftwareCounterClear
-                  0x00466e                  _TMR4_SoftwareCounterGet
-                  0x00463c                  _TMR4_Start
-                  0x00464c                  _TMR4_Stop
-                  0x00450c                  _UART1_Disable
-                  0x004502                  _UART1_Enable
-                  0x00445e                  _UART1_Initialize
-                  0x0044a8                  _UART1_IsRxReady
-                  0x0044e2                  _UART1_IsTxDone
-                  0x0044c0                  _UART1_IsTxReady
-                  0x004472                  _UART1_Read
-                  0x0044fa                  _UART1_StatusGet
-                  0x004490                  _UART1_Write
-                  0x003ee2                  _UART2_Disable
-                  0x003ed8                  _UART2_Enable
-                  0x003bda                  _UART2_Initialize
-                  0x003ca0                  _UART2_IsRxReady
-                  0x003cea                  _UART2_IsTxDone
-                  0x003cb6                  _UART2_IsTxReady
-                  0x003e34                  _UART2_Peek
-                  0x003c4a                  _UART2_Read
-                  0x003d78                  _UART2_ReadBuffer
-                  0x003e54                  _UART2_ReceiveBufferIsEmpty
-                  0x003eaa                  _UART2_ReceiveBufferSizeGet
-                  0x003c2c                  _UART2_SetRxInterruptHandler
-                  0x003c0e                  _UART2_SetTxInterruptHandler
-                  0x003e74                  _UART2_StatusGet
-                  0x003dec                  _UART2_TransferStatusGet
-                  0x003e64                  _UART2_TransmitBufferIsFull
-                  0x003e7c                  _UART2_TransmitBufferSizeGet
-                  0x003c76                  _UART2_Write
-                  0x003db2                  _UART2_WriteBuffer
-                  0x004454                  _UART4_Disable
-                  0x00444a                  _UART4_Enable
-                  0x0043a6                  _UART4_Initialize
-                  0x0043f0                  _UART4_IsRxReady
-                  0x00442a                  _UART4_IsTxDone
-                  0x004408                  _UART4_IsTxReady
-                  0x0043ba                  _UART4_Read
-                  0x004442                  _UART4_StatusGet
-                  0x0043d8                  _UART4_Write
-                  0x0035a8                  _UINT8to16
-                  0x0035c2                  _UINT8toINT16
+                  0x0041ca                  _PIN_MANAGER_Initialize
+                  0x003526                  _RADAR_directset
+                  0x002c94                  _RADAR_disconnect
+                  0x002c24                  _RADAR_facreset
+                  0x003288                  _RADAR_filttype
+                  0x002d02                  _RADAR_init
+                  0x003394                  _RADAR_maxangle
+                  0x002e30                  _RADAR_maxdetzone
+                  0x0034a0                  _RADAR_maxspeed
+                  0x00330e                  _RADAR_minangle
+                  0x002daa                  _RADAR_mindetzone
+                  0x00341a                  _RADAR_minspeed
+                  0x002f3c                  _RADAR_nexttdat
+                  0x003668                  _RADAR_printdata
+                  0x00362a                  _RADAR_printdecimal
+                  0x0035de                  _RADAR_printhead
+                  0x003202                  _RADAR_rangeset
+                  0x00306c                  _RADAR_readparam
+                  0x00317c                  _RADAR_speedset
+                  0x002eb6                  _RADAR_threshoffset
+                  0x0040a6                  _SPI1_Exchange
+                  0x00419c                  _SPI1_Exchange16bit
+                  0x0041ac                  _SPI1_Exchange16bitBuffer
+                  0x0040d2                  _SPI1_ExchangeBuffer
+                  0x00408a                  _SPI1_Initialize
+                  0x0041c2                  _SPI1_StatusGet
+                  0x0047d0                  _SYSTEM_Initialize
+                  0x0046ec                  _TMR1_Counter16BitGet
+                  0x0046da                  _TMR1_Counter16BitSet
+                  0x00470a                  _TMR1_GetElapsedThenClear
+                  0x00468a                  _TMR1_Initialize
+                  0x0046d2                  _TMR1_Period16BitGet
+                  0x0046c0                  _TMR1_Period16BitSet
+                  0x00472e                  _TMR1_SoftwareCounterClear
+                  0x004722                  _TMR1_SoftwareCounterGet
+                  0x0046f4                  _TMR1_Start
+                  0x004702                  _TMR1_Stop
+                  0x0046a0                  _TMR1_Tasks_16BitOperation
+                  0x004342                  _TMR2_Counter16BitGet
+                  0x004330                  _TMR2_Counter16BitSet
+                  0x00437a                  _TMR2_GetElapsedThenClear
+                  0x0042f2                  _TMR2_Initialize
+                  0x004328                  _TMR2_Period16BitGet
+                  0x004316                  _TMR2_Period16BitSet
+                  0x004350                  _TMR2_SetInterruptHandler
+                  0x00439e                  _TMR2_SoftwareCounterClear
+                  0x004392                  _TMR2_SoftwareCounterGet
+                  0x004360                  _TMR2_Start
+                  0x004370                  _TMR2_Stop
+                  0x00456a                  _TMR3_Counter16BitGet
+                  0x004558                  _TMR3_Counter16BitSet
+                  0x0045a2                  _TMR3_GetElapsedThenClear
+                  0x00451a                  _TMR3_Initialize
+                  0x004550                  _TMR3_Period16BitGet
+                  0x00453e                  _TMR3_Period16BitSet
+                  0x004578                  _TMR3_SetInterruptHandler
+                  0x0045c6                  _TMR3_SoftwareCounterClear
+                  0x0045ba                  _TMR3_SoftwareCounterGet
+                  0x004588                  _TMR3_Start
+                  0x004598                  _TMR3_Stop
+                  0x004622                  _TMR4_Counter16BitGet
+                  0x004610                  _TMR4_Counter16BitSet
+                  0x00465a                  _TMR4_GetElapsedThenClear
+                  0x0045d2                  _TMR4_Initialize
+                  0x004608                  _TMR4_Period16BitGet
+                  0x0045f6                  _TMR4_Period16BitSet
+                  0x004630                  _TMR4_SetInterruptHandler
+                  0x00467e                  _TMR4_SoftwareCounterClear
+                  0x004672                  _TMR4_SoftwareCounterGet
+                  0x004640                  _TMR4_Start
+                  0x004650                  _TMR4_Stop
+                  0x004510                  _UART1_Disable
+                  0x004506                  _UART1_Enable
+                  0x004462                  _UART1_Initialize
+                  0x0044ac                  _UART1_IsRxReady
+                  0x0044e6                  _UART1_IsTxDone
+                  0x0044c4                  _UART1_IsTxReady
+                  0x004476                  _UART1_Read
+                  0x0044fe                  _UART1_StatusGet
+                  0x004494                  _UART1_Write
+                  0x003ee6                  _UART2_Disable
+                  0x003edc                  _UART2_Enable
+                  0x003bde                  _UART2_Initialize
+                  0x003ca4                  _UART2_IsRxReady
+                  0x003cee                  _UART2_IsTxDone
+                  0x003cba                  _UART2_IsTxReady
+                  0x003e38                  _UART2_Peek
+                  0x003c4e                  _UART2_Read
+                  0x003d7c                  _UART2_ReadBuffer
+                  0x003e58                  _UART2_ReceiveBufferIsEmpty
+                  0x003eae                  _UART2_ReceiveBufferSizeGet
+                  0x003c30                  _UART2_SetRxInterruptHandler
+                  0x003c12                  _UART2_SetTxInterruptHandler
+                  0x003e78                  _UART2_StatusGet
+                  0x003df0                  _UART2_TransferStatusGet
+                  0x003e68                  _UART2_TransmitBufferIsFull
+                  0x003e80                  _UART2_TransmitBufferSizeGet
+                  0x003c7a                  _UART2_Write
+                  0x003db6                  _UART2_WriteBuffer
+                  0x004458                  _UART4_Disable
+                  0x00444e                  _UART4_Enable
+                  0x0043aa                  _UART4_Initialize
+                  0x0043f4                  _UART4_IsRxReady
+                  0x00442e                  _UART4_IsTxDone
+                  0x00440c                  _UART4_IsTxReady
+                  0x0043be                  _UART4_Read
+                  0x004446                  _UART4_StatusGet
+                  0x0043dc                  _UART4_Write
+                  0x0035ac                  _UINT8to16
+                  0x0035c6                  _UINT8toINT16
                   0x000472                  __DefaultInterrupt
                   0x015f00                  __FSEC.sec
                   0x000228                  __T2Interrupt
@@ -728,7 +728,7 @@ External Symbols in Program Memory (by name):
                   0x00089a                  __unpackdnrmf
                   0x0018ec                  __unpackf
                   0x001444                  _atoi
-                  0x00376a                  _binary_to_bcd
+                  0x00376e                  _binary_to_bcd
                   0x0023be                  _calibrate_mag_data
                   0x001d60                  _check_lora
                   0x002a9a                  _data_collection
@@ -739,7 +739,7 @@ External Symbols in Program Memory (by name):
                   0x002222                  _init_LoRa_rx
                   0x002266                  _init_LoRa_tx
                   0x00269c                  _init_det_radar
-                  0x003bc8                  _init_magnetometer
+                  0x003bcc                  _init_magnetometer
                   0x002a16                  _light_test
                   0x0029d0                  _lora_receive_test
                   0x001eb4                  _lora_rfconfig
@@ -755,19 +755,19 @@ External Symbols in Program Memory (by name):
                   0x0027dc                  _radar_test
                   0x002034                  _read_message
                   0x002342                  _read_switches
-                  0x003876                  _read_xaxis
-                  0x003912                  _read_yaxis
-                  0x0039ae                  _read_zaxis
+                  0x00387a                  _read_xaxis
+                  0x003916                  _read_yaxis
+                  0x0039b2                  _read_zaxis
                   0x000a08                  _sqrtf
                   0x001558                  _strlen
                   0x002442                  _tmr3_ISR
                   0x00245e                  _tmr4_ISR
                   0x001588                  _tolower
                   0x000b6c                  _toupper
-                  0x003a4a                  _transmit_mag_to_pc
-                  0x003b54                  _transmit_magnitude_to_pc
+                  0x003a4e                  _transmit_mag_to_pc
+                  0x003b58                  _transmit_magnitude_to_pc
                   0x001d12                  _uart2_ISR
-                  0x004802                  _where_was_i
+                  0x004806                  _where_was_i
 
 Memory Configuration
 
@@ -3555,8 +3555,8 @@ mcc_generated_files/where_was_i.s.scn1
  .const             0x9b9c         0xda build/default/debug/radar.o
  .const             0x9c76         0x84 build/default/debug/main.o
 
-.text             0x001cfa       0x21f2
- .text            0x001cfa        0xf26 build/default/debug/main.o
+.text             0x001cfa       0x21f6
+ .text            0x001cfa        0xf2a build/default/debug/main.o
                   0x001d12                  _uart2_ISR
                   0x001d60                  _check_lora
                   0x001dfc                  _lora_set_mode
@@ -3585,150 +3585,150 @@ mcc_generated_files/where_was_i.s.scn1
                   0x002a50                  _mag_detection_test
                   0x002a9a                  _data_collection
                   0x002aa2                  _main
- .text            0x002c20        0xb32 build/default/debug/radar.o
-                  0x002c20                  _RADAR_facreset
-                  0x002c90                  _RADAR_disconnect
-                  0x002cfe                  _RADAR_init
-                  0x002da6                  _RADAR_mindetzone
-                  0x002e2c                  _RADAR_maxdetzone
-                  0x002eb2                  _RADAR_threshoffset
-                  0x002f38                  _RADAR_nexttdat
-                  0x003068                  _RADAR_readparam
-                  0x003178                  _RADAR_speedset
-                  0x0031fe                  _RADAR_rangeset
-                  0x003284                  _RADAR_filttype
-                  0x00330a                  _RADAR_minangle
-                  0x003390                  _RADAR_maxangle
-                  0x003416                  _RADAR_minspeed
-                  0x00349c                  _RADAR_maxspeed
-                  0x003522                  _RADAR_directset
-                  0x0035a8                  _UINT8to16
-                  0x0035c2                  _UINT8toINT16
-                  0x0035da                  _RADAR_printhead
-                  0x003626                  _RADAR_printdecimal
-                  0x003664                  _RADAR_printdata
- .text            0x003752        0x488 build/default/debug/magnetometer.o
-                  0x00376a                  _binary_to_bcd
-                  0x003876                  _read_xaxis
-                  0x003912                  _read_yaxis
-                  0x0039ae                  _read_zaxis
-                  0x003a4a                  _transmit_mag_to_pc
-                  0x003b54                  _transmit_magnitude_to_pc
-                  0x003bc8                  _init_magnetometer
- .text            0x003bda        0x312 build/default/debug/mcc_generated_files/uart2.o
-                  0x003bda                  _UART2_Initialize
-                  0x003c0e                  _UART2_SetTxInterruptHandler
-                  0x003c26                  _UART2_Transmit_CallBack
-                  0x003c2c                  _UART2_SetRxInterruptHandler
-                  0x003c44                  _UART2_Receive_CallBack
-                  0x003c4a                  _UART2_Read
-                  0x003c76                  _UART2_Write
-                  0x003ca0                  _UART2_IsRxReady
-                  0x003cb6                  _UART2_IsTxReady
-                  0x003cea                  _UART2_IsTxDone
-                  0x003d78                  _UART2_ReadBuffer
-                  0x003db2                  _UART2_WriteBuffer
-                  0x003dec                  _UART2_TransferStatusGet
-                  0x003e34                  _UART2_Peek
-                  0x003e54                  _UART2_ReceiveBufferIsEmpty
-                  0x003e64                  _UART2_TransmitBufferIsFull
-                  0x003e74                  _UART2_StatusGet
-                  0x003e7c                  _UART2_TransmitBufferSizeGet
-                  0x003eaa                  _UART2_ReceiveBufferSizeGet
-                  0x003ed8                  _UART2_Enable
-                  0x003ee2                  _UART2_Disable
+ .text            0x002c24        0xb32 build/default/debug/radar.o
+                  0x002c24                  _RADAR_facreset
+                  0x002c94                  _RADAR_disconnect
+                  0x002d02                  _RADAR_init
+                  0x002daa                  _RADAR_mindetzone
+                  0x002e30                  _RADAR_maxdetzone
+                  0x002eb6                  _RADAR_threshoffset
+                  0x002f3c                  _RADAR_nexttdat
+                  0x00306c                  _RADAR_readparam
+                  0x00317c                  _RADAR_speedset
+                  0x003202                  _RADAR_rangeset
+                  0x003288                  _RADAR_filttype
+                  0x00330e                  _RADAR_minangle
+                  0x003394                  _RADAR_maxangle
+                  0x00341a                  _RADAR_minspeed
+                  0x0034a0                  _RADAR_maxspeed
+                  0x003526                  _RADAR_directset
+                  0x0035ac                  _UINT8to16
+                  0x0035c6                  _UINT8toINT16
+                  0x0035de                  _RADAR_printhead
+                  0x00362a                  _RADAR_printdecimal
+                  0x003668                  _RADAR_printdata
+ .text            0x003756        0x488 build/default/debug/magnetometer.o
+                  0x00376e                  _binary_to_bcd
+                  0x00387a                  _read_xaxis
+                  0x003916                  _read_yaxis
+                  0x0039b2                  _read_zaxis
+                  0x003a4e                  _transmit_mag_to_pc
+                  0x003b58                  _transmit_magnitude_to_pc
+                  0x003bcc                  _init_magnetometer
+ .text            0x003bde        0x312 build/default/debug/mcc_generated_files/uart2.o
+                  0x003bde                  _UART2_Initialize
+                  0x003c12                  _UART2_SetTxInterruptHandler
+                  0x003c2a                  _UART2_Transmit_CallBack
+                  0x003c30                  _UART2_SetRxInterruptHandler
+                  0x003c48                  _UART2_Receive_CallBack
+                  0x003c4e                  _UART2_Read
+                  0x003c7a                  _UART2_Write
+                  0x003ca4                  _UART2_IsRxReady
+                  0x003cba                  _UART2_IsTxReady
+                  0x003cee                  _UART2_IsTxDone
+                  0x003d7c                  _UART2_ReadBuffer
+                  0x003db6                  _UART2_WriteBuffer
+                  0x003df0                  _UART2_TransferStatusGet
+                  0x003e38                  _UART2_Peek
+                  0x003e58                  _UART2_ReceiveBufferIsEmpty
+                  0x003e68                  _UART2_TransmitBufferIsFull
+                  0x003e78                  _UART2_StatusGet
+                  0x003e80                  _UART2_TransmitBufferSizeGet
+                  0x003eae                  _UART2_ReceiveBufferSizeGet
+                  0x003edc                  _UART2_Enable
+                  0x003ee6                  _UART2_Disable
 
-.dinit            0x003eec        0x19a
- .dinit           0x003eec        0x19a data_init
+.dinit            0x003ef0        0x19a
+ .dinit           0x003ef0        0x19a data_init
 
-.text             0x004086        0x78c
- .text            0x004086        0x140 build/default/debug/mcc_generated_files/spi1.o
-                  0x004086                  _SPI1_Initialize
-                  0x0040a2                  _SPI1_Exchange
-                  0x0040ce                  _SPI1_ExchangeBuffer
-                  0x004198                  _SPI1_Exchange16bit
-                  0x0041a8                  _SPI1_Exchange16bitBuffer
-                  0x0041be                  _SPI1_StatusGet
- .text            0x0041c6        0x128 build/default/debug/mcc_generated_files/pin_manager.o
-                  0x0041c6                  _PIN_MANAGER_Initialize
- .text            0x0042ee         0xb8 build/default/debug/mcc_generated_files/tmr2.o
-                  0x0042ee                  _TMR2_Initialize
-                  0x004312                  _TMR2_Period16BitSet
-                  0x004324                  _TMR2_Period16BitGet
-                  0x00432c                  _TMR2_Counter16BitSet
-                  0x00433e                  _TMR2_Counter16BitGet
-                  0x004346                  _TMR2_CallBack
-                  0x00434c                  _TMR2_SetInterruptHandler
-                  0x00435c                  _TMR2_Start
-                  0x00436c                  _TMR2_Stop
-                  0x004376                  _TMR2_GetElapsedThenClear
-                  0x00438e                  _TMR2_SoftwareCounterGet
-                  0x00439a                  _TMR2_SoftwareCounterClear
- .text            0x0043a6         0xb8 build/default/debug/mcc_generated_files/uart4.o
-                  0x0043a6                  _UART4_Initialize
-                  0x0043ba                  _UART4_Read
-                  0x0043d8                  _UART4_Write
-                  0x0043f0                  _UART4_IsRxReady
-                  0x004408                  _UART4_IsTxReady
-                  0x00442a                  _UART4_IsTxDone
-                  0x004442                  _UART4_StatusGet
-                  0x00444a                  _UART4_Enable
-                  0x004454                  _UART4_Disable
- .text            0x00445e         0xb8 build/default/debug/mcc_generated_files/uart1.o
-                  0x00445e                  _UART1_Initialize
-                  0x004472                  _UART1_Read
-                  0x004490                  _UART1_Write
-                  0x0044a8                  _UART1_IsRxReady
-                  0x0044c0                  _UART1_IsTxReady
-                  0x0044e2                  _UART1_IsTxDone
-                  0x0044fa                  _UART1_StatusGet
-                  0x004502                  _UART1_Enable
-                  0x00450c                  _UART1_Disable
- .text            0x004516         0xb8 build/default/debug/mcc_generated_files/tmr3.o
-                  0x004516                  _TMR3_Initialize
-                  0x00453a                  _TMR3_Period16BitSet
-                  0x00454c                  _TMR3_Period16BitGet
-                  0x004554                  _TMR3_Counter16BitSet
-                  0x004566                  _TMR3_Counter16BitGet
-                  0x00456e                  _TMR3_CallBack
-                  0x004574                  _TMR3_SetInterruptHandler
-                  0x004584                  _TMR3_Start
-                  0x004594                  _TMR3_Stop
-                  0x00459e                  _TMR3_GetElapsedThenClear
-                  0x0045b6                  _TMR3_SoftwareCounterGet
-                  0x0045c2                  _TMR3_SoftwareCounterClear
- .text            0x0045ce         0xb8 build/default/debug/mcc_generated_files/tmr4.o
-                  0x0045ce                  _TMR4_Initialize
-                  0x0045f2                  _TMR4_Period16BitSet
-                  0x004604                  _TMR4_Period16BitGet
-                  0x00460c                  _TMR4_Counter16BitSet
-                  0x00461e                  _TMR4_Counter16BitGet
-                  0x004626                  _TMR4_CallBack
-                  0x00462c                  _TMR4_SetInterruptHandler
-                  0x00463c                  _TMR4_Start
-                  0x00464c                  _TMR4_Stop
-                  0x004656                  _TMR4_GetElapsedThenClear
-                  0x00466e                  _TMR4_SoftwareCounterGet
-                  0x00467a                  _TMR4_SoftwareCounterClear
- .text            0x004686         0xb0 build/default/debug/mcc_generated_files/tmr1.o
-                  0x004686                  _TMR1_Initialize
-                  0x00469c                  _TMR1_Tasks_16BitOperation
-                  0x0046bc                  _TMR1_Period16BitSet
-                  0x0046ce                  _TMR1_Period16BitGet
-                  0x0046d6                  _TMR1_Counter16BitSet
-                  0x0046e8                  _TMR1_Counter16BitGet
-                  0x0046f0                  _TMR1_Start
-                  0x0046fe                  _TMR1_Stop
-                  0x004706                  _TMR1_GetElapsedThenClear
-                  0x00471e                  _TMR1_SoftwareCounterGet
-                  0x00472a                  _TMR1_SoftwareCounterClear
- .text            0x004736         0x54 build/default/debug/mcc_generated_files/clock.o
-                  0x004736                  _CLOCK_Initialize
- .text            0x00478a         0x42 build/default/debug/mcc_generated_files/interrupt_manager.o
-                  0x00478a                  _INTERRUPT_Initialize
- .text            0x0047cc         0x1c build/default/debug/mcc_generated_files/system.o
-                  0x0047cc                  _SYSTEM_Initialize
- .text            0x0047e8         0x1a build/default/debug/mcc_generated_files/traps.o
-                  0x0047e8                  _TRAPS_halt_on_error
- .text            0x004802         0x10 build/default/debug/mcc_generated_files/where_was_i.o
-                  0x004802                  _where_was_i
+.text             0x00408a        0x78c
+ .text            0x00408a        0x140 build/default/debug/mcc_generated_files/spi1.o
+                  0x00408a                  _SPI1_Initialize
+                  0x0040a6                  _SPI1_Exchange
+                  0x0040d2                  _SPI1_ExchangeBuffer
+                  0x00419c                  _SPI1_Exchange16bit
+                  0x0041ac                  _SPI1_Exchange16bitBuffer
+                  0x0041c2                  _SPI1_StatusGet
+ .text            0x0041ca        0x128 build/default/debug/mcc_generated_files/pin_manager.o
+                  0x0041ca                  _PIN_MANAGER_Initialize
+ .text            0x0042f2         0xb8 build/default/debug/mcc_generated_files/tmr2.o
+                  0x0042f2                  _TMR2_Initialize
+                  0x004316                  _TMR2_Period16BitSet
+                  0x004328                  _TMR2_Period16BitGet
+                  0x004330                  _TMR2_Counter16BitSet
+                  0x004342                  _TMR2_Counter16BitGet
+                  0x00434a                  _TMR2_CallBack
+                  0x004350                  _TMR2_SetInterruptHandler
+                  0x004360                  _TMR2_Start
+                  0x004370                  _TMR2_Stop
+                  0x00437a                  _TMR2_GetElapsedThenClear
+                  0x004392                  _TMR2_SoftwareCounterGet
+                  0x00439e                  _TMR2_SoftwareCounterClear
+ .text            0x0043aa         0xb8 build/default/debug/mcc_generated_files/uart4.o
+                  0x0043aa                  _UART4_Initialize
+                  0x0043be                  _UART4_Read
+                  0x0043dc                  _UART4_Write
+                  0x0043f4                  _UART4_IsRxReady
+                  0x00440c                  _UART4_IsTxReady
+                  0x00442e                  _UART4_IsTxDone
+                  0x004446                  _UART4_StatusGet
+                  0x00444e                  _UART4_Enable
+                  0x004458                  _UART4_Disable
+ .text            0x004462         0xb8 build/default/debug/mcc_generated_files/uart1.o
+                  0x004462                  _UART1_Initialize
+                  0x004476                  _UART1_Read
+                  0x004494                  _UART1_Write
+                  0x0044ac                  _UART1_IsRxReady
+                  0x0044c4                  _UART1_IsTxReady
+                  0x0044e6                  _UART1_IsTxDone
+                  0x0044fe                  _UART1_StatusGet
+                  0x004506                  _UART1_Enable
+                  0x004510                  _UART1_Disable
+ .text            0x00451a         0xb8 build/default/debug/mcc_generated_files/tmr3.o
+                  0x00451a                  _TMR3_Initialize
+                  0x00453e                  _TMR3_Period16BitSet
+                  0x004550                  _TMR3_Period16BitGet
+                  0x004558                  _TMR3_Counter16BitSet
+                  0x00456a                  _TMR3_Counter16BitGet
+                  0x004572                  _TMR3_CallBack
+                  0x004578                  _TMR3_SetInterruptHandler
+                  0x004588                  _TMR3_Start
+                  0x004598                  _TMR3_Stop
+                  0x0045a2                  _TMR3_GetElapsedThenClear
+                  0x0045ba                  _TMR3_SoftwareCounterGet
+                  0x0045c6                  _TMR3_SoftwareCounterClear
+ .text            0x0045d2         0xb8 build/default/debug/mcc_generated_files/tmr4.o
+                  0x0045d2                  _TMR4_Initialize
+                  0x0045f6                  _TMR4_Period16BitSet
+                  0x004608                  _TMR4_Period16BitGet
+                  0x004610                  _TMR4_Counter16BitSet
+                  0x004622                  _TMR4_Counter16BitGet
+                  0x00462a                  _TMR4_CallBack
+                  0x004630                  _TMR4_SetInterruptHandler
+                  0x004640                  _TMR4_Start
+                  0x004650                  _TMR4_Stop
+                  0x00465a                  _TMR4_GetElapsedThenClear
+                  0x004672                  _TMR4_SoftwareCounterGet
+                  0x00467e                  _TMR4_SoftwareCounterClear
+ .text            0x00468a         0xb0 build/default/debug/mcc_generated_files/tmr1.o
+                  0x00468a                  _TMR1_Initialize
+                  0x0046a0                  _TMR1_Tasks_16BitOperation
+                  0x0046c0                  _TMR1_Period16BitSet
+                  0x0046d2                  _TMR1_Period16BitGet
+                  0x0046da                  _TMR1_Counter16BitSet
+                  0x0046ec                  _TMR1_Counter16BitGet
+                  0x0046f4                  _TMR1_Start
+                  0x004702                  _TMR1_Stop
+                  0x00470a                  _TMR1_GetElapsedThenClear
+                  0x004722                  _TMR1_SoftwareCounterGet
+                  0x00472e                  _TMR1_SoftwareCounterClear
+ .text            0x00473a         0x54 build/default/debug/mcc_generated_files/clock.o
+                  0x00473a                  _CLOCK_Initialize
+ .text            0x00478e         0x42 build/default/debug/mcc_generated_files/interrupt_manager.o
+                  0x00478e                  _INTERRUPT_Initialize
+ .text            0x0047d0         0x1c build/default/debug/mcc_generated_files/system.o
+                  0x0047d0                  _SYSTEM_Initialize
+ .text            0x0047ec         0x1a build/default/debug/mcc_generated_files/traps.o
+                  0x0047ec                  _TRAPS_halt_on_error
+ .text            0x004806         0x10 build/default/debug/mcc_generated_files/where_was_i.o
+                  0x004806                  _where_was_i
