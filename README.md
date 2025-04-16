@@ -1,2 +1,5 @@
 # TDWS
-Raph and Karlie's Senior Project: Train Detection and Warning System. Contains project files for the PIC24.
+Senior Project 2024-25: Train Detection and Warning System. Contains project files for the PIC24.
+Made by Raphael Jara and Karlie D'Apuzzo
+
+
