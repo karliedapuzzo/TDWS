@@ -1,0 +1,18 @@
+"Id";"Designator";"Footprint";"Quantity";"Designation";"Supplier and ref";
+1;"R4,R5,R2,R3";"R_0603_1608Metric";4;"1kohm";;;
+2;"Radar";"KMD7RFB00H02";1;"K-MD7-RFB-00H-02";;;
+3;"C7,C6";"C_0603_1608Metric";2;"10uF";;;
+4;"Q1";"SIB912DKT1GE3";1;"SIB912DK-T1-GE3";;;
+5;"PS1";"TPSM84203EAB";1;"TPSM84203EAB";;;
+6;"Light 2,Light 1,Load Voltage";"1729128";3;"1729128";;;
+7;"IC1";"QFP50P1200X1200X120-64N";1;"PIC24FJ128GL306-I_PT";;;
+8;"U1";"LIS3MDL";1;"LIS3MDL_Breakout";;;
+9;"C8,C9";"C_1210_3225Metric";2;"47uF";;;
+10;"D2,D4,D1,D3";"LED_D5.0mm";4;"LED";;;
+11;"";"";1;"";;;
+12;"J6,J5";"PinSocket_2x18_P2.54mm_Vertical";2;"Conn_02x18_Odd_Even";;;
+13;"U3";"Wio-E5_mini";1;"Wio-E5_mini";;;
+14;"J1";"PinHeader_1x08_P2.54mm_Horizontal";1;"Conn_01x08_Pin";;;
+15;"C1,C4,C2,C3,C5";"C_0603_1608Metric";5;"0.1 uF";;;
+16;"R1";"R_0603_1608Metric";1;"330ohm";;;
+17;"SW1";"SW_DIP_SPSTx04_Piano_10.8x11.72mm_W7.62mm_P2.54mm";1;"SW_DIP_x04";;;
